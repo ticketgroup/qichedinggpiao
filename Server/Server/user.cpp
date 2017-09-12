@@ -1,6 +1,7 @@
 #include<iostream>
 #include <cstring>
 #include"user.h"
+#include "Ticket.h"
 using namespace std;
 
 bool cancel(User* a)
@@ -13,12 +14,12 @@ User::User(char ID[], int len)
 
 void User::carinfor() 
 {
-
+	
 }
 
 void User::allticketinfor()
 {
-
+	Ticket::search(id);
 }
 
 

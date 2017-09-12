@@ -8,7 +8,7 @@
 #include"Nuser.h"
 using namespace std;
 
-class Conducor :public user
+class Conducor :public User
 {
 public:
 	void inquireUser();
