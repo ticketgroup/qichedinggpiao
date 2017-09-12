@@ -1,38 +1,26 @@
 #include<iostream>
-#include<string>
+#include <cstring>
 #include"user.h"
+#include "Ticket.h"
 using namespace std;
 
-User::User(char ID[11])
-{
-	for (int i = 0; i < 11; i++)
-		id[i] = ID[i];
-}
+bool cancel(User* a)
+{ delete a; }
 
-bool  User::verify(char ID[11], string password)
+User::User(char ID[], int len)
 {
-    
-}
-
-void User::cancel() 
-{
-
+	mysql_init(&con);
 }
 
 void User::carinfor() 
 {
-
+	
 }
 
 void User::allticketinfor()
 {
-
+	Ticket::search(id);
 }
-void User::changeinfor()
-{
-
-}
-
 
 
 
