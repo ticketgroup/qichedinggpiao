@@ -104,6 +104,7 @@
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
+      <AdditionalDependencies>ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -148,6 +149,7 @@
     <ClInclude Include="user.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Buyer.cpp" />
     <ClCompile Include="sever.cpp" />
     <ClCompile Include="user.cpp" />
   </ItemGroup>

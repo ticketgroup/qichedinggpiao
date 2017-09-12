@@ -38,10 +38,13 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="sever.cpp">
+    <ClCompile Include="user.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="user.cpp">
+    <ClCompile Include="Buyer.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="sever.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
