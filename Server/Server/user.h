@@ -12,11 +12,11 @@ class User
 {
 public:
 	User(char[], int);
-	bool virtual verify(char[], string);
-	void cancel();
+	bool virtual verify(char[]) = 0;
+	friend bool cancel(User*);
 	void carinfor();
 	void allticketinfor();
-	void virtual changeinfor();
+	void virtual changeinfor() = 0;
 	//(char*) getpassword();
 private:
 	char id[11];
