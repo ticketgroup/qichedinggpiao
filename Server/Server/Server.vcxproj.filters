@@ -14,4 +14,35 @@
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Buyer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Coach.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Conductor.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Nuser.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Suser.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Ticket.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="user.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="sever.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="user.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
 </Project>
