@@ -36,12 +36,18 @@
     <ClInclude Include="user.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="func.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="sever.cpp">
+    <ClCompile Include="user.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="user.cpp">
+    <ClCompile Include="Server.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Coach.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

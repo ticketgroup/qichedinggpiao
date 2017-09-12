@@ -145,13 +145,15 @@
     <ClInclude Include="Buyer.h" />
     <ClInclude Include="Coach.h" />
     <ClInclude Include="Conductor.h" />
+    <ClInclude Include="func.h" />
     <ClInclude Include="Nuser.h" />
     <ClInclude Include="Suser.h" />
     <ClInclude Include="Ticket.h" />
     <ClInclude Include="user.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="sever.cpp" />
+    <ClCompile Include="Coach.cpp" />
+    <ClCompile Include="Server.cpp" />
     <ClCompile Include="user.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

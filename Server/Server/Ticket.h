@@ -12,7 +12,7 @@ class Ticket
 public:
 	Ticket();
 	static void search(char[]);
-	void information();
+	void getinfo();
 	void buy();
 	void change();
 	void refund();
