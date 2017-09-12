@@ -1,5 +1,6 @@
 #pragma once
 #ifndef SELLER_H
+#define SELLER_H
 
 #include<iostream>
 #include"Buyer.h"
