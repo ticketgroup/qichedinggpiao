@@ -11,6 +11,7 @@ class Ticket
 {
 public:
 	Ticket();
+	static void search(char[]);
 	void information();
 	void buy();
 	void change();

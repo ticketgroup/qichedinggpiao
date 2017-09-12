@@ -10,18 +10,17 @@ class Coach
 {
 public:
 	Coach();
-	int getcaachnum();
-	int getsitnum();
-	int stationnum();
-	char *getstation();
-	char *gettime();
-
+	bool setcoachnum(int);
+	bool setseatnum(int);
+	bool setstation(char**);
+	bool settime(int[]);
+	(const char**)getinfo();
 private:
     int coachnum;
-	int sitnum;
+	int seatnum;
 	int stationnum;
-	char *station[32];
-	char *time[4];
+	char *(station[9]);
+	char *(time[5]);
 
 		
 
