@@ -5,7 +5,6 @@
 #include "mysql.h"
 #include<iostream>
 #include<string>
-#include"Coach.h"
 using namespace std;
 
 class User
@@ -29,19 +28,12 @@ public:
 	返回值：bool(true：注销成功，false：注销失败)
 	功能：用户注销
 	**************************************************************/
-	friend bool cancel();
-	/**************************************************************
-	函数名称：allticketinfo
-	形参表：汽车ID(char*)，日期(char*(MMDD))
-	返回值：票数(char)
-	功能：获得剩余车票数
-	**************************************************************/
-	int allticketinfo(char*, char*);
+	friend bool cancel(User*);
+	
 	//(char*) getpassword();
 protected:
 	char id[11];
 	char name[10];
-	Coach *coach;
 	MYSQL con;
 	MYSQL_RES res;
 	MYSQL_ROW result;

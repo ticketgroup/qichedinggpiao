@@ -4,7 +4,6 @@
 
 #include<iostream>
 #include<string>
-#include"Coach.h"
 using namespace std;
 
 class Ticket
