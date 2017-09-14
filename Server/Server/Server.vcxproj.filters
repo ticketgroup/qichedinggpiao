@@ -41,7 +41,13 @@
     <ClCompile Include="user.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="Ticket.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
     <ClCompile Include="Server.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Suser.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
