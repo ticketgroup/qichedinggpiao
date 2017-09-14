@@ -25,8 +25,9 @@ bool reg(int idnum, int number, char ID[11], char password[11])
 		return false;
 }
 
-bool findPassword(char ID[11], char newnum[11])
+bool findPassword(char ID[11], char newpass[11], , )
 {
+
 	if ()
 		return true;
 	else

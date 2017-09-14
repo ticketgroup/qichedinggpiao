@@ -39,9 +39,9 @@ bool Buyer::buyticket()
 		return false;
 }
 
-char***Buyer::inquireticket()
+bool Buyer::inquireticket(char** info[])
 {
-	return (char ***)();
+	ticket->getinfo(info)
 }
 
 bool Buyer::changeticket(char cid[10], char cdate[4])
