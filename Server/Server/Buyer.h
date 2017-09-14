@@ -23,14 +23,14 @@ public:
 	功能：查询汽车固定信息
 	注释：一天一发
 	**************************************************************/
-	(char***)carinfo(char*, char*, char*);
+	bool carinfo(char*, char*, char*,char***);
 	/**************************************************************
 	函数名称：allticketinfo
-	形参表：汽车ID(char*)，日期(char*(MMDD))
+	形参表：汽车ID(char*)，日期(char*(MMDD)),起点（char*），终点（char*)
 	返回值：票数(char)
 	功能：获得剩余车票数
 	**************************************************************/
-	int allticketinfo(char*, char*);
+	int allticketinfo(char*, char*,char*,char*);
 	/**************************************************************
 	函数名称：chooseticket
 	形参表：要操作的票(Ticket*)
