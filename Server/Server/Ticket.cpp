@@ -31,7 +31,7 @@ void Ticket::getse(char *st, char *en)
 	for (; tNum[i] != '0'; i++);
 	e = i - 1;
 	char tem[100];
-	sprintf(tem, "SELECT name FROM *** WHERE id in (%s,%s)", s, e);
+	sprintf(tem, "SELECT name FROM *** WHERE id in (%d,%d)", s, e);
 	mysql_real_query(&con,tem,100);
 	res = mysql_store_result(&con);
 	row = mysql_fetch_row(res);
@@ -132,4 +132,15 @@ bool Ticket::refund()
 	}
 	else
 		return false;
+}
+
+bool Ticket::getinfo(char **info)
+{
+	strcpy(info[0], id);
+	strcpy(info[1], date);
+	this->getse(info[2],info[3]);
+	strcpy(info[4], seatnum);
+	strcpy(info[5], passenger);
+	strcpy(info[0], buyer);
+	return false;
 }
