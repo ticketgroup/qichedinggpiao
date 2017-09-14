@@ -91,10 +91,10 @@ bool Conducor::deleteCoach(char *p, char *)
 
 char Conducor::verify(char *p)
 {
-	if (this->id == "???" && *p == "???")
+	if (this->id == "???" && p == "???")
 	{
 		return 'Y';
 	}
-	else
+	else 
 		return '0';
 }
