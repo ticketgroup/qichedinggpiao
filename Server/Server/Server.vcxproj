@@ -152,6 +152,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Buyer.cpp" />
+    <ClCompile Include="Conductor.cpp" />
     <ClCompile Include="Nuser.cpp" />
     <ClCompile Include="Server.cpp" />
     <ClCompile Include="user.cpp" />
