@@ -20,11 +20,11 @@ bool Buyer::carinfo(char cdate[], char start[], char end[],char** coachinfo[])
 int Buyer::allticketinfo(char cid[], char cdate[],char start[],char end[] )
 {
 	int num;
-
+		
 	return num;
 }
 
-void Buyer::chooseticket(Ticket *t1)
+void Buyer::chooseticket()
 {
 	ticket = t1;
 
