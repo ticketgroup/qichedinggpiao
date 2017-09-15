@@ -5,6 +5,8 @@
 #include <iostream>
 #include "mysql.h"
 
+int str2int(char*);
+
 class Ticket
 {
 public:

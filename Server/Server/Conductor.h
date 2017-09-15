@@ -52,18 +52,18 @@ public:
 	bool deleteUser(char*, char*);
 	/**************************************************************
 	函数名称：inquireCoach
-	形参表：密码(char*)，汽车ID(char*)，详细信息(输出)(char***)
+	形参表：密码(char*)，汽车ID(char*)，详细信息(输出)(char**)
 	返回值：bool(true：查询到信息，false：未查询到信息)
 	功能：查询车辆信息
 	**************************************************************/
-	bool inquireCoach(char*, char*, char***);
+	bool inquireCoach(char*, char*, char**);
 	/**************************************************************
 	函数名称：addCoach
-	形参表：密码(char*)，汽车ID(char*)，发车时间(char*(HHMM))，站点信息(char***)，座位数(char*)
+	形参表：密码(char*)，汽车ID(char*)，发车时间(char*(HHMM))，站点信息(char***)，站数(int),座位数(char*)
 	返回值：bool(true：成功，false：失败)
 	功能：增加车辆信息
 	**************************************************************/
-	bool addCoach(char*, char*, char*, char*, char*);
+	bool addCoach(char*, char*, char*, char***, int, char*);
 	/**************************************************************
 	函数名称：deleteCoach
 	形参表：密码(char*)，汽车ID(char*)
