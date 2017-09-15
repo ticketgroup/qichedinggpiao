@@ -32,8 +32,9 @@ void Buyer::chooseticket(Ticket *t1)
 
 bool Buyer::buyticket()
 {
-	ticket->buy;
-	if ()
+	bool b;
+	b=ticket->buy;
+	if (b==true)
 		return true;
 	else
 		return false;
@@ -46,9 +47,9 @@ bool Buyer::inquireticket(char** info[])
 
 bool Buyer::changeticket(char cid[10], char cdate[4])
 {
-
-	ticket->change(cid, cdate)
-		if ()
+	bool c;
+	c=ticket->change(cid, cdate);
+		if(c==true)
 			return true;
 		else
 			return false;
@@ -56,7 +57,9 @@ bool Buyer::changeticket(char cid[10], char cdate[4])
 }
 bool Buyer::refundticket()
 {
-	if ()
+	bool r;
+	r = ticket->refund;
+	if (r==true)
 		return true;
 	else
 		return false;
