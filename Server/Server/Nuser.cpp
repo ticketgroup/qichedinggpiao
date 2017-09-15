@@ -1,40 +1,47 @@
 #include<iostream>
-
+#include<cstring>
 #include "Nuser.h"
+using namespace std;
 
-bool verify(char ID[11], char pass[11])
+bool ver(char *Id, char *num)
 {
-	for (int i = 0; i<10;i++)
+	mysql_real_query(&con, strcat("SELECT password FROM nuser where phone=", Id), 40);
+	if (res = mysql_store_result(&con))
 	{
-		if (ID[i] !=  [i])
+		result = mysql_fetch_row(res);
+		if (!strcmp(result[0], num))
+			return true;
+		else
 			return false;
 	}
-	for (int i = 0; [i] != 0; i++)
-	{
-		if (pass[i] != [i])
-			return false;
-	}
-	return true;
-}
-
-bool reg(int idnum, int number, char ID[11], char password[11])
-{
-	if ()
-		return true;
 	else
 		return false;
 }
 
-bool findPassword(char ID[11], char newpass[11], , )
+bool reg(char *idnum, char *number, char *ID, char *password)
 {
+	
+		char tem[100];
+		sprintf(tem, "INSERT INTO suser(id,password) VALUES('%s','%s','%s','%s')", idnum, number, ID, password);
+		if (mysql_query(&con, tem))
+			return true;
+		else
+			return false;
 
-	if ()
+}
+
+bool findPassword(char *ID, char *newpass)
+{
+	char tem[200];
+	sprintf(tem, "UPDATE TABLE suser set password=%s where id=%s",newpass,ID);
+	if (mysql_query(&con, tem))
 		return true;
 	else
 		return false;
+	
 }
 
-Nuser::Nuser(char NID[11], char Npass[11]):Buyer(NID,Npass)
+Nuser::Nuser(char *NID, char *Npass):Buyer(NID,Npass)
 {
 	mysql_init(&con);
 	mysql_real_connect(&con, "localhost", "root", "111111", "user", 3306, NULL, 0);
@@ -44,42 +51,45 @@ Nuser::Nuser(char NID[11], char Npass[11]):Buyer(NID,Npass)
 
 bool Nuser::del()
 {
-	if ()
+	char tem[200];
+	sprintf(tem, "DELETE FROM suser where id=%s", ID);
+	if (mysql_query(&con, tem))
 		return true;
 	else
 		return false;
 }
 
-bool Nuser::changePassword(char newpass[11])
+bool Nuser::changePassword(char *newpass)
 {
-	if ()
-	{
-		for (int i = 0; i < 11; i++)
-			password[i] = newpass[i];
+	char tem[200];
+	sprintf(tem, "UPDATE TABLE suser set password=%s where id=%s", newpass, ID);
+	if (mysql_query(&con, tem))
 		return true;
-	}
 	else
 		return false;
 }
 
-bool Nuser::changeinfo(char newNID[11])
+bool Nuser::changeinfo(char *newNID)
 {
-	if ()
-	{
-		for (int i = 0; i < 11; i++)
-			ID[i] = newNID[i];
+	char tem[200];
+	sprintf(tem, "UPDATE TABLE suser set password=%s where id=%s", newNID, ID);
+	if (mysql_query(&con, tem))
 		return true;
-	}
 	else
 		return false;
 }
 	
-char Nuser::verify(char NID[11], char Npass[11])
+char Nuser::verify()
 {
-	if ()
-		return '1';
-	else if ()
-		return '2';
+	mysql_real_query(&con, strcat("SELECT password FROM nuser where phone=", this->ID), 40);
+	if (res = mysql_store_result(&con))
+	{
+		result = mysql_fetch_row(res);
+		if (!strcmp(result[0], password))
+			return 'Y';
+		else
+			return '2';
+	}
 	else
-		return 'Y';
+		return '1';
 }

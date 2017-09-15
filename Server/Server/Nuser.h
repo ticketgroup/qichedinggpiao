@@ -14,7 +14,7 @@ using namespace std;
 返回值：bool(true：成功，false：失败)
 功能：注册前验证信息
 **************************************************************/
-bool ver\(char*, char*);
+bool ver(char*, char*);
 /**************************************************************
 函数名称：reg
 形参表：一卡通(char*)，学号(char*)，手机号(char*)，密码(char*)
@@ -65,12 +65,11 @@ public:
 		返回值：char('Y'：登陆成功，'1'：用户名不存在，'2'：密码不正确)
 		功能：普通用户登录
 	*************************************************************/
-	char  verify(char*, char*);
+	char  verify();
 
 private:
-	char ID[11];
-	char password[11];
-
+	char *ID;
+	char *password;
 };
 
 #endif // !NUSER_H
