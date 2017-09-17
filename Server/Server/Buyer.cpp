@@ -12,9 +12,18 @@ Buyer::Buyer(char BID[], char Bpass[]):User(BID,Bpass)
 
 bool Buyer::carinfo(char cdate[], char start[], char end[],char*** coachinfo)
 {
-	inquireCoach(,coachinfo[i]);
-	
-	return true;
+	char tem[200];
+	sprintf(tem, "select id from ctos where (select num from stov where station='%s')<>'-1 and (select num from stov where station='%s')<>'-1''", start, end);
+	mysql_real_query(&con, tem, 200);
+	res = mysql_store_result(&con);
+	for (int i = 0; result = mysql_fetch_row(res); i++)
+	{
+		User::inquireCoach(result, coachinfo[i]);
+	}
+	if (mysql_query(&con, tem))
+		return true;
+	else
+		return false;
 }
 
 int Buyer::allticketinfo(char cid[], char cdate[],char start[],char end[] )

@@ -1,4 +1,5 @@
 #include "Conductor.h"
+#include"user.h"
 #include <iostream>
 #include "Ticket.h"
 #include <cstring>

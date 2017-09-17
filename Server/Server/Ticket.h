@@ -11,7 +11,7 @@ class Ticket
 public:
 	/**************************************************************
 	函数名称：买票时的构造函数
-	形参表：汽车ID(char*)，票num(char*)，日期(char*(MMDD))，购票人(char*)，乘车人(char*)
+	形参表：汽车ID(char*)，票num(char*)，日期(char*(MMDD))，购票人(char*)，乘车人(char*),座位号（char*)
 	**************************************************************/
 	Ticket(const char*,const char*,const char*,const char*,const char*,const char*);
 	/**************************************************************
@@ -32,7 +32,7 @@ public:
 	返回值：bool(true：成功，false：失败)
 	功能：修改车票信息
 	**************************************************************/
-	bool change(char*,char*);
+	bool change(char*,char*,char*);
 	/**************************************************************
 	函数名称：refund
 	形参表：none
@@ -42,9 +42,10 @@ public:
 	bool refund();
 private:
 	int seatnum;
-	Coach *coach;
 	char date[5];
     char *buyer[10];
 	char *passenger[10];
+	char tNum;
+	char id;
 };
 #endif // !TICKET_H

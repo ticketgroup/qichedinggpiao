@@ -20,7 +20,7 @@ public:
 	返回值：char**
 	功能：查询用户信息
 	**************************************************************/
-	(char**) inquireNuser(char*);
+    bool inquireNuser(char*,char**);
 private:
 	char *id;
 

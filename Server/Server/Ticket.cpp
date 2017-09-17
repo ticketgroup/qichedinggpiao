@@ -127,9 +127,7 @@ bool Ticket::refund()
 	char tem[200];
 	sprintf(tem, "DELETE FROM tickets where id=%s and num=%s and date=%s and seat=%s", this->id, this->tNum, this->date, this->seatnum);
 	if (mysql_query(&con, tem))
-	{
 		return true;
-	}
 	else
 		return false;
 }
