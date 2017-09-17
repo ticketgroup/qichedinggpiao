@@ -14,7 +14,7 @@ void timeAdd(char *time, char *addM, char *res)
 	sprintf(res, "%02d:%02d", h, m);
 }
 
-Conducor::Conducor(char *i, char *p):User(i,p),innerPassword("?????????"){}
+Conducor::Conducor(char *i, char *p):User(i,p),innerPassword("12345"){}
 
 bool Conducor::inquireSuser(char *p, char *i, char **out)
 {
@@ -242,7 +242,7 @@ bool Conducor::deleteCoach(char *p, char *i)
 
 char Conducor::verify(char *p)
 {
-	if (this->id == "???" && p == "???")
+	if (this->id == "12306" && p == "54321")
 	{
 		return 'Y';
 	}
