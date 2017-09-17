@@ -31,7 +31,7 @@ void Ticket::getse(char *st, char *en)
 	for (; tNum[i] != '0'; i++);
 	e = i - 1;
 	char tem[100];
-	sprintf(tem, "SELECT name FROM *** WHERE id in (%d,%d)", s, e);
+	sprintf(tem, "SELECT station FROM ctov WHERE id='%s' and num in (%d,%d)",this->id,s, e);
 	mysql_real_query(&con,tem,100);
 	res = mysql_store_result(&con);
 	row = mysql_fetch_row(res);
@@ -52,17 +52,18 @@ bool gettnum(char *id, char *st, char *en , char *source)
 	MYSQL_RES *res;
 	MYSQL_ROW row;
 	int s, e, station;
-	char tem[100];
+	char tem[200];
 	mysql_init(&con);
 	mysql_real_connect(&con, "localhost", "root", "111111", "coach", 3306, NULL, 0);
-	mysql_real_query(&con, strcat("select seatnum from coach where id=", id), 42);
+	sprintf(tem, "select max(num) from ctov where id='%s'", id);
+	mysql_real_query(&con, tem, 48);
 	res = mysql_store_result(&con);
 	row = mysql_fetch_row(res);
 	station = str2int(row[0]);
 	for (int i = 0; i < station; source[i] = '0', i++);
 	source[station] = '\0';
-	sprintf(tem, "select id from *** where id=%s and station in (%s,%s)", id, st, en);
-	mysql_real_query(&con, tem, 100);
+	sprintf(tem, "select num from ctov where id='%s' and station='%s' union select num from ctov where id='%s' and station='%s'", id, st, id,en);
+	mysql_real_query(&con, tem, 200);
 	res = mysql_store_result(&con);
 	row = mysql_fetch_row(res);
 	s = str2int(row[0]);
@@ -94,8 +95,8 @@ Ticket::Ticket(const char *car, const char *num, const char *da, const char *b, 
 
 bool Ticket::buy()
 {
-	char tem[150];
-	sprintf(tem,"INSERT INTO tickets(id,placenum,buyer,passenger,seat) VALUES('%s','%s',%s,%s,'%s')", this->id, this->tNum, this->buyer, this->passenger, this->seatnum);
+	char tem[200];
+	sprintf(tem,"INSERT INTO ticket(id,ticketnum,date,passenger,buyer,seatid) VALUES('%s','%s','%s','%s','%s','%s')", this->id, this->tNum,this->date,this->passenger, this->buyer, this->seatnum);
 	if (mysql_query(&con, tem))
 		return true;
 	else
@@ -108,8 +109,8 @@ bool Ticket::change(char *i, char *da, char *se)
 	char st[9], en[9];
 	this->getse(st, en);
 	gettnum(this->id, st, en, tn);
-	char tem[200];
-	sprintf(tem, "UPDATE TABLE tickets set id=%s ,date=%s,seat=%s,num=%s where id=%s and num=%s and date=%s and seat=%s", i , da , se , tn , this->id , this->tNum , this->date , this->seatnum);
+	char tem[250];
+	sprintf(tem, "UPDATE ticket set id='%s',date='%s',seatid='%s',ticketnum='%s' where id='%s' and ticketnum='%s' and date='%s' and seatid='%s'", i , da , se , tn , this->id , this->tNum , this->date , this->seatnum);
 	if (mysql_query(&con, tem))
 	{
 		strcpy(this->id, i);
@@ -124,8 +125,8 @@ bool Ticket::change(char *i, char *da, char *se)
 
 bool Ticket::refund()
 {
-	char tem[200];
-	sprintf(tem, "DELETE FROM tickets where id=%s and num=%s and date=%s and seat=%s", this->id, this->tNum, this->date, this->seatnum);
+	char tem[150];
+	sprintf(tem, "DELETE FROM ticket where id='%s' and ticketnum='%s' and date='%s' and seatid='%s'", this->id, this->tNum, this->date, this->seatnum);
 	if (mysql_query(&con, tem))
 	{
 		return true;
