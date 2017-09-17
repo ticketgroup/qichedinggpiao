@@ -20,12 +20,15 @@ bool Conducor::inquireSuser(char *p, char *i, char **out)
 {
 	if (this->check(p))
 	{
-		mysql_real_query(&con, strcat("SELECT * FROM suser where id=", i), 36);
+		char a[56];
+		sprintf(a, "SELECT password,name FROM suser where id='%s'", i);
+		mysql_real_query(&con,a, 56);
 		if (res = mysql_store_result(&con))
 		{
 			result = mysql_fetch_row(res);
-			strcpy(out[? ], i);
-			strcpy(out[? ], result[0]);
+			strcpy(out[0], i);
+			strcpy(out[1], result[0]);
+			strcpy(out[2], result[1]);
 		}
 		else
 			return false;
@@ -42,12 +45,12 @@ bool Conducor::check(char *p)
 		return false;
 }
 
-bool Conducor::addSuser(char *p, char *i, char *pa)
+bool Conducor::addSuser(char *p, char *i, char *pa,char* na)
 {
 	if (check(p))
 	{
 		char tem[100];
-		sprintf(tem, "INSERT INTO suser(id,password) VALUES('%s','%s')", i, pa);
+		sprintf(tem, "INSERT INTO suser(id,password,name) VALUES('%s','%s','%s')", i, pa,na);
 		if (mysql_query(&con, tem))
 			return true;
 		else
@@ -62,7 +65,7 @@ bool Conducor::changeSuserInfo(char *p, char *mid, char *aid, char *pa)
 	if (check(p))
 	{
 		char tem[200];
-		sprintf(tem, "UPDATE TABLE suser set id=%s ,password=%s where id=%s", aid, pa, mid);
+		sprintf(tem, "UPDATE suser set id='%s' ,password='%s' where id='%s'", aid, pa, mid);
 		if (mysql_query(&con, tem))
 			return true;
 		else
@@ -77,7 +80,7 @@ bool Conducor::deleteUser(char *p, char *i)
 	if (check(p))
 	{
 		char tem[200];
-		sprintf(tem, "DELETE FROM suser where id=%s", i);
+		sprintf(tem, "DELETE FROM suser where id='%s'", i);
 		if (mysql_query(&con, tem))
 			return true;
 		else
@@ -91,7 +94,9 @@ bool Conducor::inquireCoach(char *p, char *i, char **info)
 {
 	if (check(p))
 	{
-		mysql_real_query(&con, strcat("select * from coach where id=", i), 36);
+		char temp[100];
+		sprintf(temp, "select starttime from coach where id='%s'", i);
+		mysql_real_query(&con,temp, 46);
 		if (res = mysql_store_result(&con))
 		{
 			char st[5];
@@ -100,8 +105,6 @@ bool Conducor::inquireCoach(char *p, char *i, char **info)
 			strcpy(info[0], result[0]);
 			
 			strcpy(st, result[2]);
-
-			char temp[100];
 			MYSQL_RES ctos;
 			MYSQL_ROW row;
 			sprintf(temp, "select ctov.station,stov.num from ctov,stov where id=%s order by ctov.num", i);

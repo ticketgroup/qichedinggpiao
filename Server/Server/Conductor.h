@@ -35,7 +35,7 @@ public:
 	返回值：bool(true：成功，false：失败)
 	功能：增加售票员
 	**************************************************************/
-	bool addSuser(char*, char*, char*);
+	bool addSuser(char*, char*, char*,char*);
 	/**************************************************************
 	函数名称：changeSuserinfo
 	形参表：密码(char*)，旧用户ID(char*)，新用户ID(char*)，密码(char*)
