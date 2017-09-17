@@ -1,7 +1,7 @@
 #include "Conductor.h"
 #include <cstring>
 
-Conducor::Conducor(char *i, char *p) :User(i, p), innerPassword("?????????") {}
+Conducor::Conducor(char *i, char *p) :User(i, p), innerPassword("12345") {}
 
 bool Conducor::inquireSuser(char *p, char *i, char **out)
 {

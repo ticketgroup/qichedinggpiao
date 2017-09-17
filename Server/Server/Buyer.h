@@ -37,7 +37,7 @@ public:
 	返回值：void
 	功能：绑定需要操作的票
 	**************************************************************/
-	void chooseticket(Ticket*);
+	void chooseticket(const char*,const char*,const char*,const char*,const char*,const char*);
 	/**************************************************************
 	函数名称：buyticket
 	形参表：none

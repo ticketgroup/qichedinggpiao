@@ -13,12 +13,12 @@ public:
 	函数名称：买票时的构造函数
 	形参表：汽车ID(char*)，票num(char*)，日期(char*(MMDD))，购票人(char*)，乘车人(char*)
 	**************************************************************/
-	Ticket(char*,char*,char*,char*,char*);
+	Ticket(const char*,const char*,const char*,const char*,const char*,const char*);
 	/**************************************************************
 	函数名称：查票时的构造函数
 	形参表：汽车ID(char*)，座位号(char*)，票num(char*),日期(char*(MMDD))
 	**************************************************************/
-	Ticket(char*,char*,char*,char*);
+	//Ticket(char*,char*,char*,char*);
 	/**************************************************************
 	函数名称：buy
 	形参表：none

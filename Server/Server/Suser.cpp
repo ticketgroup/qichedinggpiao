@@ -7,18 +7,20 @@ Suser::Suser(char *i, char *p):Buyer(i , p)
 
 bool Suser::inquireNuser(char *i, char **info)
 {
-	mysql_real_query(&con, strcat("SELECT * FROM nuser where phone=", i), 40);
+	char s[52];
+	sprintf(s, "SELECT id FROM nuser where phone='%s'",i);
+	mysql_real_query(&con, s, 52);
 	if (res = mysql_store_result(&con))
 	{
 		result = mysql_fetch_row(res);
-		/*
-		strcpy(info[0], i);
-		*/
-		mysql_real_query(&con, strcat("SELECT * FROM cinfo where uid=", result[? ]), 40);
+		strcpy(info[0], result[0]);
+		strcpy(info[3], i);
+		sprintf(s, "SELECT number,name FROM cinfo where id='%s'", result[0]);
+		mysql_real_query(&con, s, 52);
 		res = mysql_store_result(&con);
 		result = mysql_fetch_row(res);
-		strcpy(info[/*?*/], result[1]);
-		strcpy(info[/*?*/], result[2]);
+		strcpy(info[1], result[0]);
+		strcpy(info[2], result[1]);
 		return true;
 	}
 	else
@@ -27,7 +29,9 @@ bool Suser::inquireNuser(char *i, char **info)
 
 char Suser::verify(char *p)
 {
-	mysql_real_query(&con, strcat("SELECT password FROM nuser where phone=", this->id), 40);
+	char v[54];
+	sprintf(v, "SELECT password FROM nuser where phone='%s'",this->id);
+	mysql_real_query(&con, v, 54);
 	if (res = mysql_store_result(&con))
 	{
 		result = mysql_fetch_row(res);
