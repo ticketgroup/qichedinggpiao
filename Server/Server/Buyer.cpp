@@ -10,9 +10,9 @@ Buyer::Buyer(char BID[], char Bpass[]):User(BID,Bpass)
 	mysql_real_connect(&con, "localhost", "root", "111111", "user", 3306, NULL, 0);
 }
 
-bool Buyer::carinfo(char cdate[], char start[], char end[],char** coachinfo[])
+bool Buyer::carinfo(char cdate[], char start[], char end[],char*** coachinfo)
 {
-	//char ***coachinfo=new char **[10];
+	inquireCoach(,coachinfo[i]);
 	
 	return true;
 }
