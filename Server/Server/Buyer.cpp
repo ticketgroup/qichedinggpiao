@@ -50,9 +50,9 @@ int Buyer::allticketinfo(char cid[], char cdate[],char start[],char end[] )
 
 void Buyer::chooseticket(const char *car, const char *num, const char *da, const char *b, const char *p, const char *s)
 {
-	Ticket t1(car, num, da, b, p, s);
-	ticket = &t1;
-
+	if (ticket)
+		delete ticket;
+	ticket = new Ticket(car, num, da, b, p, s);
 }
 
 bool Buyer::buyticket()
@@ -60,7 +60,7 @@ bool Buyer::buyticket()
 	return ticket->buy();
 }
 
-bool Buyer::inquireticket(char** info[])
+bool Buyer::inquireticket(char*** info)
 {
 	ticket->getinfo(info);
 }
