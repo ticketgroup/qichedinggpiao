@@ -24,7 +24,7 @@ int Buyer::allticketinfo(char cid[], char cdate[],char start[],char end[] )
 	mysql_init(&b);
 	mysql_real_connect(&b, "localhost", "root", "111111", "coach", 3306, NULL, 0);
 	char term[100];
-	sprintf(term, "select num from ctov where station in (%s,%s) order by num", start, end);
+	sprintf(term, "select num from ctov where station in ('%s','%s') order by num", start, end);
 	mysql_real_query(&b, term, 100);
 	res=mysql_store_result(&b);
 	result = mysql_fetch_row(res);
@@ -37,12 +37,13 @@ int Buyer::allticketinfo(char cid[], char cdate[],char start[],char end[] )
 	{
 		tem[i] = '0';
 	}
-	sprintf(term, "select count(distinct sitnum) from ticket where substring(ticketnum,%d,%d)<>'%s'", st - 1, en - st + 1, tem);
+	sprintf(term, "select count(distinct seatid) from ticket where substring(ticketnum,%d,%d)<>'%s'", st - 1, en - st + 1, tem);
 	mysql_real_query(&b, term, 100);
 	res = mysql_store_result(&b);
 	result = mysql_fetch_row(res);
 	int sitnum=str2int(result[0]);
-	mysql_real_query(&b, strcat("select sitnum from coach where id=", cid), 41);
+	sprintf(tem, "select seatnum from coach where id='%s'", cid);
+	mysql_real_query(&b,tem, 44);
 	num = str2int(mysql_fetch_row(mysql_store_result(&b))[0])-sitnum;
 	return num;
 }
@@ -56,12 +57,7 @@ void Buyer::chooseticket(const char *car, const char *num, const char *da, const
 
 bool Buyer::buyticket()
 {
-	bool b;
-	b=ticket->buy;
-	if (b==true)
-		return true;
-	else
-		return false;
+	return ticket->buy();
 }
 
 bool Buyer::inquireticket(char** info[])
@@ -71,20 +67,10 @@ bool Buyer::inquireticket(char** info[])
 
 bool Buyer::changeticket(char cid[10], char cdate[4])
 {
-	bool c;
-	c=ticket->change(cid, cdate);
-		if(c==true)
-			return true;
-		else
-			return false;
+	return ticket->change(cid, cdate);
 
 }
 bool Buyer::refundticket()
 {
-	bool r;
-	r = ticket->refund;
-	if (r==true)
-		return true;
-	else
-		return false;
+	return ticket->refund();
 }
