@@ -4,15 +4,6 @@
 #include <cstring>
 using namespace std;
 
-void timeAdd(char *time, char *addM, char *res)
-{
-	char temp[4][3] = { time[0],time[1],'\0',time[2],time[3],'\0',addM[0],addM[1],'\0',addM[2],addM[3],'\0' };
-	int m = str2int(temp[1]) + str2int(temp[3]);
-	int h = m / 60;
-	m %= 60;
-	h += str2int(temp[0]) + str2int(temp[2]);
-	sprintf(res, "%02d:%02d", h, m);
-}
 
 Conducor::Conducor(char *i, char *p):User(i,p),innerPassword("12345"){}
 
