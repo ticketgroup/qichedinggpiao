@@ -90,88 +90,53 @@ bool Conducor::deleteUser(char *p, char *i)
 		return false;
 }
 
-bool Conducor::inquireCoach(char *p, char *i, char **info)
-{
-	if (check(p))
-	{
-		char temp[100];
-		sprintf(temp, "select starttime from coach where id='%s'", i);
-		mysql_real_query(&con,temp, 46);
-		if (res = mysql_store_result(&con))
-		{
-			char st[5];
-			result = mysql_fetch_row(res);
-
-			strcpy(info[0], result[0]);
-			
-			strcpy(st, result[2]);
-			MYSQL_RES ctos;
-			MYSQL_ROW row;
-			sprintf(temp, "select ctov.station,stov.num from ctov,stov where id=%s order by ctov.num", i);
-			mysql_real_query(&con, temp, 100);
-			res = mysql_store_result(&con);
-			char *t;
-			for (int a = 0; result = mysql_fetch_row(res); a++)
-			{
-				strcpy(info[2 * a], result[0]);
-				sprintf(temp, "select %s from stov where id=%s", result[3], i);
-				mysql_real_query(&con, temp, 100);
-				sprintf(t, "%04s", strtok(result[0], ","));
-				timeAdd(st, t, info[2 * a + 1]);
-			}
-		}
-		else
-			return false;
-	}
-	else
-		return false;
-}
 
 bool Conducor::addCoach(char *p, char *i, char *st, char ***station, int s, char *seat)
 {
 	if (check(p))
 	{
-		mysql_real_query(&con,strcat("select id from coach where id=",i),37);
+		char temp[100];
+		sprint("select id from coach where id='%s'",i);
+		mysql_real_query(&con,temp,40);
 		if (mysql_store_result(&con))
 			return false;
 		else
 		{
-			char temp[100];
-			sprintf(temp, "insert into coach(id,starttime,seatnum) values(%s,%s,%s)", i, st, seat);
+			sprintf(temp, "insert into coach(id,starttime,seatnum) values('%s','%s',%s)", i, st, seat);
 			if (mysql_query(&con, temp))
 			{
-				sprintf(temp, "insert into ctos(id) values(%s)", i);
+				sprintf(temp, "insert into ctos(id) values('%s')", i);
 				if (mysql_query(&con, temp))
 				{
 					for (int a = 0; a < s; a++)
 					{
-						sprintf(temp, "select num from stov where station=%s", station[a][0]);
+						sprintf(temp, "select num from stov where station='%s'", station[a][0]);
 						mysql_real_query(&con, temp, 100);
 						if (res = mysql_store_result(&con))
 						{
 							result = mysql_fetch_row(res);
-							sprintf(temp, "insert into ctov(num,id,station) values(%d,%s,%s)", a, i, station[a][0]);
+							sprintf(temp, "insert into ctov(num,id,station) values(%d,'%s','%s')", a, i, station[a][0]);
 							if (mysql_query(&con, temp))
 							{
-								sprintf(temp, "update ctos set %s='%s,%s' where id=%s", result[0], station[a][1], station[a][2], i);
+								sprintf(temp, "update ctos set %s='%s,%s' where id='%s'", result[0], station[a][1], station[a][2], i);
 								if (mysql_query(&con, temp))
 								{
 									continue;
 								}
 								else
 								{
-									while(!mysql_query(&con, strcat("delete from coach where id=", i)));
-									while(!mysql_query(&con, strcat("delete from ctov where id=", i)));
+									while(!mysql_query(&con, strcat(strcat("delete from coach where id='", i),"'")));
+									while(!mysql_query(&con, strcat(strcat("delete from ctov where id='", i),"'")));
 									if(!a)
-										while(!mysql_query(&con, strcat("delete from ctos where id=", i)));
+										while(!mysql_query(&con, strcat(strcat("delete from ctos where id='", i),"'")));
 									return false;
 								}
 							}
 							else
 							{
-								while(!mysql_query(&con, strcat("delete from coach where id=", i)));
+								while(!mysql_query(&con, strcat(strcat("delete from coach where id='", i),"'")));
 								if(!a)
-									while(!mysql_query(&con, strcat("delete from ctov where id=", i)));
+									while(!mysql_query(&con, strcat(strcat("delete from ctov where id='", i),"'")));
 								return false;
 							}
 						}
@@ -184,32 +149,32 @@ bool Conducor::addCoach(char *p, char *i, char *st, char ***station, int s, char
 								max = str2int(mysql_fetch_row(res)[0]);
 							}
 							++max;
-							sprintf(temp,"alert table stov add(%d varchar(32) default '-1' not null)",max);
+							sprintf(temp,"alert table ctos add(%d varchar(9) default '-1' not null)",max);
 							while (!mysql_query(&con, temp));
-							sprintf(temp, "update stov set %d='-1'", max);
+							sprintf(temp, "update ctos set %d='-1'", max);
 							while (!mysql_query(&con, temp));
-							sprintf(temp, "insert into ctov(num,id,station) values(%d,%s,%s)", a, i, station[a][0]);
+							sprintf(temp, "insert into ctov(num,id,station) values(%d,'%s','%s')", a, i, station[a][0]);
 							if (mysql_query(&con, temp))
 							{
-								sprintf(temp, "update ctos set %d='%s,%s' where id=%s", max, station[a][1], station[a][2], i);
+								sprintf(temp, "update ctos set %d='%s,%s' where id='%s'", max, station[a][1], station[a][2], i);
 								if (mysql_query(&con, temp))
 								{
 									continue;
 								}
 								else
 								{
-									while (!mysql_query(&con, strcat("delete from coach where id=", i)));
+									while (!mysql_query(&con, strcat(strcat("delete from coach where id='", i),"'")));
 									while (!mysql_query(&con, strcat("delete from ctov where id=", i)));
 									if (!a)
-										while (!mysql_query(&con, strcat("delete from ctos where id=", i)));
+										while (!mysql_query(&con, strcat(strcat("delete from ctos where id='", i),"'")));
 									return false;
 								}
 							}
 							else
 							{
-								while (!mysql_query(&con, strcat("delete from coach where id=", i)));
+								while (!mysql_query(&con, strcat(strcat("delete from coach where id='", i),"'")));
 								if (!a)
-									while (!mysql_query(&con, strcat("delete from ctov where id=", i)));
+									while (!mysql_query(&con, strcat(strcat("delete from ctov where id=", i),"'")));
 								return false;
 							}
 						}
@@ -218,7 +183,7 @@ bool Conducor::addCoach(char *p, char *i, char *st, char ***station, int s, char
 				}
 				else
 				{
-					while(!mysql_query(&con, strcat("delete from coach where id=", i)));
+					while(!mysql_query(&con, strcat(strcat("delete from coach where id='", i),"'")));
 					return false;
 				}
 			}
@@ -234,9 +199,9 @@ bool Conducor::deleteCoach(char *p, char *i)
 {
 	if (check(p))
 	{
-		while (!mysql_query(&con, strcat("delete from coach where id=", i)));
-		while (!mysql_query(&con, strcat("delete from ctov where id=", i)));
-		while (!mysql_query(&con, strcat("delete from ctos where id=", i)));
+		while (!mysql_query(&con, strcat(strcat("delete from coach where id='", i), "'")));
+		while (!mysql_query(&con, strcat(strcat("delete from ctov where id=", i), "'")));
+		while (!mysql_query(&con, strcat(strcat("delete from ctos where id='", i), "'")));
 		return true;
 	}
 	else
