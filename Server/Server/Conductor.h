@@ -7,21 +7,21 @@
 #include"Suser.h"
 using namespace std;
 
-class Conducor :public User
+class Conductor :public User
 {
 public:
 	/**************************************************************
 	函数名称：构造函数
 	形参表：用户ID(char*)，密码(char*)
 	**************************************************************/
-	Conducor(char*, char*);
+	Conductor(char*, char*);
 	/**************************************************************
 	函数名称：inquireSuser
 	形参表：用户ID(char*)
 	返回值：详细信息(char**)
 	功能：查询售票员信息
 	**************************************************************/
-	bool inquireSuser(char*,char*,char**);
+	bool inquireSuser(char*,char*,char **);
 	/**************************************************************
 	函数名称：check
 	形参表：内部密码(char*)

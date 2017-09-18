@@ -6,9 +6,9 @@
 using namespace std;
 
 
-Conducor::Conducor(char *i, char *p) :User(i, p), innerPassword("12345") {}
+Conductor::Conductor(char *i, char *p) :User(i, p), innerPassword("12345") {}
 
-bool Conducor::inquireSuser(char *p, char *i, char **out)
+bool Conductor::inquireSuser(char *p, char *i, char **out)
 {
 	if (this->check(p))
 	{
@@ -29,7 +29,7 @@ bool Conducor::inquireSuser(char *p, char *i, char **out)
 		return false;
 }
 
-bool Conducor::check(char *p)
+bool Conductor::check(char *p)
 {
 	if (!strcmp(this->innerPassword, p))
 		return true;
@@ -37,7 +37,7 @@ bool Conducor::check(char *p)
 		return false;
 }
 
-bool Conducor::addSuser(char *p, char *i, char *pa, char* na)
+bool Conductor::addSuser(char *p, char *i, char *pa, char* na)
 {
 	if (check(p))
 	{
@@ -52,7 +52,7 @@ bool Conducor::addSuser(char *p, char *i, char *pa, char* na)
 		return false;
 }
 
-bool Conducor::changeSuserInfo(char *p, char *mid, char *aid, char *pa)
+bool Conductor::changeSuserInfo(char *p, char *mid, char *aid, char *pa)
 {
 	if (check(p))
 	{
@@ -67,7 +67,7 @@ bool Conducor::changeSuserInfo(char *p, char *mid, char *aid, char *pa)
 		return false;
 }
 
-bool Conducor::deleteUser(char *p, char *i)
+bool Conductor::deleteUser(char *p, char *i)
 {
 	if (check(p))
 	{
@@ -83,7 +83,7 @@ bool Conducor::deleteUser(char *p, char *i)
 }
 
 
-bool Conducor::addCoach(char *p, char *i, char *st, char ***station, int s, char *seat)
+bool Conductor::addCoach(char *p, char *i, char *st, char ***station, int s, char *seat)
 {
 	if (check(p))
 	{
@@ -187,7 +187,7 @@ bool Conducor::addCoach(char *p, char *i, char *st, char ***station, int s, char
 		return false;
 }
 
-bool Conducor::deleteCoach(char *p, char *i)
+bool Conductor::deleteCoach(char *p, char *i)
 {
 	if (check(p))
 	{
@@ -200,7 +200,7 @@ bool Conducor::deleteCoach(char *p, char *i)
 		return false;
 }
 
-char Conducor::verify(char *p)
+char Conductor::verify(char *p)
 {
 	if (this->id == "12306" && p == "54321")
 	{

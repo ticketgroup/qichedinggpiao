@@ -6,6 +6,10 @@
 #include<string>
 using namespace std;
 
+
+int str2int(char*);
+bool getnum(char*, char*, char*, char*);
+int getSeatNum(char*, char*,char*);
 class Ticket
 {
 public:
@@ -40,6 +44,7 @@ public:
 	¹¦ÄÜ£ºÍËÆ±
 	**************************************************************/
 	bool refund();
+	void getse(char*, char*);
 private:
 	int seatnum;
 	char date[5];
