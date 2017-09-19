@@ -26,3 +26,8 @@ void Addcoach::on_pushButton_clicked()
         break;
     }
 }
+
+void Addcoach::on_pushButton_2_clicked()
+{
+    this->close();
+}

@@ -14,6 +14,7 @@ class Changecoach : public QDialog
 
 public:
     explicit Changecoach(QWidget *parent = 0);
+    void setId(QString);
     ~Changecoach();
 
 private slots:
@@ -21,6 +22,7 @@ private slots:
 
 private:
     Ui::Changecoach *ui;
+    QString id;
 };
 
 #endif // CHANGECOACH_H

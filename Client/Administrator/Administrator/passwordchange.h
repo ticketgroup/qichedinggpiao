@@ -13,7 +13,8 @@ class Passwordchange : public QDialog
     Q_OBJECT
 
 public:
-    explicit Passwordchange(QWidget *parent = 0);
+    explicit Passwordchange(QWidget *parent = 0,);
+    void setId(QString);
     ~Passwordchange();
 
 private slots:
@@ -21,6 +22,7 @@ private slots:
 
 private:
     Ui::Passwordchange *ui;
+    QString id;
 };
 
 #endif // PASSWORDCHANGE_H

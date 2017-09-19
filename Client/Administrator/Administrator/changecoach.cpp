@@ -17,6 +17,12 @@ Changecoach::~Changecoach()
     delete ui;
 }
 
+Passwordchange::setId(QString i)
+{
+    id = i;
+}
+
+
 void Changecoach::on_pushButton_clicked()
 {
     switch(QMessageBox::question(NULL, "question", "Content", QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes))
@@ -28,4 +34,9 @@ void Changecoach::on_pushButton_clicked()
     case QMessageBox::No:
         break;
     }
+}
+
+void Changecoach::on_pushButton_2_clicked()
+{
+    this->close();
 }
