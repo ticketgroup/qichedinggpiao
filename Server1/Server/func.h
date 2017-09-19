@@ -81,54 +81,5 @@ void timeAdd(char *time, char *addM, char *res)
 	h += str2int(temp[0]) + str2int(temp[2]);
 	sprintf(res, "%02d:%02d", h, m);
 }
-int getSeatNum(char *id, char *st, char *en)
-{
-	MYSQL coa;
-	mysql_init(&coa);
-	mysql_real_connect(&coa, "localhost", "root", "111111", "coache", 3306, NULL, 0);
-	char tem[120];
-	sprintf(tem, "select num from ctov where id='%s' and station in ('%s','%s') order by num", id, st, en);
-	mysql_real_query(&coa, tem, 120);
-	if (res = mysql_store_result(&con))
-	{
-		int a = str2int(mysql_fetch_row(res)[0]);
-		int b = str2int(mysql_fetch_row(res)[0]) - a + 2;
-		char * tn = new char[b];
-		tn[b] = '\0';
-		for (int i = b - 1; i > -1; i--)
-		{
-			tn[i] = '0';
-		}
-		sprintf(tem, "select seatid from ticket where id='%s' and substring(ticketnum,%d,%d)<>'%s' order by seatnum", id, a, b, tn);
-		mysql_real_query(&coa, tem, 120);
-		if (res = mysql_store_result(&coa))
-		{
-			int pre = str2int(mysql_fetch_row(res)[0]);
-			int next;
-			while (result = mysql_fetch_row(res))
-			{
-				next = str2int(result[0]);
-				if (next - pre > 1)
-					return pre + 1;
-				pre = next;
-			}
-			sprintf(tem, "select seatnum from coach where id='%s'", id);
-			mysql_real_query(&coa, tem, 120);
-			if (res = mysql_store_result(&coa))
-			{
-				int seat = str2int(mysql_fetch_row(res)[0]);
-				if (next != seat)
-					return seat;
-				else
-					return 0;
-			}
-		}
-		else
-			return 1;
-	}
-	else
-		return 0;
-}
-
 
 #endif //  FUNC_H
