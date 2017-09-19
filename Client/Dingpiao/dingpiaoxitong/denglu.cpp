@@ -38,24 +38,24 @@ void denglu::on_pushButton_3_clicked()
                 }
                 else if(st[0] == '1')
                 {
-                    QMessageBox::about(NULL, "登录失败", "没有这个用户！");
+                    QMessageBox::about(NULL, QString::fromLocal8Bit("登录失败"),QString::fromLocal8Bit( "没有这个用户！"));
                 }
                 else if(st[0]  == '2')
                 {
-                    QMessageBox::about(NULL, "登录失败", "密码错误！");
+                    QMessageBox::about(NULL, QString::fromLocal8Bit("登录失败"), QString::fromLocal8Bit("密码错误！"));
                 }
             }
             else
-                 QMessageBox::about(NULL, "登录失败", "服务器连接失败！请重新登录！");
+                 QMessageBox::about(NULL, QString::fromLocal8Bit("登录失败"), QString::fromLocal8Bit("服务器连接失败！请重新登录！"));
         }
         else
         {
-            QMessageBox::about(NULL, "登录失败", "密码中含有非法字符！");
+            QMessageBox::about(NULL, QString::fromLocal8Bit("登录失败"), QString::fromLocal8Bit("密码中含有非法字符！"));
         }
     }
     else
     {
-        QMessageBox::about(NULL, "登录失败", "您输入的用户名有误！");
+        QMessageBox::about(NULL, QString::fromLocal8Bit("登录失败"), QString::fromLocal8Bit("您输入的用户名有误！"));
     }
 }
 
@@ -63,16 +63,16 @@ void denglu::on_pushButton_3_clicked()
 
 void denglu::on_showChildButton_clicked()
 {
-    this->hide();
+    //this->hide();
     passwordback.show();
-    passwordback.exec();
-    this->show();
+    passwordback.open();
+    //this->show();
 }
 
 void denglu::on_pushButton_clicked()
 {
-    this->hide();
+    //this->hide();
     registration.show();
-    registration.exec();
-    this->show();
+    registration.open();
+    //this->show();
 }

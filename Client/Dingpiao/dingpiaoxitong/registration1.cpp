@@ -34,24 +34,24 @@ void Registration1::on_pushButton_clicked()
             {
                 if(st[0] == 'Y')
                 {
-                    QMessageBox::about(NULL, "注册成功", "注册成功！");
+                    QMessageBox::about(NULL, QString::fromLocal8Bit("注册成功"), QString::fromLocal8Bit("注册成功！"));
                     this->close();
                 }
                 else if(st[0] == 'N')
                 {
-                    QMessageBox::about(NULL, "修改失败", "您输入的手机号有误！");
+                    QMessageBox::about(NULL, QString::fromLocal8Bit("修改失败"), QString::fromLocal8Bit("您输入的手机号有误！"));
                 }
             }
             else
-                 QMessageBox::about(NULL, "修改失败", "服务器连接失败！请重新登录！");
+                 QMessageBox::about(NULL, QString::fromLocal8Bit("修改失败"), QString::fromLocal8Bit("服务器连接失败！请重新登录！"));
         }
         else
         {
-            QMessageBox::about(NULL, "修改失败", "密码中含有非法字符！");
+            QMessageBox::about(NULL, QString::fromLocal8Bit("修改失败"), QString::fromLocal8Bit("密码中含有非法字符！"));
         }
     }
     else
     {
-        QMessageBox::about(NULL, "修改失败", "您输入的手机号有误！");
+        QMessageBox::about(NULL, QString::fromLocal8Bit("修改失败"), QString::fromLocal8Bit("您输入的手机号有误！"));
     }
 }

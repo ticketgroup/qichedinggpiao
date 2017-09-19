@@ -31,19 +31,19 @@ void Telephonechange::on_pushButton_clicked()
         {
             if(st[0] == 'Y')
             {
-                QMessageBox::about(NULL, "修改成功", "修改成功！");
+                QMessageBox::about(NULL, QString::fromLocal8Bit("修改成功"), QString::fromLocal8Bit("修改成功！"));
                 this->close();
             }
             else if(st[0] == 'N')
             {
-                QMessageBox::about(NULL, "修改失败", "您输入的原手机号错误！");
+                QMessageBox::about(NULL, QString::fromLocal8Bit("修改失败"), QString::fromLocal8Bit("您输入的原手机号错误！"));
             }
         }
         else
-             QMessageBox::about(NULL, "修改失败", "服务器连接失败！请重新登录！");
+             QMessageBox::about(NULL, QString::fromLocal8Bit("修改失败"), QString::fromLocal8Bit("服务器连接失败！请重新登录！"));
     }
     else
     {
-        QMessageBox::about(NULL, "修改失败", "您输入的手机号错误！");
+        QMessageBox::about(NULL, QString::fromLocal8Bit("修改失败"), QString::fromLocal8Bit("您输入的手机号错误！"));
     }
 }
