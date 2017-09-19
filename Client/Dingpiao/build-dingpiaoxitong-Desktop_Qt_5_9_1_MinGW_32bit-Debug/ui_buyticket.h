@@ -124,10 +124,11 @@ public:
         pushButton_2->setGeometry(QRect(290, 250, 75, 23));
         label_11 = new QLabel(Buyticket);
         label_11->setObjectName(QStringLiteral("label_11"));
-        label_11->setGeometry(QRect(150, 20, 91, 41));
+        label_11->setGeometry(QRect(0, 20, 401, 41));
         QFont font1;
         font1.setPointSize(17);
         label_11->setFont(font1);
+        label_11->setAlignment(Qt::AlignCenter);
 
         retranslateUi(Buyticket);
         QObject::connect(pushButton_2, SIGNAL(clicked()), Buyticket, SLOT(close()));

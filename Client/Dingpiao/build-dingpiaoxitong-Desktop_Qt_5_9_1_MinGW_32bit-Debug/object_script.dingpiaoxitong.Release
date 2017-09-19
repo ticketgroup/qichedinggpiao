@@ -12,6 +12,7 @@ INPUT(
 ./release\endorse.o
 ./release\registration1.o
 ./release\variables.o
+./release\qrc_tupian.o
 ./release\moc_mainwindow.o
 ./release\moc_denglu.o
 ./release\moc_passwordchange.o

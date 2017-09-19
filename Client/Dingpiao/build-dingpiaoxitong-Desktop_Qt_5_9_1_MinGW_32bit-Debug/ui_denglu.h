@@ -52,7 +52,7 @@ public:
         denglu->setModal(false);
         formLayoutWidget = new QWidget(denglu);
         formLayoutWidget->setObjectName(QStringLiteral("formLayoutWidget"));
-        formLayoutWidget->setGeometry(QRect(90, 110, 201, 67));
+        formLayoutWidget->setGeometry(QRect(70, 110, 251, 61));
         QFont font1;
         font1.setPointSize(12);
         formLayoutWidget->setFont(font1);
@@ -122,6 +122,7 @@ public:
     {
         denglu->setWindowTitle(QApplication::translate("denglu", "\347\231\273\345\275\225", Q_NULLPTR));
         nLabel_2->setText(QApplication::translate("denglu", "\347\224\250\346\210\267\345\220\215(&N):", Q_NULLPTR));
+        nLineEdit_2->setText(QString());
         pLabel_2->setText(QApplication::translate("denglu", "\345\257\206\347\240\201(&P):", Q_NULLPTR));
         pLineEdit_2->setText(QString());
         pushButton->setText(QApplication::translate("denglu", "\346\263\250\345\206\214", Q_NULLPTR));

@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'registration1.ui'
+** Form generated from reading UI file 'telephonechange.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.9.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef UI_REGISTRATION1_H
-#define UI_REGISTRATION1_H
+#ifndef UI_TELEPHONECHANGE_H
+#define UI_TELEPHONECHANGE_H
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QAction>
@@ -23,7 +23,7 @@
 
 QT_BEGIN_NAMESPACE
 
-class Ui_Registration1
+class Ui_Telephonechange
 {
 public:
     QLabel *label;
@@ -36,31 +36,36 @@ public:
     QPushButton *pushButton;
     QPushButton *pushButton_2;
 
-    void setupUi(QDialog *Registration1)
+    void setupUi(QDialog *Telephonechange)
     {
-        if (Registration1->objectName().isEmpty())
-            Registration1->setObjectName(QStringLiteral("Registration1"));
-        Registration1->resize(400, 300);
-        label = new QLabel(Registration1);
+        if (Telephonechange->objectName().isEmpty())
+            Telephonechange->setObjectName(QStringLiteral("Telephonechange"));
+        Telephonechange->resize(400, 300);
+        label = new QLabel(Telephonechange);
         label->setObjectName(QStringLiteral("label"));
-        label->setGeometry(QRect(150, 40, 101, 41));
+        label->setGeometry(QRect(0, 40, 401, 41));
         QFont font;
         font.setPointSize(17);
         font.setBold(true);
         font.setWeight(75);
         label->setFont(font);
-        formLayoutWidget = new QWidget(Registration1);
+        label->setAlignment(Qt::AlignCenter);
+        formLayoutWidget = new QWidget(Telephonechange);
         formLayoutWidget->setObjectName(QStringLiteral("formLayoutWidget"));
-        formLayoutWidget->setGeometry(QRect(60, 110, 281, 61));
+        formLayoutWidget->setGeometry(QRect(90, 120, 221, 91));
         QFont font1;
-        font1.setPointSize(13);
+        font1.setPointSize(12);
         formLayoutWidget->setFont(font1);
         formLayout = new QFormLayout(formLayoutWidget);
         formLayout->setObjectName(QStringLiteral("formLayout"));
+        formLayout->setLabelAlignment(Qt::AlignCenter);
+        formLayout->setFormAlignment(Qt::AlignCenter);
         formLayout->setContentsMargins(0, 0, 0, 0);
         Label = new QLabel(formLayoutWidget);
         Label->setObjectName(QStringLiteral("Label"));
         Label->setFont(font1);
+        Label->setMargin(0);
+        Label->setIndent(-1);
 
         formLayout->setWidget(0, QFormLayout::LabelRole, Label);
 
@@ -73,44 +78,46 @@ public:
         Label_2 = new QLabel(formLayoutWidget);
         Label_2->setObjectName(QStringLiteral("Label_2"));
         Label_2->setFont(font1);
+        Label_2->setScaledContents(false);
 
         formLayout->setWidget(1, QFormLayout::LabelRole, Label_2);
 
         LineEdit_2 = new QLineEdit(formLayoutWidget);
         LineEdit_2->setObjectName(QStringLiteral("LineEdit_2"));
         LineEdit_2->setFont(font1);
+        LineEdit_2->setEchoMode(QLineEdit::Password);
 
         formLayout->setWidget(1, QFormLayout::FieldRole, LineEdit_2);
 
-        pushButton = new QPushButton(Registration1);
+        pushButton = new QPushButton(Telephonechange);
         pushButton->setObjectName(QStringLiteral("pushButton"));
-        pushButton->setGeometry(QRect(200, 230, 75, 23));
-        pushButton_2 = new QPushButton(Registration1);
+        pushButton->setGeometry(QRect(190, 250, 75, 23));
+        pushButton_2 = new QPushButton(Telephonechange);
         pushButton_2->setObjectName(QStringLiteral("pushButton_2"));
-        pushButton_2->setGeometry(QRect(300, 230, 75, 23));
+        pushButton_2->setGeometry(QRect(280, 250, 75, 23));
 
-        retranslateUi(Registration1);
-        QObject::connect(pushButton_2, SIGNAL(clicked()), Registration1, SLOT(close()));
+        retranslateUi(Telephonechange);
+        QObject::connect(pushButton_2, SIGNAL(clicked()), Telephonechange, SLOT(close()));
 
-        QMetaObject::connectSlotsByName(Registration1);
+        QMetaObject::connectSlotsByName(Telephonechange);
     } // setupUi
 
-    void retranslateUi(QDialog *Registration1)
+    void retranslateUi(QDialog *Telephonechange)
     {
-        Registration1->setWindowTitle(QApplication::translate("Registration1", "\346\263\250\345\206\214", Q_NULLPTR));
-        label->setText(QApplication::translate("Registration1", "\347\224\250\346\210\267\346\263\250\345\206\214", Q_NULLPTR));
-        Label->setText(QApplication::translate("Registration1", "\346\211\213\346\234\272\345\217\267\357\274\210\347\224\250\346\210\267\345\220\215\357\274\211\357\274\232", Q_NULLPTR));
-        Label_2->setText(QApplication::translate("Registration1", "\350\256\276\347\275\256\345\257\206\347\240\201\357\274\232", Q_NULLPTR));
-        pushButton->setText(QApplication::translate("Registration1", "\347\241\256\345\256\232", Q_NULLPTR));
-        pushButton_2->setText(QApplication::translate("Registration1", "\345\217\226\346\266\210", Q_NULLPTR));
+        Telephonechange->setWindowTitle(QApplication::translate("Telephonechange", "\344\277\256\346\224\271\346\211\213\346\234\272\345\217\267", Q_NULLPTR));
+        label->setText(QApplication::translate("Telephonechange", "\344\277\256\346\224\271\346\211\213\346\234\272\345\217\267", Q_NULLPTR));
+        Label->setText(QApplication::translate("Telephonechange", "\345\216\237\346\211\213\346\234\272\345\217\267:", Q_NULLPTR));
+        Label_2->setText(QApplication::translate("Telephonechange", "\346\226\260\346\211\213\346\234\272\345\217\267\357\274\232", Q_NULLPTR));
+        pushButton->setText(QApplication::translate("Telephonechange", "\347\241\256\345\256\232", Q_NULLPTR));
+        pushButton_2->setText(QApplication::translate("Telephonechange", "\345\217\226\346\266\210", Q_NULLPTR));
     } // retranslateUi
 
 };
 
 namespace Ui {
-    class Registration1: public Ui_Registration1 {};
+    class Telephonechange: public Ui_Telephonechange {};
 } // namespace Ui
 
 QT_END_NAMESPACE
 
-#endif // UI_REGISTRATION1_H
+#endif // UI_TELEPHONECHANGE_H

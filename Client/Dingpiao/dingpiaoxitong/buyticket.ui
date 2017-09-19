@@ -182,9 +182,9 @@
   <widget class="QLabel" name="label_11">
    <property name="geometry">
     <rect>
-     <x>150</x>
+     <x>0</x>
      <y>20</y>
-     <width>91</width>
+     <width>401</width>
      <height>41</height>
     </rect>
    </property>
@@ -195,6 +195,9 @@
    </property>
    <property name="text">
     <string>订单确认</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
    </property>
   </widget>
  </widget>

@@ -1,13 +1,13 @@
 /********************************************************************************
-** Form generated from reading UI file 'passwordback1.ui'
+** Form generated from reading UI file 'registration1.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.9.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef UI_PASSWORDBACK1_H
-#define UI_PASSWORDBACK1_H
+#ifndef UI_REGISTRATION1_H
+#define UI_REGISTRATION1_H
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QAction>
@@ -23,7 +23,7 @@
 
 QT_BEGIN_NAMESPACE
 
-class Ui_Passwordback1
+class Ui_Registration1
 {
 public:
     QLabel *label;
@@ -36,24 +36,25 @@ public:
     QPushButton *pushButton;
     QPushButton *pushButton_2;
 
-    void setupUi(QDialog *Passwordback1)
+    void setupUi(QDialog *Registration1)
     {
-        if (Passwordback1->objectName().isEmpty())
-            Passwordback1->setObjectName(QStringLiteral("Passwordback1"));
-        Passwordback1->resize(400, 300);
-        label = new QLabel(Passwordback1);
+        if (Registration1->objectName().isEmpty())
+            Registration1->setObjectName(QStringLiteral("Registration1"));
+        Registration1->resize(400, 300);
+        label = new QLabel(Registration1);
         label->setObjectName(QStringLiteral("label"));
-        label->setGeometry(QRect(130, 40, 121, 41));
+        label->setGeometry(QRect(0, 40, 401, 41));
         QFont font;
         font.setPointSize(17);
         font.setBold(true);
         font.setWeight(75);
         label->setFont(font);
-        formLayoutWidget = new QWidget(Passwordback1);
+        label->setAlignment(Qt::AlignCenter);
+        formLayoutWidget = new QWidget(Registration1);
         formLayoutWidget->setObjectName(QStringLiteral("formLayoutWidget"));
-        formLayoutWidget->setGeometry(QRect(90, 120, 221, 81));
+        formLayoutWidget->setGeometry(QRect(60, 110, 281, 61));
         QFont font1;
-        font1.setPointSize(12);
+        font1.setPointSize(13);
         formLayoutWidget->setFont(font1);
         formLayout = new QFormLayout(formLayoutWidget);
         formLayout->setObjectName(QStringLiteral("formLayout"));
@@ -79,39 +80,38 @@ public:
         LineEdit_2 = new QLineEdit(formLayoutWidget);
         LineEdit_2->setObjectName(QStringLiteral("LineEdit_2"));
         LineEdit_2->setFont(font1);
-        LineEdit_2->setEchoMode(QLineEdit::Password);
 
         formLayout->setWidget(1, QFormLayout::FieldRole, LineEdit_2);
 
-        pushButton = new QPushButton(Passwordback1);
+        pushButton = new QPushButton(Registration1);
         pushButton->setObjectName(QStringLiteral("pushButton"));
-        pushButton->setGeometry(QRect(200, 240, 75, 23));
-        pushButton_2 = new QPushButton(Passwordback1);
+        pushButton->setGeometry(QRect(200, 230, 75, 23));
+        pushButton_2 = new QPushButton(Registration1);
         pushButton_2->setObjectName(QStringLiteral("pushButton_2"));
-        pushButton_2->setGeometry(QRect(300, 240, 75, 23));
+        pushButton_2->setGeometry(QRect(300, 230, 75, 23));
 
-        retranslateUi(Passwordback1);
-        QObject::connect(pushButton_2, SIGNAL(clicked()), Passwordback1, SLOT(close()));
+        retranslateUi(Registration1);
+        QObject::connect(pushButton_2, SIGNAL(clicked()), Registration1, SLOT(close()));
 
-        QMetaObject::connectSlotsByName(Passwordback1);
+        QMetaObject::connectSlotsByName(Registration1);
     } // setupUi
 
-    void retranslateUi(QDialog *Passwordback1)
+    void retranslateUi(QDialog *Registration1)
     {
-        Passwordback1->setWindowTitle(QApplication::translate("Passwordback1", "\346\233\264\346\224\271\345\257\206\347\240\201", Q_NULLPTR));
-        label->setText(QApplication::translate("Passwordback1", "\350\256\276\347\275\256\346\226\260\345\257\206\347\240\201", Q_NULLPTR));
-        Label->setText(QApplication::translate("Passwordback1", "\346\211\213\346\234\272\345\217\267:", Q_NULLPTR));
-        Label_2->setText(QApplication::translate("Passwordback1", "\346\226\260\345\257\206\347\240\201:", Q_NULLPTR));
-        pushButton->setText(QApplication::translate("Passwordback1", "\347\241\256\345\256\232", Q_NULLPTR));
-        pushButton_2->setText(QApplication::translate("Passwordback1", "\345\217\226\346\266\210", Q_NULLPTR));
+        Registration1->setWindowTitle(QApplication::translate("Registration1", "\346\263\250\345\206\214", Q_NULLPTR));
+        label->setText(QApplication::translate("Registration1", "\347\224\250\346\210\267\346\263\250\345\206\214", Q_NULLPTR));
+        Label->setText(QApplication::translate("Registration1", "\346\211\213\346\234\272\345\217\267\357\274\210\347\224\250\346\210\267\345\220\215\357\274\211\357\274\232", Q_NULLPTR));
+        Label_2->setText(QApplication::translate("Registration1", "\350\256\276\347\275\256\345\257\206\347\240\201\357\274\232", Q_NULLPTR));
+        pushButton->setText(QApplication::translate("Registration1", "\347\241\256\345\256\232", Q_NULLPTR));
+        pushButton_2->setText(QApplication::translate("Registration1", "\345\217\226\346\266\210", Q_NULLPTR));
     } // retranslateUi
 
 };
 
 namespace Ui {
-    class Passwordback1: public Ui_Passwordback1 {};
+    class Registration1: public Ui_Registration1 {};
 } // namespace Ui
 
 QT_END_NAMESPACE
 
-#endif // UI_PASSWORDBACK1_H
+#endif // UI_REGISTRATION1_H

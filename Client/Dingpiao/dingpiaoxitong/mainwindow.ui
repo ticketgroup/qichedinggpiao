@@ -33,40 +33,49 @@
      <widget class="QLabel" name="label_4">
       <property name="geometry">
        <rect>
-        <x>30</x>
+        <x>10</x>
         <y>10</y>
-        <width>51</width>
-        <height>16</height>
+        <width>71</width>
+        <height>20</height>
        </rect>
       </property>
       <property name="text">
        <string>出发日期</string>
       </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
      </widget>
      <widget class="QLabel" name="label_5">
       <property name="geometry">
        <rect>
-        <x>170</x>
+        <x>160</x>
         <y>10</y>
-        <width>51</width>
-        <height>16</height>
+        <width>61</width>
+        <height>20</height>
        </rect>
       </property>
       <property name="text">
        <string>出发地</string>
       </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
      </widget>
      <widget class="QLabel" name="label_7">
       <property name="geometry">
        <rect>
-        <x>320</x>
+        <x>300</x>
         <y>10</y>
-        <width>51</width>
-        <height>16</height>
+        <width>71</width>
+        <height>20</height>
        </rect>
       </property>
       <property name="text">
        <string>到达地</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
       </property>
      </widget>
      <widget class="QDateEdit" name="dateEdit">
@@ -193,6 +202,11 @@
         <height>221</height>
        </rect>
       </property>
+      <row>
+       <property name="text">
+        <string>新建行</string>
+       </property>
+      </row>
       <column>
        <property name="text">
         <string>编号</string>
@@ -338,6 +352,11 @@
         <string>乘车人</string>
        </property>
       </column>
+      <column>
+       <property name="text">
+        <string>乘车人一卡通</string>
+       </property>
+      </column>
      </widget>
      <widget class="QPushButton" name="pushButton_5">
       <property name="geometry">
@@ -373,58 +392,58 @@
      <widget class="QLabel" name="label">
       <property name="geometry">
        <rect>
-        <x>30</x>
-        <y>80</y>
-        <width>54</width>
-        <height>12</height>
+        <x>13</x>
+        <y>61</y>
+        <width>91</width>
+        <height>31</height>
        </rect>
       </property>
       <property name="text">
        <string>姓名:</string>
       </property>
       <property name="alignment">
-       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       <set>Qt::AlignCenter</set>
       </property>
      </widget>
      <widget class="QLabel" name="label_2">
       <property name="geometry">
        <rect>
-        <x>30</x>
-        <y>120</y>
-        <width>54</width>
-        <height>12</height>
+        <x>10</x>
+        <y>100</y>
+        <width>91</width>
+        <height>31</height>
        </rect>
       </property>
       <property name="text">
        <string>学号:</string>
       </property>
       <property name="alignment">
-       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       <set>Qt::AlignCenter</set>
       </property>
      </widget>
      <widget class="QLabel" name="label_3">
       <property name="geometry">
        <rect>
-        <x>30</x>
-        <y>160</y>
-        <width>54</width>
-        <height>12</height>
+        <x>3</x>
+        <y>131</y>
+        <width>91</width>
+        <height>61</height>
        </rect>
       </property>
       <property name="text">
        <string>一卡通号:</string>
       </property>
       <property name="alignment">
-       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       <set>Qt::AlignCenter</set>
       </property>
      </widget>
      <widget class="QLabel" name="label_6">
       <property name="geometry">
        <rect>
-        <x>30</x>
-        <y>40</y>
-        <width>54</width>
-        <height>12</height>
+        <x>13</x>
+        <y>21</y>
+        <width>91</width>
+        <height>31</height>
        </rect>
       </property>
       <property name="layoutDirection">
@@ -434,7 +453,7 @@
        <string>手机号:</string>
       </property>
       <property name="alignment">
-       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       <set>Qt::AlignCenter</set>
       </property>
      </widget>
      <widget class="QPushButton" name="pushButton_2">
@@ -470,7 +489,7 @@
       <property name="geometry">
        <rect>
         <x>120</x>
-        <y>20</y>
+        <y>10</y>
         <width>121</width>
         <height>51</height>
        </rect>

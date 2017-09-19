@@ -89,12 +89,13 @@ public:
         pushButton_2->setGeometry(QRect(290, 250, 75, 23));
         label = new QLabel(Passwordchange);
         label->setObjectName(QStringLiteral("label"));
-        label->setGeometry(QRect(140, 30, 111, 41));
+        label->setGeometry(QRect(0, 30, 401, 41));
         QFont font1;
         font1.setPointSize(17);
         font1.setBold(true);
         font1.setWeight(75);
         label->setFont(font1);
+        label->setAlignment(Qt::AlignCenter);
 
         retranslateUi(Passwordchange);
         QObject::connect(pushButton_2, SIGNAL(clicked()), Passwordchange, SLOT(close()));

@@ -29,12 +29,10 @@ public:
     QLabel *label;
     QWidget *formLayoutWidget;
     QFormLayout *formLayout;
-    QLabel *Label;
-    QLineEdit *LineEdit;
+    QLabel *Label_2;
     QLineEdit *LineEdit_2;
     QLabel *Label_3;
     QLineEdit *LineEdit_3;
-    QLabel *Label_2;
     QPushButton *pushButton;
     QPushButton *pushButton_2;
 
@@ -45,56 +43,45 @@ public:
         Registration->resize(400, 300);
         label = new QLabel(Registration);
         label->setObjectName(QStringLiteral("label"));
-        label->setGeometry(QRect(140, 20, 111, 41));
+        label->setGeometry(QRect(0, 20, 401, 41));
         QFont font;
         font.setPointSize(17);
         font.setBold(true);
         font.setWeight(75);
         label->setFont(font);
+        label->setAlignment(Qt::AlignCenter);
         formLayoutWidget = new QWidget(Registration);
         formLayoutWidget->setObjectName(QStringLiteral("formLayoutWidget"));
-        formLayoutWidget->setGeometry(QRect(80, 90, 221, 101));
+        formLayoutWidget->setGeometry(QRect(80, 110, 247, 52));
         QFont font1;
         font1.setPointSize(12);
         formLayoutWidget->setFont(font1);
         formLayout = new QFormLayout(formLayoutWidget);
         formLayout->setObjectName(QStringLiteral("formLayout"));
         formLayout->setContentsMargins(0, 0, 0, 0);
-        Label = new QLabel(formLayoutWidget);
-        Label->setObjectName(QStringLiteral("Label"));
-        Label->setFont(font1);
+        Label_2 = new QLabel(formLayoutWidget);
+        Label_2->setObjectName(QStringLiteral("Label_2"));
+        Label_2->setFont(font1);
 
-        formLayout->setWidget(0, QFormLayout::LabelRole, Label);
-
-        LineEdit = new QLineEdit(formLayoutWidget);
-        LineEdit->setObjectName(QStringLiteral("LineEdit"));
-        LineEdit->setFont(font1);
-
-        formLayout->setWidget(0, QFormLayout::FieldRole, LineEdit);
+        formLayout->setWidget(0, QFormLayout::LabelRole, Label_2);
 
         LineEdit_2 = new QLineEdit(formLayoutWidget);
         LineEdit_2->setObjectName(QStringLiteral("LineEdit_2"));
         LineEdit_2->setFont(font1);
 
-        formLayout->setWidget(1, QFormLayout::FieldRole, LineEdit_2);
+        formLayout->setWidget(0, QFormLayout::FieldRole, LineEdit_2);
 
         Label_3 = new QLabel(formLayoutWidget);
         Label_3->setObjectName(QStringLiteral("Label_3"));
         Label_3->setFont(font1);
 
-        formLayout->setWidget(2, QFormLayout::LabelRole, Label_3);
+        formLayout->setWidget(1, QFormLayout::LabelRole, Label_3);
 
         LineEdit_3 = new QLineEdit(formLayoutWidget);
         LineEdit_3->setObjectName(QStringLiteral("LineEdit_3"));
         LineEdit_3->setFont(font1);
 
-        formLayout->setWidget(2, QFormLayout::FieldRole, LineEdit_3);
-
-        Label_2 = new QLabel(formLayoutWidget);
-        Label_2->setObjectName(QStringLiteral("Label_2"));
-        Label_2->setFont(font1);
-
-        formLayout->setWidget(1, QFormLayout::LabelRole, Label_2);
+        formLayout->setWidget(1, QFormLayout::FieldRole, LineEdit_3);
 
         pushButton = new QPushButton(Registration);
         pushButton->setObjectName(QStringLiteral("pushButton"));
@@ -113,9 +100,8 @@ public:
     {
         Registration->setWindowTitle(QApplication::translate("Registration", "\346\263\250\345\206\214", Q_NULLPTR));
         label->setText(QApplication::translate("Registration", "\347\224\250\346\210\267\346\263\250\345\206\214", Q_NULLPTR));
-        Label->setText(QApplication::translate("Registration", "\345\247\223\345\220\215:", Q_NULLPTR));
-        Label_3->setText(QApplication::translate("Registration", "\345\255\246\345\217\267:", Q_NULLPTR));
         Label_2->setText(QApplication::translate("Registration", "\344\270\200\345\215\241\351\200\232\345\217\267:", Q_NULLPTR));
+        Label_3->setText(QApplication::translate("Registration", "\345\255\246\345\217\267:", Q_NULLPTR));
         pushButton->setText(QApplication::translate("Registration", "\344\270\213\344\270\200\346\255\245", Q_NULLPTR));
         pushButton_2->setText(QApplication::translate("Registration", "\345\217\226\346\266\210", Q_NULLPTR));
     } // retranslateUi

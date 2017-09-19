@@ -12,6 +12,7 @@ INPUT(
 ./debug\endorse.o
 ./debug\registration1.o
 ./debug\variables.o
+./debug\qrc_tupian.o
 ./debug\moc_mainwindow.o
 ./debug\moc_denglu.o
 ./debug\moc_passwordchange.o

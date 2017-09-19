@@ -4,6 +4,7 @@
 #include <QDialog>
 #include "passwordback.h"
 #include "registration.h"
+#include "mainwindow.h"
 
 namespace Ui {
 class denglu;

@@ -5,8 +5,8 @@
 #-------------------------------------------------
 
 QT       += core gui
-QT      +=network
-LIBS += -lpthread libwsock32 libws2_32
+QT       += network
+LIBS     += -lpthread libwsock32 libws2_32
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -51,8 +51,8 @@ HEADERS += \
     buyticket.h \
     endorse.h \
     registration1.h \
-    variables.h \
-    Client.h
+    Client.h \
+    variables.h
 
 FORMS += \
         mainwindow.ui \
@@ -65,3 +65,6 @@ FORMS += \
     buyticket.ui \
     endorse.ui \
     registration1.ui
+
+RESOURCES += \
+    tupian.qrc
