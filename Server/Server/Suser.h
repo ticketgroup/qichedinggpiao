@@ -1,4 +1,3 @@
-#pragma once
 #ifndef SELLER_H
 #define SELLER_H
 
@@ -16,18 +15,28 @@ public:
 	Suser(char*, char*);
 	/**************************************************************
 	函数名称：inquireNuser
-	形参表：用户ID(char*)，用户信息(输出)(char**)
-	返回值：bool(true：查询到信息，false：未查询到信息)
+	形参表：用户ID(char*)
+	返回值：char**
 	功能：查询用户信息
 	**************************************************************/
-	bool inquireNuser(char*,char**);
+    bool inquireNuser(char*,char**);
 	/**************************************************************
 	函数名称：verify
 	形参表：用户ID(char*)，密码(char*)
 	返回值：char('Y'：登陆成功，'1'：用户名不存在，'2'：密码不正确)
 	功能：用户登录
 	**************************************************************/
-	virtual char verify(char*);
+	char verify(char*);
+	/**************************************************************
+	函数名称：inquireticket
+	形参表： none
+	返回值：char***
+	功能：查票(全部)
+	**************************************************************/
+	bool inquireticket(char ***,char* );
+private:
+	char *id;
+
 
 };
 #endif // !SELLER_H

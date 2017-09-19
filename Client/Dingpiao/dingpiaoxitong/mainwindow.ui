@@ -1,0 +1,529 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>596</width>
+    <height>380</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>汽车购票系统</string>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <widget class="QTabWidget" name="tabWidget">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>20</y>
+      <width>581</width>
+      <height>341</height>
+     </rect>
+    </property>
+    <property name="currentIndex">
+     <number>0</number>
+    </property>
+    <widget class="QWidget" name="tab">
+     <attribute name="title">
+      <string>售票信息查询</string>
+     </attribute>
+     <widget class="QLabel" name="label_4">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>10</y>
+        <width>51</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>出发日期</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_5">
+      <property name="geometry">
+       <rect>
+        <x>170</x>
+        <y>10</y>
+        <width>51</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>出发地</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_7">
+      <property name="geometry">
+       <rect>
+        <x>320</x>
+        <y>10</y>
+        <width>51</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>到达地</string>
+      </property>
+     </widget>
+     <widget class="QDateEdit" name="dateEdit">
+      <property name="geometry">
+       <rect>
+        <x>90</x>
+        <y>10</y>
+        <width>71</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="currentSection">
+       <enum>QDateTimeEdit::MonthSection</enum>
+      </property>
+      <property name="displayFormat">
+       <string>MM/dd</string>
+      </property>
+      <property name="calendarPopup">
+       <bool>true</bool>
+      </property>
+      <property name="currentSectionIndex">
+       <number>0</number>
+      </property>
+      <property name="timeSpec">
+       <enum>Qt::LocalTime</enum>
+      </property>
+      <property name="date">
+       <date>
+        <year>2017</year>
+        <month>6</month>
+        <day>2</day>
+       </date>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="comboBox">
+      <property name="geometry">
+       <rect>
+        <x>220</x>
+        <y>10</y>
+        <width>71</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <item>
+       <property name="text">
+        <string>新建项目</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>新建项目</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>新建项目</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>新建项目</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>新建项目</string>
+       </property>
+      </item>
+     </widget>
+     <widget class="QComboBox" name="comboBox_2">
+      <property name="geometry">
+       <rect>
+        <x>370</x>
+        <y>10</y>
+        <width>71</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <item>
+       <property name="text">
+        <string>新建项目</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>新建项目</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>新建项目</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>新建项目</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>新建项目</string>
+       </property>
+      </item>
+     </widget>
+     <widget class="QPushButton" name="pushButton_4">
+      <property name="geometry">
+       <rect>
+        <x>470</x>
+        <y>10</y>
+        <width>75</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>搜索</string>
+      </property>
+     </widget>
+     <widget class="QTableWidget" name="tableWidget">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>50</y>
+        <width>561</width>
+        <height>221</height>
+       </rect>
+      </property>
+      <column>
+       <property name="text">
+        <string>编号</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>出发地</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>出发时间</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>到达地</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>到达时间</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>剩余票数</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>售价</string>
+       </property>
+      </column>
+     </widget>
+     <widget class="QPushButton" name="pushButton_7">
+      <property name="geometry">
+       <rect>
+        <x>470</x>
+        <y>280</y>
+        <width>75</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>购票</string>
+      </property>
+     </widget>
+     <widget class="QWidget" name="formLayoutWidget">
+      <property name="geometry">
+       <rect>
+        <x>280</x>
+        <y>280</y>
+        <width>181</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <layout class="QFormLayout" name="formLayout">
+       <item row="0" column="0">
+        <widget class="QLabel" name="Label">
+         <property name="text">
+          <string>乘车人一卡通：</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QLineEdit" name="LineEdit"/>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab_2">
+     <attribute name="title">
+      <string>订单查询</string>
+     </attribute>
+     <widget class="QTableWidget" name="tableWidget_4">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>10</y>
+        <width>541</width>
+        <height>231</height>
+       </rect>
+      </property>
+      <row>
+       <property name="text">
+        <string>新建行</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
+        <string>新建行</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
+        <string>新建行</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
+        <string>新建行</string>
+       </property>
+      </row>
+      <column>
+       <property name="text">
+        <string>汽车编号</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>出发日期</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>出发地</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>出发时间</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>到达地</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>到达时间</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>座位号</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>乘车人</string>
+       </property>
+      </column>
+     </widget>
+     <widget class="QPushButton" name="pushButton_5">
+      <property name="geometry">
+       <rect>
+        <x>360</x>
+        <y>260</y>
+        <width>75</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>改签</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_6">
+      <property name="geometry">
+       <rect>
+        <x>470</x>
+        <y>260</y>
+        <width>75</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>退票</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab_3">
+     <attribute name="title">
+      <string>个人信息查询</string>
+     </attribute>
+     <widget class="QLabel" name="label">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>80</y>
+        <width>54</width>
+        <height>12</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>姓名:</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_2">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>120</y>
+        <width>54</width>
+        <height>12</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>学号:</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_3">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>160</y>
+        <width>54</width>
+        <height>12</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>一卡通号:</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_6">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>40</y>
+        <width>54</width>
+        <height>12</height>
+       </rect>
+      </property>
+      <property name="layoutDirection">
+       <enum>Qt::LeftToRight</enum>
+      </property>
+      <property name="text">
+       <string>手机号:</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_2">
+      <property name="geometry">
+       <rect>
+        <x>310</x>
+        <y>40</y>
+        <width>81</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>修改手机号</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_3">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>200</y>
+        <width>75</width>
+        <height>23</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>修改密码</string>
+      </property>
+      <property name="flat">
+       <bool>false</bool>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_10">
+      <property name="geometry">
+       <rect>
+        <x>120</x>
+        <y>20</y>
+        <width>121</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>TextLabel</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_11">
+      <property name="geometry">
+       <rect>
+        <x>120</x>
+        <y>60</y>
+        <width>101</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>TextLabel</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_12">
+      <property name="geometry">
+       <rect>
+        <x>120</x>
+        <y>100</y>
+        <width>91</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>TextLabel</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_13">
+      <property name="geometry">
+       <rect>
+        <x>120</x>
+        <y>140</y>
+        <width>91</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>TextLabel</string>
+      </property>
+     </widget>
+    </widget>
+   </widget>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources/>
+ <connections/>
+</ui>

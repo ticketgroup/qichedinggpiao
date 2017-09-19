@@ -1,27 +1,26 @@
-#pragma once
 #ifndef CONDUCTOR_H
 #define CONDUCTOR_H
 
-#include<iostream>
-#include"user.h"
-#include"Suser.h"
+#include <iostream>
+#include "user.h"
+#include "Suser.h"
 using namespace std;
 
-class Conducor :public User
+class Conductor :public User
 {
 public:
 	/**************************************************************
 	函数名称：构造函数
 	形参表：用户ID(char*)，密码(char*)
 	**************************************************************/
-	Conducor(char*, char*);
+	Conductor(char*, char*);
 	/**************************************************************
 	函数名称：inquireSuser
-	形参表：密码(char*)，用户ID(char*)，售票员信息(输出)(char**)
-	返回值：bool(true：查询到信息，false：未查询到信息)
+	形参表：用户ID(char*)
+	返回值：详细信息(char**)
 	功能：查询售票员信息
 	**************************************************************/
-	bool inquireSuser(char*, char*, char**);
+	bool inquireSuser(char*,char*,char **);
 	/**************************************************************
 	函数名称：check
 	形参表：内部密码(char*)
@@ -31,46 +30,40 @@ public:
 	bool check(char*);
 	/**************************************************************
 	函数名称：addSuser
-	形参表：密码(char*)，用户ID(char*)，密码(char*)
+	形参表：用户ID(char*)，密码(char*)
 	返回值：bool(true：成功，false：失败)
 	功能：增加售票员
 	**************************************************************/
-	bool addSuser(char*, char*, char*,char*);
+	bool addSuser(char*, char*,char*,char*);
 	/**************************************************************
 	函数名称：changeSuserinfo
-	形参表：密码(char*)，旧用户ID(char*)，新用户ID(char*)，密码(char*)
+	形参表：内部验证密码（char*），旧用户ID(char*)，新用户ID(char*)，密码(char*)
 	返回值：bool(true：成功，false：失败)
 	功能：更改售票员信息
 	**************************************************************/
-	bool changeSuserInfo(char*, char*, char*, char*);
+	bool changeSuserInfo(char*, char*, char*,char*);
 	/**************************************************************
 	函数名称：deleteUser
-	形参表：密码(char*)，用户ID(char*)
+	形参表：内部验证密码（char*），用户ID(char*)
 	返回值：bool(true：成功，false：失败)
 	功能：删除售票员
 	**************************************************************/
-	bool deleteUser(char*, char*);
+	bool deleteUser(char*,char*);
 	/**************************************************************
 	函数名称：addCoach
-	形参表：密码(char*)，汽车ID(char*)，发车时间(char*(HHMM))，站点信息(char***)，站数(int),座位数(char*)
+	形参表：内部验证密码（char*),汽车ID(char*)，发车时间(char*(HHMM))，站点信息(char***)，座位数(char*)
 	返回值：bool(true：成功，false：失败)
 	功能：增加车辆信息
 	**************************************************************/
-	bool addCoach(char*, char*, char*, char***, int, char*);
+	bool addCoach(char*, char*, char*, char***,int,char*);
 	/**************************************************************
 	函数名称：deleteCoach
-	形参表：密码(char*)，汽车ID(char*)
+	形参表：内部验证密码（char*）,汽车ID(char*)
 	返回值：bool(true：成功，false：失败)
 	功能：删除车辆信息
 	**************************************************************/
-	bool deleteCoach(char*, char*);
-	/**************************************************************
-	函数名称：verify
-	形参表：用户ID(char*)，密码(char*)
-	返回值：char('Y'：登陆成功，'1'：用户名不存在，'2'：密码不正确)
-	功能：用户登录
-	**************************************************************/
-	virtual char verify(char*);
+	bool deleteCoach(char*,char*);
+	char verify(char*);
 private:
 	const char innerPassword[40];
 };

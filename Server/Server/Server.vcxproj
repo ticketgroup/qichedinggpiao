@@ -42,7 +42,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v140_xp</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
@@ -146,12 +146,18 @@
     <ClInclude Include="Conductor.h" />
     <ClInclude Include="func.h" />
     <ClInclude Include="Nuser.h" />
+    <ClInclude Include="Server.h" />
+    <ClInclude Include="stdafx.h" />
     <ClInclude Include="Suser.h" />
     <ClInclude Include="Ticket.h" />
     <ClInclude Include="user.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Buyer.cpp" />
     <ClCompile Include="Conductor.cpp" />
+    <ClCompile Include="func.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Nuser.cpp" />
     <ClCompile Include="Server.cpp" />
     <ClCompile Include="Suser.cpp" />
     <ClCompile Include="Ticket.cpp" />

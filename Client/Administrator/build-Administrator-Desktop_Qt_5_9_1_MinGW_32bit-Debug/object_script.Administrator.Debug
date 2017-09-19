@@ -1,0 +1,15 @@
+INPUT(
+./debug\main.o
+./debug\mainwindow.o
+./debug\denglu.o
+./debug\passwordchange.o
+./debug\addconductor.o
+./debug\addcoach.o
+./debug\changecoach.o
+./debug\moc_mainwindow.o
+./debug\moc_denglu.o
+./debug\moc_passwordchange.o
+./debug\moc_addconductor.o
+./debug\moc_addcoach.o
+./debug\moc_changecoach.o
+);

@@ -1,4 +1,5 @@
 #include "Ticket.h"
+#include "func.h"
 #include <cstring>
 #include <iostream>
 using namespace std;
@@ -11,8 +12,8 @@ void Ticket::getse(char *st, char *en)
 	for (; tNum[i] != '0'; i++);
 	e = i - 1;
 	char tem[100];
-	sprintf(tem, "SELECT station FROM ctov WHERE id='%s' and num in (%d,%d)",this->id,s, e);
-	mysql_real_query(&con,tem,100);
+	sprintf(tem, "SELECT station FROM ctov WHERE id='%s' and num in (%d,%d);", this->id, s, e);
+	mysql_real_query(&con, tem, 100);
 	res = mysql_store_result(&con);
 	row = mysql_fetch_row(res);
 	strcpy(st, row[0]);
@@ -36,8 +37,8 @@ Ticket::Ticket(const char *car, const char *num, const char *da, const char *b, 
 bool Ticket::buy()
 {
 	char tem[200];
-	sprintf(tem,"INSERT INTO ticket(id,ticketnum,date,passenger,buyer,seatid) VALUES('%s','%s','%s','%s','%s','%s')", this->id, this->tNum,this->date,this->passenger, this->buyer, this->seatnum);
-	if (mysql_query(&con, tem))
+	sprintf(tem, "INSERT INTO ticket(id,ticketnum,date,passenger,buyer,seatid) VALUES('%s','%s','%s','%s','%s','%s');", this->id, this->tNum, this->date, this->passenger, this->buyer, this->seatnum);
+	if (!mysql_query(&con, tem))
 		return true;
 	else
 		return false;
@@ -50,8 +51,8 @@ bool Ticket::change(char *i, char *da, char *se)
 	this->getse(st, en);
 	gettnum(this->id, st, en, tn);
 	char tem[250];
-	sprintf(tem, "UPDATE ticket set id='%s',date='%s',seatid='%s',ticketnum='%s' where id='%s' and ticketnum='%s' and date='%s' and seatid='%s'", i , da , se , tn , this->id , this->tNum , this->date , this->seatnum);
-	if (mysql_query(&con, tem))
+	sprintf(tem, "UPDATE ticket set id='%s',date='%s',seatid='%s',ticketnum='%s' where id='%s' and ticketnum='%s' and date='%s' and seatid='%s';", i, da, se, tn, this->id, this->tNum, this->date, this->seatnum);
+	if (!mysql_query(&con, tem))
 	{
 		strcpy(this->id, i);
 		strcpy(this->date, da);
@@ -66,8 +67,8 @@ bool Ticket::change(char *i, char *da, char *se)
 bool Ticket::refund()
 {
 	char tem[150];
-	sprintf(tem, "DELETE FROM ticket where id='%s' and ticketnum='%s' and date='%s' and seatid='%s'", this->id, this->tNum, this->date, this->seatnum);
-	if (mysql_query(&con, tem))
+	sprintf(tem, "DELETE FROM ticket where id='%s' and ticketnum='%s' and date='%s' and seatid='%s';", this->id, this->tNum, this->date, this->seatnum);
+	if (!mysql_query(&con, tem))
 	{
 		return true;
 	}
@@ -75,13 +76,13 @@ bool Ticket::refund()
 		return false;
 }
 
-bool Ticket::getinfo(char **info)
-{
-	strcpy(info[0], id);
-	strcpy(info[1], date);
-	this->getse(info[2],info[3]);
-	strcpy(info[4], seatnum);
-	strcpy(info[5], passenger);
-	strcpy(info[0], buyer);
-	return false;
-}
+//bool Ticket::getinfo(char **info)
+//{
+//	strcpy(info[0], id);
+//	strcpy(info[1], date);
+//	this->getse(info[2], info[3]);
+//	strcpy(info[4], seatnum);
+//	strcpy(info[5], passenger);
+//	strcpy(info[0], buyer);
+//	return false;
+//}

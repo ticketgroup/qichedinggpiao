@@ -1,4 +1,3 @@
-#pragma once
 #ifndef USER_H
 #define USER_H
 
@@ -14,34 +13,34 @@ public:
 	函数名称：构造函数
 	形参表：用户ID(char*)，密码(char*)
 	**************************************************************/
-	User(char*, char*);
+	User(char[], char[]);
 	/**************************************************************
 	函数名称：verify                                               
 	形参表：用户ID(char*)，密码(char*)                             
 	返回值：char('Y'：登陆成功，'1'：用户名不存在，'2'：密码不正确)
 	功能：用户登录                                                 
 	**************************************************************/
-	virtual char verify(char*) = 0;
+	virtual char verify(char[]) = 0;
 	/**************************************************************
 	函数名称：cancel
-	形参表：User*(需要注销的用户)
+	形参表：none
 	返回值：bool(true：注销成功，false：注销失败)
 	功能：用户注销
 	**************************************************************/
 	friend bool cancel(User*);
 	/**************************************************************
 	函数名称：inquireCoach
-	形参表：密码(char*)，汽车ID(char*)，详细信息(输出)(char**)
-	返回值：bool(true：查询到信息，false：未查询到信息)
+	形参表：汽车ID(char*),输出数据（char**)
+	返回值：bool
 	功能：查询车辆信息
 	**************************************************************/
-	bool inquireCoach(char*, char*, char**);
+	bool inquireCoach(char*,char**);
+	
 	//(char*) getpassword();
 protected:
-	char id[11];
-	char name[10];
+	char id[12];
 	MYSQL con;
-	MYSQL_RES *res;
+	MYSQL_RES* res;
 	MYSQL_ROW result;
 };
 #endif

@@ -36,9 +36,27 @@
     <ClInclude Include="func.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="Server.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="user.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Buyer.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Nuser.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Conductor.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Suser.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="Ticket.cpp">
@@ -47,10 +65,10 @@
     <ClCompile Include="Server.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="Suser.cpp">
+    <ClCompile Include="main.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="Conductor.cpp">
+    <ClCompile Include="func.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
