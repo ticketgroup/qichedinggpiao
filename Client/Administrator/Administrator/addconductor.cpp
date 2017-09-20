@@ -1,7 +1,5 @@
 #include "addconductor.h"
 #include "ui_addconductor.h"
-#include "variables.h"
-#include <QMessageBox>
 
 Addconductor::Addconductor(QWidget *parent) :
     QDialog(parent),
@@ -18,8 +16,8 @@ Addconductor::~Addconductor()
 
 void Addconductor::on_pushButton_clicked()
 {
-    QString id = ui->LineEdit->text();
-    QString password = ui->LineEdit_2->text();
+    QString id = ui->nLineEdit_2->text();
+    QString password = ui->pLineEdit_2->text();
     QRegExp rx("^\\d{11}$");
     QRegExp rp("^\\w{1,40}$");
     if(rx.indexIn(id) != -1)
@@ -29,8 +27,7 @@ void Addconductor::on_pushButton_clicked()
             switch(QMessageBox::question(NULL, QString::fromLocal8Bit("确认增加"), QString::fromLocal8Bit("确认要增加该售票员吗？"), QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes))
             {
             case QMessageBox::Yes:
-            {
-                QByteArray ba = ("12345;" + id + ";" + password).toLatin1();
+                QByteArray ba = (id + ";" + password).toLatin1();
                 char st[2];
                 client.sendmsg("25",ba.data(), st, 53, 2);
                 if(st)
@@ -48,7 +45,6 @@ void Addconductor::on_pushButton_clicked()
                 else
                      QMessageBox::about(NULL, QString::fromLocal8Bit("添加失败"), QString::fromLocal8Bit("服务器连接失败！请重新登录！"));
                 break;
-            }
             case QMessageBox::No:
                 break;
             }

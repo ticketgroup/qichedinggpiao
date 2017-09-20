@@ -22,7 +22,6 @@ int str2int(char*s);
 **************************************************************/
 bool gettnum(char *id, char *st, char *en, char *source);
 void timeAdd(char *time, char *addM, char *res);
-void timeSub(char *time, char *addM, char *res);
 int getSeatNum(char *id, char *st, char *en);
 
 #endif //  FUNC_H
