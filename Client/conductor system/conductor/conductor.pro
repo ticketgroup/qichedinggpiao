@@ -28,13 +28,17 @@ SOURCES += \
         mainwindow.cpp \
     denglu.cpp \
     buyticket.cpp \
-    endorse.cpp
+    endorse.cpp \
+    client.cpp \
+    variables.cpp
 
 HEADERS += \
         mainwindow.h \
     denglu.h \
     buyticket.h \
-    endorse.h
+    endorse.h \
+    Client.h \
+    variables.h
 
 FORMS += \
         mainwindow.ui \

@@ -5,6 +5,8 @@
 #-------------------------------------------------
 
 QT       += core gui
+QT       += network
+LIBS     += -lpthread libwsock32 libws2_32
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -30,7 +32,9 @@ SOURCES += \
     passwordchange.cpp \
     addconductor.cpp \
     addcoach.cpp \
-    changecoach.cpp
+    changecoach.cpp \
+    client.cpp \
+    variables.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -38,7 +42,9 @@ HEADERS += \
     passwordchange.h \
     addconductor.h \
     addcoach.h \
-    changecoach.h
+    changecoach.h \
+    Client.h \
+    variables.h
 
 FORMS += \
         mainwindow.ui \

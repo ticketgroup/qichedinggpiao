@@ -13,7 +13,7 @@ class Passwordchange : public QDialog
     Q_OBJECT
 
 public:
-    explicit Passwordchange(QWidget *parent = 0,);
+    explicit Passwordchange(QWidget *parent = 0);
     void setId(QString);
     ~Passwordchange();
 

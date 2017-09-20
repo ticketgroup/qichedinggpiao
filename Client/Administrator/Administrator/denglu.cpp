@@ -1,5 +1,7 @@
 #include "denglu.h"
 #include "ui_denglu.h"
+#include "variables.h"
+#include <QMessageBox>
 
 Denglu::Denglu(QWidget *parent) :
     QDialog(parent),
@@ -18,7 +20,7 @@ void Denglu::on_pushButton_3_clicked()
 {
     QString id = ui->nLineEdit_2->text();
     QString password = ui->pLineEdit_2->text();
-    QRegExp rx("^\\d{11}$");
+    QRegExp rx("^\\d{5}$");
     QRegExp rp("^\\w{1,40}$");
     if(rx.indexIn(id) != -1)
     {
@@ -26,20 +28,16 @@ void Denglu::on_pushButton_3_clicked()
         {
             QByteArray ba = (id + ";" + password).toLatin1();
             char st[2];
-            client.sendmsg("22",ba.data(), st, 53, 2);
+            client.sendmsg("22",ba.data(), st, 47, 2);
             if(st)
             {
                if(st[0] == 'Y')
                 {
                     accept();
                 }
-                else if(st[0] == '1')
+                else if(st[0] == 'N')
                 {
-                    QMessageBox::about(NULL, QString::fromLocal8Bit("登录失败"),QString::fromLocal8Bit( "没有这个用户！"));
-                }
-                else if(st[0]  == '2')
-                {
-                    QMessageBox::about(NULL, QString::fromLocal8Bit("登录失败"), QString::fromLocal8Bit("密码错误！"));
+                    QMessageBox::about(NULL, QString::fromLocal8Bit("登录失败"),QString::fromLocal8Bit( "登录失败！"));
                 }
             }
             else

@@ -1,15 +1,17 @@
 #include "passwordchange.h"
 #include "ui_passwordchange.h"
+#include "variables.h"
+#include <QMessageBox>
 
 Passwordchange::Passwordchange(QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::Passwordchange),
+    ui(new Ui::Passwordchange)
 {
     ui->setupUi(this);
     setFixedSize(this->width(), this->height());
 }
 
-Passwordchange::setId(QString i)
+void Passwordchange::setId(QString i)
 {
     id = i;
 }
@@ -28,7 +30,7 @@ void Passwordchange::on_pushButton_clicked()
        switch(QMessageBox::question(NULL, QString::fromLocal8Bit("确认修改"), QString::fromLocal8Bit("确认要修改该售票员吗？"), QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes))
        {
        case QMessageBox::Yes:
-
+       {
            QByteArray ba = (id + ";" + password).toLatin1();
            char st[2];
            client.sendmsg("26",ba.data(), st, 53, 2);
@@ -46,11 +48,12 @@ void Passwordchange::on_pushButton_clicked()
             }
             else
                  QMessageBox::about(NULL, QString::fromLocal8Bit("登录失败"), QString::fromLocal8Bit("服务器连接失败！请重新登录！"));
-        }
            break;
+       }
        case QMessageBox::No:
            break;
        }
+    }
     else
        QMessageBox::about(NULL, QString::fromLocal8Bit("修改失败"), QString::fromLocal8Bit("密码中含有非法字符！"));
 

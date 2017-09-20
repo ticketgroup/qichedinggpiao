@@ -172,11 +172,6 @@
         <height>221</height>
        </rect>
       </property>
-      <row>
-       <property name="text">
-        <string>新建行</string>
-       </property>
-      </row>
       <column>
        <property name="text">
         <string>编号</string>
@@ -262,26 +257,6 @@
         <height>231</height>
        </rect>
       </property>
-      <row>
-       <property name="text">
-        <string>新建行</string>
-       </property>
-      </row>
-      <row>
-       <property name="text">
-        <string>新建行</string>
-       </property>
-      </row>
-      <row>
-       <property name="text">
-        <string>新建行</string>
-       </property>
-      </row>
-      <row>
-       <property name="text">
-        <string>新建行</string>
-       </property>
-      </row>
       <column>
        <property name="text">
         <string>汽车编号</string>
