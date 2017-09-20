@@ -66,7 +66,8 @@ using namespace std;
 #define TIME_SIZE 10
 //查询信息数组的三维
 #define UNIT_SIZE 10
-#define ROW_SIZE 15
+#define ROW_SIZE 7
+#define DD_ROW_SIZE 9
 #define LINE_SIZE 20
 #define INFO_SIZE 3000
 
@@ -187,6 +188,7 @@ DWORD WINAPI CreateClientThread(LPVOID IpParameter)
 	char npw[PW_SIZE] = "";
 	char cd[CD_SIZE] = "";
 	char sid[SD_SIZE] = "";
+	char innerpw1[10] = "12345";
 label0:
 	RECVMSG;
 
@@ -341,12 +343,7 @@ label0:
 					{
 						for (int j = 0; j < ROW_SIZE; j++)
 						{
-							if (info[i][j][strlen(info[i][j]) - 1] == '#')
-							{
-								strcat(cinfo, info[i][j]);
-								break;
-							}
-							else if (info[i][j][strlen(info[i][j]) - 1] == '$')
+						 if (info[i][j][strlen(info[i][j]) - 1] == '$')
 							{
 								strcat(cinfo, info[i][j]);
 								goto labelbreak1;
@@ -358,6 +355,7 @@ label0:
 							}
 						}
 					}
+				labelbreak1:
 					//delete info
 					for (int i = 0; i < LINE_SIZE; i++)
 					{
@@ -368,7 +366,7 @@ label0:
 						delete info[i];
 					}
 					delete info;
-				labelbreak1:
+				
 					cout << cinfo << endl;
 					send(sock_clt, cinfo, INFO_SIZE, 0);
 				}
@@ -498,12 +496,7 @@ label0:
 					{
 						for (int j = 0; j < ROW_SIZE; j++)
 						{
-							if (info[i][j][strlen(info[i][j]) - 1] == '#')
-							{
-								strcat(cinfo, info[i][j]);
-								break;
-							}
-							else if (info[i][j][strlen(info[i][j]) - 1] == '$')
+							 if (info[i][j][strlen(info[i][j]) - 1] == '$')
 							{
 								strcat(cinfo, info[i][j]);
 								goto labelbreak;
@@ -515,6 +508,7 @@ label0:
 							}
 						}
 					}
+				labelbreak:
 					for (int i = 0; i < LINE_SIZE; i++)
 					{
 						for (int j = 0; j < ROW_SIZE; j++)
@@ -524,7 +518,7 @@ label0:
 						delete info[i];
 					}
 					delete info;
-				labelbreak:
+
 					cout << cinfo << endl;
 					send(sock_clt, cinfo, INFO_SIZE, 0);
 				}
@@ -534,7 +528,7 @@ label0:
 			}
 			break;
 
-			//售票员订票
+			//售票员选定票+发送确认信息
 			case 17:
 			{
 				SENDY;
@@ -545,6 +539,7 @@ label0:
 				char qidiantime[TIME_SIZE] = "";
 				char zhongdian[STA_SIZE] = "";
 				char zhongdiantime[TIME_SIZE] = "";
+				char price[5] = "";
 				char taid[10] = "";
 
 				int i = 0;
@@ -558,35 +553,26 @@ label0:
 				i++;
 				for (int m = 0; buf_msg[i] != ';'; m++, i++)
 					qidian[m] = buf_msg[i];
-				i++;
-				for (int m = 0; buf_msg[i] != ';'; m++, i++)
-					qidian[m] = buf_msg[i];
-				i++;
 				cout << qidian << endl;
+				i++;
 				for (int m = 0; buf_msg[i] != ';'; m++, i++)
 					qidiantime[m] = buf_msg[i];
 				cout << qidiantime << endl;
-
-				i = strlen(buf_msg) - 1;
-				i--;
-				for (; buf_msg[i] != ';'; i--);
-				i--;
-				for (; buf_msg[i] != ';'; i--);
-				i--;
-				for (; buf_msg[i] != ';'; i--);
 				i++;
-
 				for (int m = 0; buf_msg[i] != ';'; m++, i++)
 					zhongdian[m] = buf_msg[i];
-				i++;
 				cout << zhongdian << endl;
+				i++;
 				for (int m = 0; buf_msg[i] != ';'; m++, i++)
 					zhongdiantime[m] = buf_msg[i];
-				i++;
 				cout << zhongdiantime << endl;
+				i++;
+				for (int m = 0; buf_msg[i] != ';'; m++, i++)
+					price[m] = buf_msg[i];
+				cout << price << endl;
+				i++;
 				for (int m = 0; buf_msg[i] != ';'; m++, i++)
 					taid[m] = buf_msg[i];
-				i++;
 				cout << taid << endl;
 
 				Suser suser(id, pw);
@@ -597,11 +583,40 @@ label0:
 					char seat1[5] = "";
 					itoa(seat, seat1, 5);
 					suser.chooseticket(qicheid, sour, riqi, id, taid, seat1);
-					if (suser.buyticket())
+					SENDY;
+					RECVMSG;
+					if (strcmp(buf_msg, "0") == 0)
 					{
-						SENDY;
+						char inquinfo[100] = "";
+						strcat(inquinfo, qicheid);
+						strcat(inquinfo, ";");
+						strcat(inquinfo, taid);
+						strcat(inquinfo, ";");
+						strcat(inquinfo, seat1);
+						strcat(inquinfo, ";");
+						strcat(inquinfo, price);
+						strcat(inquinfo, ";");
+						strcat(inquinfo, riqi);
+						strcat(inquinfo, ";");
+						send(sock_clt, inquinfo, 100, 0);
 					}
 				}
+				else
+					SENDN;
+				goto label0;
+			}
+			break;
+
+			//买票
+			case 31:
+			{
+				Suser suser(id, pw);
+				if (suser.buyticket())
+				{
+					SENDY;
+				}
+				else
+					SENDN;
 				goto label0;
 			}
 			break;
@@ -860,8 +875,8 @@ label0:
 				info = new char **[LINE_SIZE];
 				for (int i = 0; i < LINE_SIZE; i++)
 				{
-					info[i] = new char *[ROW_SIZE];
-					for (int j = 0; j < ROW_SIZE; j++)
+					info[i] = new char *[DD_ROW_SIZE];
+					for (int j = 0; j < DD_ROW_SIZE; j++)
 						info[i][j] = new char[UNIT_SIZE];
 				}
 				Suser suser(id, pw);
@@ -870,17 +885,12 @@ label0:
 					char cinfo[INFO_SIZE] = "";
 					for (int i = 0; i < LINE_SIZE; i++)
 					{
-						for (int j = 0; j < ROW_SIZE; j++)
+						for (int j = 0; j < DD_ROW_SIZE; j++)
 						{
-							if (info[i][j][strlen(info[i][j]) - 1] == '#')
+							if (info[i][j][strlen(info[i][j]) - 1] == '$')
 							{
 								strcat(cinfo, info[i][j]);
-								break;
-							}
-							else if (info[i][j][strlen(info[i][j]) - 1] == '$')
-							{
-								strcat(cinfo, info[i][j]);
-								goto labelbreak;
+								goto label21;
 							}
 							else
 							{
@@ -889,10 +899,11 @@ label0:
 							}
 						}
 					}
+					label21:
 					send(sock_clt, cinfo, 1000, 0);
 					for (int i = 0; i < LINE_SIZE; i++)
 					{
-						for (int j = 0; j < ROW_SIZE; j++)
+						for (int j = 0; j < DD_ROW_SIZE; j++)
 						{
 							delete info[i][j];
 						}
@@ -904,8 +915,9 @@ label0:
 			}
 			break;
 
-			//用户订票
-			case 12:
+
+			//用户选定票+发送确认信息
+			case 32:
 			{
 				SENDY;
 				RECVMSG;
@@ -915,6 +927,7 @@ label0:
 				char qidiantime[TIME_SIZE] = "";
 				char zhongdian[STA_SIZE] = "";
 				char zhongdiantime[TIME_SIZE] = "";
+				char price[5] = "";
 				char taid[10] = "";
 
 				int i = 0;
@@ -928,35 +941,26 @@ label0:
 				i++;
 				for (int m = 0; buf_msg[i] != ';'; m++, i++)
 					qidian[m] = buf_msg[i];
-				i++;
-				for (int m = 0; buf_msg[i] != ';'; m++, i++)
-					qidian[m] = buf_msg[i];
-				i++;
 				cout << qidian << endl;
+				i++;
 				for (int m = 0; buf_msg[i] != ';'; m++, i++)
 					qidiantime[m] = buf_msg[i];
 				cout << qidiantime << endl;
-
-				i = strlen(buf_msg) - 1;
-				i--;
-				for (; buf_msg[i] != ';'; i--);
-				i--;
-				for (; buf_msg[i] != ';'; i--);
-				i--;
-				for (; buf_msg[i] != ';'; i--);
 				i++;
-
 				for (int m = 0; buf_msg[i] != ';'; m++, i++)
 					zhongdian[m] = buf_msg[i];
-				i++;
 				cout << zhongdian << endl;
+				i++;
 				for (int m = 0; buf_msg[i] != ';'; m++, i++)
 					zhongdiantime[m] = buf_msg[i];
-				i++;
 				cout << zhongdiantime << endl;
+				i++;
+				for (int m = 0; buf_msg[i] != ';'; m++, i++)
+					price[m] = buf_msg[i];
+				cout << price << endl;
+				i++;
 				for (int m = 0; buf_msg[i] != ';'; m++, i++)
 					taid[m] = buf_msg[i];
-				i++;
 				cout << taid << endl;
 
 				Nuser nuser(id, pw);
@@ -967,11 +971,40 @@ label0:
 					char seat1[5] = "";
 					itoa(seat, seat1, 5);
 					nuser.chooseticket(qicheid, sour, riqi, id, taid, seat1);
-					if (nuser.buyticket())
+					SENDY;
+					RECVMSG;
+					if (strcmp(buf_msg, "0") == 0)
 					{
-						SENDY;
+						char inquinfo[100] = "";
+						strcat(inquinfo, qicheid);
+						strcat(inquinfo, ";");
+						strcat(inquinfo, taid);
+						strcat(inquinfo, ";");
+						strcat(inquinfo, seat1);
+						strcat(inquinfo, ";");
+						strcat(inquinfo, price);
+						strcat(inquinfo, ";");
+						strcat(inquinfo, riqi);
+						strcat(inquinfo, ";");
+						send(sock_clt, inquinfo, 100, 0);
 					}
 				}
+				else
+					SENDN;
+				goto label0;
+			}
+			break;
+
+			//买票
+			case 12:
+			{
+				Nuser nuser(id, pw);
+				if (nuser.buyticket())
+				{
+					SENDY;
+				}
+				else
+					SENDN;
 				goto label0;
 			}
 			break;
@@ -983,8 +1016,8 @@ label0:
 				info = new char **[LINE_SIZE];
 				for (int i = 0; i < LINE_SIZE; i++)
 				{
-					info[i] = new char *[ROW_SIZE];
-					for (int j = 0; j < ROW_SIZE; j++)
+					info[i] = new char *[DD_ROW_SIZE];
+					for (int j = 0; j < DD_ROW_SIZE; j++)
 						info[i][j] = new char[UNIT_SIZE];
 				}
 				Nuser nuser(id, pw);
@@ -993,17 +1026,12 @@ label0:
 					char cinfo[INFO_SIZE] = "";
 					for (int i = 0; i < LINE_SIZE; i++)
 					{
-						for (int j = 0; j < ROW_SIZE; j++)
+						for (int j = 0; j < DD_ROW_SIZE; j++)
 						{
-							if (info[i][j][strlen(info[i][j]) - 1] == '#')
+							if (info[i][j][strlen(info[i][j]) - 1] == '$')
 							{
 								strcat(cinfo, info[i][j]);
-								break;
-							}
-							else if (info[i][j][strlen(info[i][j]) - 1] == '$')
-							{
-								strcat(cinfo, info[i][j]);
-								goto labelbreak;
+								goto label20;
 							}
 							else
 							{
@@ -1012,10 +1040,11 @@ label0:
 							}
 						}
 					}
+				label20:
 					send(sock_clt, cinfo, 1000, 0);
 					for (int i = 0; i < LINE_SIZE; i++)
 					{
-						for (int j = 0; j < ROW_SIZE; j++)
+						for (int j = 0; j < DD_ROW_SIZE; j++)
 						{
 							delete info[i][j];
 						}
@@ -1023,8 +1052,8 @@ label0:
 					}
 					delete info;
 				}
+				goto label0;
 			}
-			goto label0;
 			break;
 
 			//用户退票
@@ -1424,6 +1453,72 @@ label0:
 			//管理员增加车
 			case 28:
 			{
+				SENDY;
+				RECVMSG;
+				char ***addinfo;
+				addinfo = new char **[12];
+				for (int i = 0; i < 12; i++)
+				{
+					addinfo[i] = new char *[3];
+					for (int j = 0; j < 3; j++)
+						addinfo[i][j] = new char[10];
+				}
+				char innerpw[10] = "";
+				char busid[10] = "";
+				char seatnum[5] = "";
+				char sttime[10] = "";
+				int i = 0;
+				for (int j = 0; buf_msg[i] != ';';i++)
+					innerpw[j] = buf_msg[i];
+				i++;
+				for (int j=0; buf_msg[i] != ';'; i++)
+					busid[j] = buf_msg[i];
+				i++;
+				for (int j = 0; buf_msg[i] != ';';i++)
+					seatnum[j] = buf_msg[i];
+				i++;
+				for (int j = 0; buf_msg[i] != ';';i++)
+					;
+				i++;
+				for (int j = 0; buf_msg[i] != ';';i++)
+					sttime[j] = buf_msg[i];
+				i--;
+				for (int j = 0; buf_msg[i] != ';';i--)
+					;
+				i--;
+				for (int j = 0; buf_msg[i] != ';'; i--)
+					;
+				i++;
+
+				int stanum = 1;
+				for (int m = 0; m < 12; m++,stanum++)
+					for (int n = 0; n < 3; n++)
+						for (int q = 0; addinfo[m][n][q] != '\0'; q++, i++)
+						{
+							addinfo[m][n][q] = buf_msg[i];
+							if (addinfo[m][n][q] == '$')
+								goto label30;
+						}
+			label30:
+				Conductor conductor(id, pw);
+				if (conductor.addCoach(innerpw, busid, sttime, addinfo, stanum, seatnum))
+				{
+					SENDY;
+				}
+				else
+				{
+					SENDN;
+				}
+
+				for (int i = 0; i < 12; i++)
+				{
+					for (int j = 0; j < 3; j++)
+					{
+						delete addinfo[i][j];
+					}
+					delete addinfo[i];
+				}
+				delete addinfo;
 
 				goto label0;
 			}
@@ -1432,16 +1527,78 @@ label0:
 			//管理员减少车
 			case 29:
 			{
+				SENDY;
+				RECVMSG;
+				memset(innerpw1, 0, 10);
+				char busid[10] = "";
+				int i = 0;
+				for (int j = 0; buf_msg[i] != ';'; i++)
+					innerpw1[j] = buf_msg[i];
+				i++;
+				for (int j = 0; buf_msg[i] != ';'; i++)
+					busid[j] = buf_msg[i];
+				Conductor conductor(id, pw);
+				if (conductor.deleteCoach(innerpw1, busid))
+				{
+					SENDY;
+				}
+				else
+				{
+					SENDN;
+				}
 				goto label0;
 			}
 			break;
 
-			//管理员查询车
+			//管理员查询车(全部)
 			case 30:
 			{
+				SENDY;
+				RECVMSG;
+				char **inqucoa;
+				inqucoa = new char *[12];
+				for (int i = 0; i < 12; i++)
+				{
+					inqucoa[i] = new char[10];
+				}
+
+				Conductor conductor(id, pw);
+				if (conductor.inquireCoach(buf_msg, inqucoa))
+				{
+					char incoa[120] = "";
+					int z = 0;
+					for (int i = 0; i < 12; i++)
+						for (int j = 0; inqucoa[i][j] != '\0'; j++,z++)
+							incoa[z] = inqucoa[i][j];
+					send(sock_clt, incoa, 120, 0);
+				}
+				else
+				{
+					SENDN;
+				}
+
+				for (int i = 0; i < 12; i++)
+				{
+					delete[] inqucoa[i];
+				}
+				delete inqucoa;
+
 				goto label0;
 			}
 			break;
+
+			//管理员查单辆车
+			case 34:
+			{
+				SENDY;
+				RECVMSG;
+
+			}
+			break;
+
+
+
+
 
 			default:
 				goto label0;
