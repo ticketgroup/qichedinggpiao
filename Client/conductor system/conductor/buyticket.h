@@ -14,6 +14,7 @@ class Buyticket : public QDialog
 
 public:
     explicit Buyticket(QWidget *parent = 0);
+    void getmsg();
     ~Buyticket();
 
 private slots:

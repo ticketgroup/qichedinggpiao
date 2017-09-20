@@ -13,8 +13,7 @@ class Endorse : public QDialog
 
 public:
     explicit Endorse(QWidget *parent = 0);
-    void setLabel(QString, QString);
-    bool close();
+    void setLabel(QString, QString,QString);
     ~Endorse();
 
 private slots:

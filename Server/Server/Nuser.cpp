@@ -111,7 +111,7 @@ Nuser::Nuser(char *NID, char *Npass):Buyer(NID,Npass)
 {
 	mysql_init(&con);
 	mysql_real_connect(&con, "localhost", "root", "111111", "user", 3306, NULL, 0);
-	for (int i = 0; i < 11; i++)
+	for (int i = 0; i < 12; i++)
 		ID[i] = NID[i];
 }
 
@@ -179,7 +179,7 @@ char Nuser::verify(char* password)
 {
 	char n[54];
 	sprintf(n, "SELECT password FROM nuser where phone='%s';", this->ID);
-	mysql_real_query(&con, n, 54);
+	mysql_real_query(&con, n, 56);
 	res = mysql_store_result(&con);
 	if (result = mysql_fetch_row(res))
 	{

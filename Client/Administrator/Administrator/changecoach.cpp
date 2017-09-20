@@ -1,5 +1,7 @@
 #include "changecoach.h"
 #include "ui_changecoach.h"
+#include "variables.h"
+#include <QMessageBox>
 
 Changecoach::Changecoach(QWidget *parent) :
     QDialog(parent),
@@ -16,7 +18,7 @@ Changecoach::~Changecoach()
     delete ui;
 }
 
-Passwordchange::setId(QString i)
+void Changecoach::setId(QString i)
 {
     id = i;
 }
@@ -27,8 +29,9 @@ void Changecoach::on_pushButton_clicked()
     switch(QMessageBox::question(NULL, QString::fromLocal8Bit("确认修改"), QString::fromLocal8Bit("确认修改这条车辆信息吗？"), QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes))
     {
     case QMessageBox::Yes:
+    {
         char st[2];
-        QString str = id;
+        QString str = id + ";";
         QTableWidget *table = ui->tableWidget_2;
         int i = 0;
         for(; table->item(i,0)!=0; i++)
@@ -42,7 +45,8 @@ void Changecoach::on_pushButton_clicked()
         }
         else
         {
-            client.sendmsg("28", str, st, 346, 2);
+            QByteArray ba = (str).toLatin1();
+            client.sendmsg("28", ba.data(), st, 346, 2);
             if(st[0] == 'Y')
             {
                 QMessageBox::about(NULL, QString::fromLocal8Bit("修改成功"), QString::fromLocal8Bit("修改成功！"));
@@ -54,6 +58,7 @@ void Changecoach::on_pushButton_clicked()
             }
         }
         break;
+    }
     case QMessageBox::No:
         break;
     }
