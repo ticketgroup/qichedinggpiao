@@ -203,6 +203,9 @@ label0:
 			{
 			case 33:
 			{
+				SENDY
+				RECVMSG;
+
 				char **nuserinfo;
 				nuserinfo = new char *[12];
 				for (int i = 0; i < 12; i++)
@@ -213,7 +216,7 @@ label0:
 				Nuser nuser(id, pw);
 				if (nuser.inquireInfo(nuserinfo))
 				{
-					char ninfo[48] = "";
+					char ninfo[55] = "";
 					strcat(ninfo, nuserinfo[0]);
 					strcat(ninfo, ";");
 					strcat(ninfo, nuserinfo[1]);
@@ -223,18 +226,14 @@ label0:
 					strcat(ninfo, nuserinfo[3]);
 					strcat(ninfo, "\0");
 					cout << ninfo << endl;
-					send(sock_clt, ninfo, 48, 0);
+					send(sock_clt, ninfo, 55, 0);
 				}
 				else
 				{
 					SENDN;
 				}
 
-				for (int i = 0; i<12; i++)
-					 {
-					     delete[] nuserinfo[i];
-					 }
-				 delete nuserinfo;
+				delete[] nuserinfo;
 
 				goto label0;
 			}
@@ -1054,6 +1053,9 @@ label0:
 			//普通用户查询订单
 			case 13:
 			{
+
+				SENDY
+				RECVMSG;
 				char ***info;
 				info = new char **[LINE_SIZE];
 				for (int i = 0; i < LINE_SIZE; i++)
@@ -1093,6 +1095,10 @@ label0:
 						delete info[i];
 					}
 					delete info;
+				}
+				else
+				{
+					SENDN
 				}
 				goto label0;
 			}

@@ -136,27 +136,24 @@ bool Nuser::changePassword(char *newpass)
 }
 bool Nuser::inquireInfo(char **out)
 {
-	MYSQL coa;
-	MYSQL_RES* cres;
-	MYSQL_ROW row;
-	mysql_init(&coa);
-	mysql_real_connect(&coa, "localhost", "root", "111111", "coach", 3306, NULL, 0);
 	char a[56];
-	sprintf(a, "SELECT id FROM nuser where phone='%s';", id);
+	sprintf(a, "SELECT id FROM nuser where phone='%s';", ID);
 	mysql_real_query(&con, a, 56);
-	if (res = mysql_store_result(&con))
+	res = mysql_store_result(&con);
+	if (result = mysql_fetch_row(res))
 	{
-		result = mysql_fetch_row(res);
-		strcpy(out[0], id);
+		strcpy(out[0], ID);
 		strcpy(out[1], result[0]);
 		//strcpy(out[2], result[1]);
-		char b[45];
+		char b[72];
+		mysql_query(&con, "SET NAMES 'GBK';");
 		sprintf(b, "SELECT number,name FROM cinfo where id='%s';", result[0]);
-		mysql_real_query(&coa, b, 45);
-		cres = mysql_store_result(&coa);
-		row = mysql_fetch_row(cres);
-		strcpy(out[2], row[0]);
-		strcpy(out[3], row[1]);
+		mysql_real_query(&con, b, 72);
+		res = mysql_store_result(&con);
+		result = mysql_fetch_row(res);
+		strcpy(out[2], result[0]);
+		strcpy(out[3], result[1]);
+		return true;
 	}
 	else
 		return false;

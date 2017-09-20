@@ -38,14 +38,14 @@ void MainWindow::getmsg()
 {
     char st[55];
     client.sendmsg("33","0", st, 2, 55);
-    QLabel* l[4] = {ui->label_10,ui->label_11,ui->label_12,ui->label_13};
+    QLabel* l[4] = {ui->label_10,ui->label_13,ui->label_12,ui->label_11};
     l[0]->setText(QString::fromLocal8Bit(strtok(st,";")));
     for(int i = 1; i < 4; i++)
     {
         l[i]->setText(QString::fromLocal8Bit(strtok(NULL, ";")));
     }
 
-    char sta[1000];
+    /*char sta[1000];
     client.sendmsg("13","0", sta, 2, 1000);
     char *a;
     QTableWidget *table = ui->tableWidget_4;
@@ -62,7 +62,7 @@ void MainWindow::getmsg()
         {
             table->setItem(m,i,new QTableWidgetItem(QString::fromLocal8Bit(strtok(NULL,";"))));
         }
-    }
+    }*/
 
 }
 void MainWindow::on_pushButton_3_clicked()

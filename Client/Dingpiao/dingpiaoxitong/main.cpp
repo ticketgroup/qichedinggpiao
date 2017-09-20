@@ -10,8 +10,8 @@ int main(int argc, char *argv[])
     MainWindow w;
     denglu *Denglu = new denglu();
     if(Denglu->exec()==QDialog::Accepted){
-    //    w.getmsg();
         w.show();
+        w.getmsg();
         return a.exec();
     }
     else
