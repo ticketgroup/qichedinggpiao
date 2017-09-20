@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -131,7 +131,7 @@
       </item>
       <item>
        <property name="text">
-        <string>新建项目</string>
+        <string>lalala</string>
        </property>
       </item>
       <item>
@@ -262,7 +262,7 @@
         <x>280</x>
         <y>280</y>
         <width>181</width>
-        <height>22</height>
+        <height>25</height>
        </rect>
       </property>
       <layout class="QFormLayout" name="formLayout">
