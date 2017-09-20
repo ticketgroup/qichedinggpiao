@@ -21,34 +21,27 @@ bool Buyer::carinfo(char cdate[], char start[], char end[],char*** coachinfo)
 	char tem[200];
 	sprintf(tem, "select id from ctos where (select num from stov where station='%s')<>'-1 and (select num from stov where station='%s')<>'-1';", start, end);
 	mysql_real_query(&con, tem, 200);
-	res = mysql_store_result(&con);
-	int num=allticketinfo(mysql_fetch_row(res)[0], cdate, start, end);
-	char n[3];
-	itoa(num, n, 10);
-	for (int i = 0; result = mysql_fetch_row(res); i++)
+	if(res = mysql_store_result(&con))
 	{
-		//User::inquireCoach(result[0], coachinfo[i]);
-		char temp[100];
-		sprintf(temp, "select starttime from coach where id='%s';", result[0]);
-		mysql_real_query(&coa, temp, 46);
-		char st[5];
-		cres = mysql_store_result(&coa);
-		row = mysql_fetch_row(cres);
-	
-		strcpy(coachinfo[i][0],result[0]);
-		strcpy(coachinfo[i][1], cdate);
-		strcpy(coachinfo[i][2], start);
-		strcpy(coachinfo[i][3], end);
-		strcpy(coachinfo[i][4], n);
-		//strcat(info[0], ";");
-
-		strcpy(st, row[0]);
-		sprintf(temp, "select ctov.station,stov.num from ctov,stov where id='%s' order by ctov.num;", result[0]);
-		mysql_real_query(&con, temp, 100);
-		res = mysql_store_result(&con);
-	}
-	if (mysql_query(&con, tem))
+		result = mysql_fetch_row(res);
+		int num = allticketinfo(result[0], cdate, start, end);
+		char n[3];
+		itoa(num, n, 10);
+		int i = 0;
+		for (; result = mysql_fetch_row(res); i++)
+		{
+			inquireCoach(result[0], coachinfo[i], start, end);
+			char temp[100];
+			sprintf(temp, "select starttime from coach where id='%s';", result[0]);
+			mysql_real_query(&coa, temp, 46);
+			char st[5];
+			cres = mysql_store_result(&coa);
+			row = mysql_fetch_row(cres);
+			strcpy(coachinfo[i][6], n);
+		}
+		strcat(coachinfo[i - 1][7], "$");
 		return true;
+	}
 	else
 		return false;
 }
@@ -103,4 +96,40 @@ bool Buyer::changeticket(char *cid, char *cdate,char *seatnum)
 bool Buyer::refundticket()
 {
 	return ticket->refund();
+}
+
+bool Buyer::inquireCoach(char *i, char **info, char *sta, char *en)
+{
+	char temp[200];
+	sprintf(temp, "select starttime from coach where id='%s';", i);
+	mysql_real_query(&con, temp, 46);
+	if (res = mysql_store_result(&con))
+	{
+		char st[5];
+		result = mysql_fetch_row(res);
+
+		strcpy(info[0], i);
+		strcpy(info[1], sta);
+		strcpy(info[3], en);
+
+		strcpy(st, result[0]);
+		sprintf(temp, "select (select num from stov where station='%s') from ctos where id='%s' union select (select num from stov where station='%s') from ctos where id='%s';", sta, i, en, i);
+		mysql_real_query(&con, temp, 200);
+		res = mysql_store_result(&con);
+		char t[5];
+		char b[6];
+		result = mysql_fetch_row(res);
+		sprintf(t, "%04s", strtok(result[0], ","));
+		timeAdd(st, t, b);
+		strcpy(info[2], b);
+		int te = str2int(strtok(NULL, ","));
+		result = mysql_fetch_row(res);
+		sprintf(t, "%04s", strtok(result[0], ","));
+		timeAdd(st, t, b);
+		strcpy(info[4], b);
+		te = str2int(strtok(NULL, ",")) - te;
+		sprintf(info[6], "%d", te);
+	}
+	else
+		return false;
 }

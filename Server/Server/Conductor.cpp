@@ -1,5 +1,6 @@
 #include "Conductor.h"
 #include"user.h"
+#include "func.h"
 #include <iostream>
 #include "Ticket.h"
 #include <cstring>
@@ -33,6 +34,23 @@ bool Conductor::check(char *p)
 {
 	if (!strcmp(this->innerPassword, p))
 		return true;
+	else
+		return false;
+}
+
+bool Conductor::carinfo(char ***info)
+{
+	mysql_real_query(&con, "select id from coach;", 23);
+	if (res = mysql_store_result(&con))
+	{
+		int i = 0;
+		for (; result = mysql_fetch_row(res); i++)
+		{
+			inquireCoach(result[0], info[i]);
+		}
+		strcat(info[i - 1][2], "$");
+		return true;
+	}
 	else
 		return false;
 }
@@ -208,4 +226,40 @@ char Conductor::verify(char *p)
 	}
 	else
 		return '0';
+}
+
+bool Conductor::inquireCoach(char *i, char **info)
+{
+	char temp[100];
+	sprintf(temp, "select starttime from coach where id='%s';", i);
+	mysql_real_query(&con, temp, 46);
+	if (res = mysql_store_result(&con))
+	{
+		char st[5];
+		result = mysql_fetch_row(res);
+
+		strcpy(info[0], i);
+		//strcat(info[0], ";");
+
+		strcpy(st, result[2]);
+		sprintf(temp, "select ctov.station,stov.num from ctov,stov where id='%s' order by ctov.num;", i);
+		mysql_real_query(&con, temp, 100);
+		res = mysql_store_result(&con);
+		char t[5];
+		char b[6];
+		info[2][0] = '\0';
+		for (int a = 0; result = mysql_fetch_row(res); a++)
+		{
+			strcat(info[2], result[0]);
+			strcat(info[2], "/");
+			sprintf(temp, "select '%s' from ctos where id='%s';", result[1], i);
+			mysql_real_query(&con, temp, 100);
+			sprintf(t, "%04s", strtok(result[0], ","));
+			timeAdd(st, t, b);
+			strcat(info[2], b);
+			strcat(info[2], ";");
+		}
+	}
+	else
+		return false;
 }

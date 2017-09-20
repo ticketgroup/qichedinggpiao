@@ -34,7 +34,7 @@ public:
 	返回值：bool
 	功能：查询车辆信息
 	**************************************************************/
-	bool inquireCoach(char*,char**);
+	virtual bool inquireCoach(char*,char**) = 0;
 	
 	//(char*) getpassword();
 protected:

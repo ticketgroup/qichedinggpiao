@@ -18,7 +18,8 @@ bool Suser::inquireticket(char*** info,char *nid)
 	sprintf(temp, "select id,ticketnum,date,passenger,seatid from ticket where passenger='%s';", nid);
 	mysql_real_query(&coa, temp, 80);
 	cres = mysql_store_result(&coa);
-	for (int i = 0; row = mysql_fetch_row(cres); i++)
+	int i = 0;
+	for (; row = mysql_fetch_row(cres); i++)
 	{
 		strcpy(info[i][0], row[0]);
 		strcpy(info[i][1], row[4]);
@@ -45,6 +46,7 @@ bool Suser::inquireticket(char*** info,char *nid)
 		timeAdd(st, t, info[i][5]);
 
 	}
+	strcat(info[i - 1][7], "$");
 	/*************
 	template
 	*************/
