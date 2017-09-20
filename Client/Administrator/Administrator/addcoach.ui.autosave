@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Addcoach</class>
+ <widget class="QDialog" name="Addcoach">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>300</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>添加车次</string>
+  </property>
+  <widget class="QTableWidget" name="tableWidget_2">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>70</y>
+     <width>231</width>
+     <height>181</height>
+    </rect>
+   </property>
+   <property name="columnCount">
+    <number>1</number>
+   </property>
+   <row>
+    <property name="text">
+     <string>汽车编号</string>
+    </property>
+   </row>
+   <row>
+    <property name="text">
+     <string>座位数</string>
+    </property>
+   </row>
+   <row>
+    <property name="text">
+     <string>站点1</string>
+    </property>
+   </row>
+   <row>
+    <property name="text">
+     <string>发车时间1</string>
+    </property>
+   </row>
+   <row>
+    <property name="text">
+     <string>票价1</string>
+    </property>
+   </row>
+   <row>
+    <property name="text">
+     <string>站点2</string>
+    </property>
+   </row>
+   <row>
+    <property name="text">
+     <string>发车时间2</string>
+    </property>
+   </row>
+   <row>
+    <property name="text">
+     <string>票价2</string>
+    </property>
+   </row>
+   <row>
+    <property name="text">
+     <string>站点3</string>
+    </property>
+   </row>
+   <row>
+    <property name="text">
+     <string>发车时间3</string>
+    </property>
+   </row>
+   <row>
+    <property name="text">
+     <string>票价3</string>
+    </property>
+   </row>
+   <row>
+    <property name="text">
+     <string>站点4</string>
+    </property>
+   </row>
+   <row>
+    <property name="text">
+     <string>发车时间4</string>
+    </property>
+   </row>
+   <row>
+    <property name="text">
+     <string>票价4</string>
+    </property>
+   </row>
+   <row>
+    <property name="text">
+     <string>站点5</string>
+    </property>
+   </row>
+   <row>
+    <property name="text">
+     <string>发车时间5</string>
+    </property>
+   </row>
+   <row>
+    <property name="text">
+     <string>票价5</string>
+    </property>
+   </row>
+   <row>
+    <property name="text">
+     <string>站点6</string>
+    </property>
+   </row>
+   <row>
+    <property name="text">
+     <string>发车时间6</string>
+    </property>
+   </row>
+   <row>
+    <property name="text">
+     <string>票价6</string>
+    </property>
+   </row>
+   <row>
+    <property name="text">
+     <string>站点7</string>
+    </property>
+   </row>
+   <row>
+    <property name="text">
+     <string>发车时间7</string>
+    </property>
+   </row>
+   <row>
+    <property name="text">
+     <string>票价7</string>
+    </property>
+   </row>
+   <row>
+    <property name="text">
+     <string>站点8</string>
+    </property>
+   </row>
+   <row>
+    <property name="text">
+     <string>发车时间8</string>
+    </property>
+   </row>
+   <row>
+    <property name="text">
+     <string>票价8</string>
+    </property>
+   </row>
+   <row>
+    <property name="text">
+     <string>站点9</string>
+    </property>
+   </row>
+   <row>
+    <property name="text">
+     <string>发车时间9</string>
+    </property>
+   </row>
+   <row>
+    <property name="text">
+     <string>票价9</string>
+    </property>
+   </row>
+   <row>
+    <property name="text">
+     <string>站点10</string>
+    </property>
+   </row>
+   <row>
+    <property name="text">
+     <string>发车时间10</string>
+    </property>
+   </row>
+   <row>
+    <property name="text">
+     <string>票价10</string>
+    </property>
+   </row>
+   <row>
+    <property name="text">
+     <string>站点11</string>
+    </property>
+   </row>
+   <row>
+    <property name="text">
+     <string>发车时间11</string>
+    </property>
+   </row>
+   <row>
+    <property name="text">
+     <string>票价11</string>
+    </property>
+   </row>
+   <row>
+    <property name="text">
+     <string>站点12</string>
+    </property>
+   </row>
+   <row>
+    <property name="text">
+     <string>新建行</string>
+    </property>
+   </row>
+   <row>
+    <property name="text">
+     <string>票价12</string>
+    </property>
+   </row>
+   <column>
+    <property name="text">
+     <string>车辆信息</string>
+    </property>
+   </column>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>150</x>
+     <y>10</y>
+     <width>91</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>17</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>添加车次</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton">
+   <property name="geometry">
+    <rect>
+     <x>280</x>
+     <y>70</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>确认</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_2">
+   <property name="geometry">
+    <rect>
+     <x>280</x>
+     <y>120</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>取消</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>pushButton_2</sender>
+   <signal>clicked()</signal>
+   <receiver>Addcoach</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>326</x>
+     <y>122</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>347</x>
+     <y>110</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>
