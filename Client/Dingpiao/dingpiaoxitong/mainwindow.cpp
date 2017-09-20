@@ -98,6 +98,10 @@ void MainWindow::on_pushButton_5_clicked()
         endorse.show();
         endorse.exec();
     }
+    else
+    {
+         QMessageBox::about(NULL, QString::fromLocal8Bit("改签失败"), QString::fromLocal8Bit("请选择要改签的票！"));
+    }
 }
 
 void MainWindow::on_pushButton_7_clicked()

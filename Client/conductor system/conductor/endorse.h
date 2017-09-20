@@ -2,6 +2,7 @@
 #define ENDORSE_H
 
 #include <QDialog>
+#include <QLabel>
 
 namespace Ui {
 class Endorse;
