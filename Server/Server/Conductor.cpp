@@ -9,22 +9,22 @@ using namespace std;
 
 Conductor::Conductor(char *i, char *p) :User(i, p), innerPassword("12345") {}
 
-bool Conductor::inquireSuser(char *p, char *i, char **out)
+bool Conductor::inquireSuser(char *p, char *i, char ***out)
 {
 	if (this->check(p))
 	{
-		char a[56];
-		sprintf(a, "SELECT password,name FROM suser where id='%s';", i);
-		mysql_real_query(&con, a, 56);
+		mysql_real_query(&con, "SELECT id,password,name FROM suser", 36);
 		if (res = mysql_store_result(&con))
 		{
-			result = mysql_fetch_row(res);
-			strcpy(out[0], i);
-			strcpy(out[1], result[0]);
-			strcpy(out[2], result[1]);
+			for (int i = 0; result = mysql_fetch_row(res); i++)
+			{
+				strcpy(out[i][0], result[0]);
+				strcpy(out[i][1], result[1]);
+				strcpy(out[i][2], result[2]);
+			}
 		}
 		else
-			return false;
+			return true;
 	}
 	else
 		return false;
