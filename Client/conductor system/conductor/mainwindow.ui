@@ -27,7 +27,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -82,9 +82,9 @@
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>10</y>
-        <width>54</width>
-        <height>12</height>
+        <y>-10</y>
+        <width>71</width>
+        <height>41</height>
        </rect>
       </property>
       <property name="text">
@@ -94,7 +94,7 @@
      <widget class="QDateEdit" name="dateEdit">
       <property name="geometry">
        <rect>
-        <x>60</x>
+        <x>70</x>
         <y>0</y>
         <width>71</width>
         <height>21</height>
@@ -162,26 +162,26 @@
       <property name="geometry">
        <rect>
         <x>150</x>
-        <y>0</y>
-        <width>41</width>
-        <height>16</height>
+        <y>-10</y>
+        <width>51</width>
+        <height>41</height>
        </rect>
       </property>
       <property name="text">
-       <string>出发地</string>
+       <string>出发地：</string>
       </property>
      </widget>
      <widget class="QLabel" name="label_2">
       <property name="geometry">
        <rect>
         <x>290</x>
-        <y>0</y>
-        <width>41</width>
-        <height>16</height>
+        <y>-10</y>
+        <width>51</width>
+        <height>41</height>
        </rect>
       </property>
       <property name="text">
-       <string>到达地</string>
+       <string>到达地：</string>
       </property>
      </widget>
      <widget class="QComboBox" name="comboBox">
@@ -376,19 +376,6 @@
       </property>
       <property name="text">
        <string>退票</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_5">
-      <property name="geometry">
-       <rect>
-        <x>410</x>
-        <y>10</y>
-        <width>54</width>
-        <height>12</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>TextLabel</string>
       </property>
      </widget>
     </widget>

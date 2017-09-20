@@ -34,13 +34,13 @@
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>10</y>
+        <y>-1</y>
         <width>71</width>
-        <height>20</height>
+        <height>41</height>
        </rect>
       </property>
       <property name="text">
-       <string>出发日期</string>
+       <string>出发日期：</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
@@ -49,14 +49,14 @@
      <widget class="QLabel" name="label_5">
       <property name="geometry">
        <rect>
-        <x>160</x>
-        <y>10</y>
+        <x>170</x>
+        <y>0</y>
         <width>61</width>
-        <height>20</height>
+        <height>41</height>
        </rect>
       </property>
       <property name="text">
-       <string>出发地</string>
+       <string>出发地：</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
@@ -65,14 +65,14 @@
      <widget class="QLabel" name="label_7">
       <property name="geometry">
        <rect>
-        <x>300</x>
-        <y>10</y>
+        <x>310</x>
+        <y>0</y>
         <width>71</width>
-        <height>20</height>
+        <height>41</height>
        </rect>
       </property>
       <property name="text">
-       <string>到达地</string>
+       <string>到达地：</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
@@ -113,7 +113,7 @@
      <widget class="QComboBox" name="comboBox">
       <property name="geometry">
        <rect>
-        <x>220</x>
+        <x>230</x>
         <y>10</y>
         <width>71</width>
         <height>22</height>
@@ -131,7 +131,7 @@
       </item>
       <item>
        <property name="text">
-        <string>新建项目</string>
+        <string>lalala</string>
        </property>
       </item>
       <item>
@@ -262,7 +262,7 @@
         <x>280</x>
         <y>280</y>
         <width>181</width>
-        <height>22</height>
+        <height>25</height>
        </rect>
       </property>
       <layout class="QFormLayout" name="formLayout">
@@ -349,7 +349,7 @@
       </column>
       <column>
        <property name="text">
-        <string>乘车人</string>
+        <string>乘车人姓名</string>
        </property>
       </column>
       <column>
@@ -399,7 +399,7 @@
        </rect>
       </property>
       <property name="text">
-       <string>姓名:</string>
+       <string>姓名：</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
@@ -415,7 +415,7 @@
        </rect>
       </property>
       <property name="text">
-       <string>学号:</string>
+       <string>学号：</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
@@ -431,7 +431,7 @@
        </rect>
       </property>
       <property name="text">
-       <string>一卡通号:</string>
+       <string>一卡通号：</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
@@ -450,7 +450,7 @@
        <enum>Qt::LeftToRight</enum>
       </property>
       <property name="text">
-       <string>手机号:</string>
+       <string>手机号：</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
