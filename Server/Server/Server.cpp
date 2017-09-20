@@ -54,7 +54,9 @@ using namespace std;
 		b[i] = a[p][0][0];										\
 }
 
-
+Nuser *nuser;
+Suser *suser;
+Conductor *conductor;
 #define SERVER_PORT 6000    //端口号
 #define MSG_BUF_SIZE 1024	//buf_msg的长度
 #define ID_SIZE 20			//ID长度
@@ -201,6 +203,7 @@ label0:
 			int judgeint = atoi(buf_msg);
 			switch (judgeint)
 			{
+			//用户查看自己信息
 			case 33:
 			{
 				char **nuserinfo;
@@ -210,8 +213,8 @@ label0:
 					nuserinfo[i] = new char[4];
 				}
 
-				Nuser nuser(id, pw);
-				if (nuser.inquireInfo(nuserinfo))
+					nuser=new Nuser(id, pw);
+				if (nuser->inquireInfo(nuserinfo))
 				{
 					char ninfo[48] = "";
 					strcat(ninfo, nuserinfo[0]);
@@ -230,12 +233,13 @@ label0:
 					SENDN;
 				}
 
-				for (int i = 0; i<12; i++)
-					 {
-					     delete[] nuserinfo[i];
-					 }
-				 delete nuserinfo;
+				for (int i = 0; i < 12; i++)
+				{
+					delete[] nuserinfo[i];
+				}
+				delete nuserinfo;
 
+				delete nuser;
 				goto label0;
 			}
 			break;
@@ -317,9 +321,9 @@ label0:
 				//分离ID和password
 				DIV_ID_PW(IdPw);
 
-				Nuser nuser(id, pw);
+				nuser=new Nuser(id, pw);
 				//验证账号密码
-				char ver=nuser.verify(pw);
+				char ver=nuser->verify(pw);
 				if (ver == 'Y')
 					SENDY
 				else if (ver == '1')
@@ -340,9 +344,9 @@ label0:
 
 				DIV_ID_PW(IdPw2);
 
-				Suser suser(id, pw);
+				suser=new Suser(id, pw);
 				//验证账号密码
-				char ver = suser.verify(pw);
+				char ver = suser->verify(pw);
 				if (ver == 'Y')
 					SENDY
 				else if (ver == '1')
@@ -377,8 +381,8 @@ label0:
 					for (int j = 0; j < ROW_SIZE; j++)
 						info[i][j] = new char[UNIT_SIZE];
 				}
-				Nuser nuser(id, pw);
-				if (nuser.carinfo(MMDD, start, end, info))
+				nuser=new Nuser(id, pw);
+				if (nuser->carinfo(MMDD, start, end, info))
 				{
 					char cinfo[INFO_SIZE] = "";
 					for (int i = 0; i < LINE_SIZE; i++)
@@ -432,11 +436,11 @@ label0:
 				for (int p = 0; buf_msg[i] != '\0'; i++, p++)		
 					newpw[p] = buf_msg[i];
 				cout << buf_msg;
-				Nuser nuser(id, oldpw);
-				char ver = nuser.verify(oldpw);
+				nuser=new Nuser(id, oldpw);
+				char ver = nuser->verify(oldpw);
 				if (ver == 'Y')
 				{
-					if (nuser.changePassword(newpw))
+					if (nuser->changePassword(newpw))
 					{
 						memcpy(pw, newpw, strlen(newpw));
 						pw[strlen(newpw)] = '\0';
@@ -530,8 +534,8 @@ label0:
 						info[i][j] = new char[UNIT_SIZE];
 				}
 
-				Suser suser(id, pw);
-				if (suser.carinfo(MMDD, start, end, info))
+				suser=new Suser(id, pw);
+				if (suser->carinfo(MMDD, start, end, info))
 				{
 					char cinfo[INFO_SIZE] = "";
 					for (int i = 0; i < LINE_SIZE; i++)
@@ -617,14 +621,14 @@ label0:
 					taid[m] = buf_msg[i];
 				cout << taid << endl;
 
-				Suser suser(id, pw);
+				suser=new Suser(id, pw);
 				char sour[20] = "";
 				if (gettnum(qicheid, qidian, zhongdian, sour))
 				{
 					int seat = getSeatNum(id, qidian, zhongdian);
 					char seat1[5] = "";
 					itoa(seat, seat1, 5);
-					suser.chooseticket(qicheid, sour, riqi, id, taid, seat1);
+					suser->chooseticket(qicheid, sour, riqi, id, taid, seat1);
 					SENDY;
 					RECVMSG;
 					if (strcmp(buf_msg, "0") == 0)
@@ -652,8 +656,8 @@ label0:
 			//买票
 			case 31:
 			{
-				Suser suser(id, pw);
-				if (suser.buyticket())
+				suser=new Suser(id, pw);
+				if (suser->buyticket())
 				{
 					SENDY;
 				}
@@ -713,7 +717,7 @@ label0:
 				cout << riqi << endl;
 				i++;
 
-				Suser suser(id, pw);
+				suser=new Suser(id, pw);
 
 				//调用函数退票
 				char sour[20] = "";
@@ -723,8 +727,8 @@ label0:
 					int seat = getSeatNum(id, qidian, zhongdian);
 					char seat1[5] = "";
 					itoa(seat, seat1, 5);
-					suser.chooseticket(qicheid, sour, riqi, id, taid, seat1);
-					if (suser.refundticket())
+					suser->chooseticket(qicheid, sour, riqi, id, taid, seat1);
+					if (suser->refundticket())
 					{
 						SENDY;
 					}
@@ -800,8 +804,8 @@ label0:
 					for (int j = 0; j < ROW_SIZE; j++)
 						info[i][j] = new char[UNIT_SIZE];
 				}
-				Suser suser(id, pw);
-				if (suser.carinfo(nriqi, qidian, zhongdian, info))
+				suser=new Suser(id, pw);
+				if (suser->carinfo(nriqi, qidian, zhongdian, info))
 				{
 					char cinfo[INFO_SIZE] = "";
 					for (int i = 0; i < LINE_SIZE; i++)
@@ -888,8 +892,8 @@ label0:
 						int cseat = getSeatNum(id, cqidian, czhongdian);
 						char cseat1[5] = "";
 						itoa(cseat, cseat1, 5);
-						suser.chooseticket(qicheid, sour, riqi, id, taid, seat);
-						if (suser.changeticket(cqicheid, criqi, cseat1))
+						suser->chooseticket(qicheid, sour, riqi, id, taid, seat);
+						if (suser->changeticket(cqicheid, criqi, cseat1))
 						{
 							SENDY;
 						}
@@ -901,7 +905,7 @@ label0:
 
 				if (gettnum(qicheid, qidian, zhongdian, sour1))
 				{
-					suser.chooseticket(qicheid, sour1, riqi, id, taid, seat);
+					suser->chooseticket(qicheid, sour1, riqi, id, taid, seat);
 
 				}
 
@@ -921,8 +925,8 @@ label0:
 					for (int j = 0; j < DD_ROW_SIZE; j++)
 						info[i][j] = new char[UNIT_SIZE];
 				}
-				Suser suser(id, pw);
-				if (suser.inquireticket(info,buf_msg))
+				suser=new Suser(id, pw);
+				if (suser->inquireticket(info,buf_msg))
 				{
 					char cinfo[INFO_SIZE] = "";
 					for (int i = 0; i < LINE_SIZE; i++)
@@ -1005,14 +1009,14 @@ label0:
 					taid[m] = buf_msg[i];
 				cout << taid << endl;
 
-				Nuser nuser(id, pw);
+				nuser=new Nuser(id, pw);
 				char sour[20] = "";
 				if (gettnum(qicheid, qidian, zhongdian, sour))
 				{
 					int seat = getSeatNum(id, qidian, zhongdian);
 					char seat1[5] = "";
 					itoa(seat, seat1, 5);
-					nuser.chooseticket(qicheid, sour, riqi, id, taid, seat1);
+					nuser->chooseticket(qicheid, sour, riqi, id, taid, seat1);
 					SENDY;
 					RECVMSG;
 					if (strcmp(buf_msg, "0") == 0)
@@ -1040,8 +1044,8 @@ label0:
 			//买票
 			case 12:
 			{
-				Nuser nuser(id, pw);
-				if (nuser.buyticket())
+				nuser=new Nuser(id, pw);
+				if (nuser->buyticket())
 				{
 					SENDY;
 				}
@@ -1062,8 +1066,8 @@ label0:
 					for (int j = 0; j < DD_ROW_SIZE; j++)
 						info[i][j] = new char[UNIT_SIZE];
 				}
-				Nuser nuser(id, pw);
-				if (nuser.inquireticket(info))
+				nuser=new Nuser(id, pw);
+				if (nuser->inquireticket(info))
 				{
 					char cinfo[INFO_SIZE] = "";
 					for (int i = 0; i < LINE_SIZE; i++)
@@ -1148,7 +1152,7 @@ label0:
 				cout << riqi << endl;
 				i++;
 
-				Nuser nuser(id, pw);
+				nuser=new Nuser(id, pw);
 
 				//调用函数退票
 				char sour[20] = "";
@@ -1158,8 +1162,8 @@ label0:
 					int seat = getSeatNum(id, qidian, zhongdian);
 					char seat1[5] = "";
 					itoa(seat, seat1, 5);
-					nuser.chooseticket(qicheid, sour, riqi, id, taid, seat1);
-					if (nuser.refundticket())
+					nuser->chooseticket(qicheid, sour, riqi, id, taid, seat1);
+					if (nuser->refundticket())
 					{
 						SENDY;
 					}
@@ -1235,8 +1239,8 @@ label0:
 					for (int j = 0; j < ROW_SIZE; j++)
 						info[i][j] = new char[UNIT_SIZE];
 				}
-				Nuser nuser(id, pw);
-				if (nuser.carinfo(nriqi, qidian, zhongdian, info))
+				nuser=new Nuser(id, pw);
+				if (nuser->carinfo(nriqi, qidian, zhongdian, info))
 				{
 					char cinfo[INFO_SIZE] = "";
 					for (int i = 0; i < LINE_SIZE; i++)
@@ -1323,8 +1327,8 @@ label0:
 						int cseat = getSeatNum(id, cqidian, czhongdian);
 						char cseat1[5] = "";
 						itoa(cseat, cseat1, 5);
-						nuser.chooseticket(qicheid, sour, riqi, id, taid, seat);
-						if (nuser.changeticket(cqicheid,criqi,cseat1))
+						nuser->chooseticket(qicheid, sour, riqi, id, taid, seat);
+						if (nuser->changeticket(cqicheid,criqi,cseat1))
 						{
 							SENDY;
 						}
@@ -1336,7 +1340,7 @@ label0:
 
 					if (gettnum(qicheid, qidian, zhongdian, sour1))
 					{
-						nuser.chooseticket(qicheid, sour1, riqi, id, taid, seat);
+						nuser->chooseticket(qicheid, sour1, riqi, id, taid, seat);
 
 					}
 
@@ -1354,9 +1358,9 @@ label0:
 				//分离ID和password
 				DIV_ID_PW(IdPw);
 
-				Conductor conductor(id, pw);
+				conductor=new Conductor(id, pw);
 				//验证账号密码
-				char ver = conductor.verify(pw);
+				char ver = conductor->verify(pw);
 				if (ver == 'Y')
 					SENDY
 				else if (ver == '0')
@@ -1392,9 +1396,9 @@ label0:
 					for (int j = 0; j < 3; j++)
 						sellinfo[i][j] = new char[20];
 				}
-				Conductor conductor(id,pw);
+				conductor=new Conductor(id,pw);
 				char seinfo[1200];
-				if (conductor.inquireSuser(innerpw,sellinfo))
+				if (conductor->inquireSuser(innerpw,sellinfo))
 				{
 					int p = 0;
 					for(int q=0;q<20;q++)
@@ -1441,8 +1445,8 @@ label0:
 				for (int j = 0; buf_msg[i] != '\0'; i++, j++)
 					sellpw[j] = buf_msg[i];
 				i++;
-				Conductor conductor(sellid,sellpw);
-				if (conductor.addSuser(innerpw, sellid, sellpw))
+				conductor = new Conductor(sellid,sellpw);
+				if (conductor->addSuser(innerpw, sellid, sellpw))
 				{
 					SENDY;
 				}
@@ -1471,8 +1475,8 @@ label0:
 				i++;
 				for (int j = 0; buf_msg[i] != ';'; i++, j++)
 					nsellpw[j] = buf_msg[i];
-				Conductor conductor(sellid, nsellpw);
-				if (conductor.changeSuserInfo(innerpw, sellid, nsellid, nsellpw))
+				conductor = new Conductor(sellid, nsellpw);
+				if (conductor->changeSuserInfo(innerpw, sellid, nsellid, nsellpw))
 				{
 					SENDY;
 				}
@@ -1493,8 +1497,8 @@ label0:
 				i++;
 				for (int j = 0; buf_msg[i] != ';'; i++, j++)
 					sellid[j] = buf_msg[i];
-				Conductor conductor(sellid, sellid);
-				if (conductor.deleteUser(innerpw, sellid))
+				conductor = new Conductor(sellid, sellid);
+				if (conductor->deleteUser(innerpw, sellid))
 				{
 					SENDY;
 				}
@@ -1576,8 +1580,8 @@ label0:
 					label30:
 						char st[5];
 						timeSub(sttime, "00:00", st);
-						Conductor conductor(id, pw);
-				if (conductor.addCoach(innerpw, busid, st, addinfo, stanum, seatnum))
+						conductor = new Conductor(id, pw);
+				if (conductor->addCoach(innerpw, busid, st, addinfo, stanum, seatnum))
 				{
 					SENDY;
 				}
@@ -1613,8 +1617,8 @@ label0:
 				i++;
 				for (int j = 0; buf_msg[i] != ';'; i++, j++)
 					busid[j] = buf_msg[i];
-				Conductor conductor(id, pw);
-				if (conductor.deleteCoach(innerpw1, busid))
+				conductor = new Conductor(id, pw);
+				if (conductor->deleteCoach(innerpw1, busid))
 				{
 					SENDY;
 				}
@@ -1644,9 +1648,9 @@ label0:
 					for (int j = 0; j < 14; j++)
 						businfo[i][j] = new char[10];
 				}
-				Conductor conductor(id, pw);
+				conductor = new Conductor(id, pw);
 				char seinfo[2800];
-				if (conductor.inquireSuser(innerpw, businfo))
+				if (conductor->inquireSuser(innerpw, businfo))
 				{
 					int p = 0;
 					for (int q = 0; q<20; q++)
@@ -1686,8 +1690,8 @@ label0:
 					inqucoa[i] = new char[10];
 				}
 
-				Conductor conductor(id, pw);
-				if (conductor.inquireCoach(buf_msg, inqucoa))
+				conductor = new Conductor(id, pw);
+				if (conductor->inquireCoach(buf_msg, inqucoa))
 				{
 					char incoa[120] = "";
 					int z = 0;
@@ -1725,8 +1729,8 @@ label0:
 				for (int j = 0; buf_msg[y] != ';'; y++)
 					busid[j] = buf_msg[y];
 				y++;
-				Conductor conductor(busid, busid);
-				conductor.deleteCoach(innerpw, busid);
+				conductor = new Conductor(busid, busid);
+				conductor->deleteCoach(innerpw, busid);
 
 				//增加车辆
 				{
@@ -1773,8 +1777,8 @@ label0:
 									goto label90;
 							}
 				label90:
-					Conductor conductor(id, pw);
-					if (conductor.addCoach(innerpw, busid, sttime, addinfo, stanum, seatnum))
+					conductor = new Conductor(id, pw);
+					if (conductor->addCoach(innerpw, busid, sttime, addinfo, stanum, seatnum))
 					{
 						SENDY;
 					}
