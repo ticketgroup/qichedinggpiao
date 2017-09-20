@@ -13,10 +13,13 @@ class Endorse : public QDialog
 
 public:
     explicit Endorse(QWidget *parent = 0);
+    void setLabel(QString, QString, QString);
     ~Endorse();
 
 private slots:
     void on_pushButton_clicked();
+
+    void on_pushButton_3_clicked();
 
 private:
     Ui::Endorse *ui;

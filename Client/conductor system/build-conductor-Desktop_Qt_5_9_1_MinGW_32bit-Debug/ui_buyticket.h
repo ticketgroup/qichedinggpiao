@@ -121,10 +121,11 @@ public:
 
         label_11 = new QLabel(Buyticket);
         label_11->setObjectName(QStringLiteral("label_11"));
-        label_11->setGeometry(QRect(160, 20, 91, 41));
+        label_11->setGeometry(QRect(0, 20, 401, 41));
         QFont font1;
         font1.setPointSize(17);
         label_11->setFont(font1);
+        label_11->setAlignment(Qt::AlignCenter);
         pushButton = new QPushButton(Buyticket);
         pushButton->setObjectName(QStringLiteral("pushButton"));
         pushButton->setGeometry(QRect(200, 240, 75, 23));
