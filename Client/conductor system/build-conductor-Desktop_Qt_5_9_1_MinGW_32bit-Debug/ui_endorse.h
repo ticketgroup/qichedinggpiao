@@ -49,11 +49,10 @@ public:
         label_4->setGeometry(QRect(10, 50, 51, 16));
         label = new QLabel(Endorse);
         label->setObjectName(QStringLiteral("label"));
-        label->setGeometry(QRect(0, 0, 571, 31));
+        label->setGeometry(QRect(250, 0, 51, 31));
         QFont font;
         font.setPointSize(17);
         label->setFont(font);
-        label->setAlignment(Qt::AlignCenter);
         tableWidget = new QTableWidget(Endorse);
         if (tableWidget->columnCount() < 7)
             tableWidget->setColumnCount(7);

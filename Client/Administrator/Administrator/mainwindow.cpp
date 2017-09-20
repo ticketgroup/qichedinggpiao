@@ -43,7 +43,7 @@ void MainWindow::on_pushButton_3_clicked()
 
 void MainWindow::on_pushButton_2_clicked()
 {
-    switch(QMessageBox::question(NULL, QString::fromLocal8Bit("删除确定"), QString::fromLocal8Bit("您确定要删除这个售票员吗？"), QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes))
+    switch(QMessageBox::question(NULL, "question", "Content", QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes))
     {
     case QMessageBox::Yes:
         QList<QTableWidgetSelectionRange>ranges=ui->tableWidget->selectedRanges();
@@ -89,7 +89,7 @@ void MainWindow::on_pushButton_clicked()
 
 void MainWindow::on_pushButton_6_clicked()
 {
-    switch(QMessageBox::question(NULL, QString::fromLocal8Bit("删除确定"), QString::fromLocal8Bit("您确定要删除次车次吗？"), QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes))
+    switch(QMessageBox::question(NULL, "question", "Content", QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes))
     {
     case QMessageBox::Yes:
         QList<QTableWidgetSelectionRange>ranges=ui->tableWidget_2->selectedRanges();
@@ -118,7 +118,7 @@ void MainWindow::on_pushButton_6_clicked()
         else
         {
 
-            QMessageBox::about(NULL, QString::fromLocal8Bit("删除失败"), QString::fromLocal8Bit("请选择车次！"));
+            QMessageBox::about(NULL, QString::fromLocal8Bit("删除失败"), QString::fromLocal8Bit("请选择售票员！"));
         }
 
         break;
@@ -147,6 +147,6 @@ void MainWindow::on_pushButton_5_clicked()
     else
     {
 
-        QMessageBox::about(NULL, QString::fromLocal8Bit("修改失败"), QString::fromLocal8Bit("请选择车次！"));
+        QMessageBox::about(NULL, QString::fromLocal8Bit("修改失败"), QString::fromLocal8Bit("请选择售票员！"));
     }
 }

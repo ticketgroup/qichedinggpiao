@@ -85,7 +85,7 @@ public:
         pushButton_2->setGeometry(QRect(270, 240, 75, 23));
         label = new QLabel(Denglu);
         label->setObjectName(QStringLiteral("label"));
-        label->setGeometry(QRect(0, 30, 401, 41));
+        label->setGeometry(QRect(110, 30, 141, 41));
         QFont font1;
         font1.setFamily(QString::fromUtf8("\345\215\216\346\226\207\346\245\267\344\275\223"));
         font1.setPointSize(17);
@@ -93,12 +93,11 @@ public:
         label->setAlignment(Qt::AlignCenter);
         label_2 = new QLabel(Denglu);
         label_2->setObjectName(QStringLiteral("label_2"));
-        label_2->setGeometry(QRect(200, 60, 161, 31));
+        label_2->setGeometry(QRect(230, 60, 91, 31));
         QFont font2;
         font2.setFamily(QString::fromUtf8("\345\215\216\346\226\207\346\245\267\344\275\223"));
         font2.setPointSize(14);
         label_2->setFont(font2);
-        label_2->setAlignment(Qt::AlignCenter);
 #ifndef QT_NO_SHORTCUT
 #endif // QT_NO_SHORTCUT
 

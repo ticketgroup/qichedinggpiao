@@ -30,9 +30,7 @@ SOURCES += \
     passwordchange.cpp \
     addconductor.cpp \
     addcoach.cpp \
-    changecoach.cpp \
-    client.cpp \
-    variables.cpp
+    changecoach.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -40,9 +38,7 @@ HEADERS += \
     passwordchange.h \
     addconductor.h \
     addcoach.h \
-    changecoach.h \
-    Client.h \
-    variables.h
+    changecoach.h
 
 FORMS += \
         mainwindow.ui \

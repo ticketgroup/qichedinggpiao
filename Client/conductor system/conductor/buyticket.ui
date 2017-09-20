@@ -169,25 +169,19 @@
   <widget class="QLabel" name="label_11">
    <property name="geometry">
     <rect>
-     <x>0</x>
+     <x>160</x>
      <y>20</y>
-     <width>401</width>
+     <width>91</width>
      <height>41</height>
     </rect>
    </property>
    <property name="font">
     <font>
      <pointsize>17</pointsize>
-     <weight>75</weight>
-     <italic>false</italic>
-     <bold>true</bold>
     </font>
    </property>
    <property name="text">
     <string>订单确认</string>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignCenter</set>
    </property>
   </widget>
   <widget class="QPushButton" name="pushButton">

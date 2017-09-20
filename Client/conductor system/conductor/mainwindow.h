@@ -25,10 +25,6 @@ private slots:
 
     void on_pushButton_5_clicked();
 
-    void on_pushButton_6_clicked();
-
-    void on_pushButton_2_clicked();
-
 private:
     Ui::MainWindow *ui;
     Buyticket buyticket;

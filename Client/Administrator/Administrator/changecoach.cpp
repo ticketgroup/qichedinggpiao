@@ -28,7 +28,7 @@ void Changecoach::on_pushButton_clicked()
     {
     case QMessageBox::Yes:
         char st[2];
-        QString str = id + ";";
+        QString str = id;
         QTableWidget *table = ui->tableWidget_2;
         int i = 0;
         for(; table->item(i,0)!=0; i++)
