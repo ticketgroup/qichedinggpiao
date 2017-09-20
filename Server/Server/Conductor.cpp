@@ -9,7 +9,7 @@ using namespace std;
 
 Conductor::Conductor(char *i, char *p) :User(i, p), innerPassword("12345") {}
 
-bool Conductor::inquireSuser(char *p, char *i, char ***out)
+bool Conductor::inquireSuser(char *p, char ***out)
 {
 	if (this->check(p))
 	{

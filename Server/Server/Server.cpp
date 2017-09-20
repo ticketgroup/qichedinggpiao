@@ -1334,36 +1334,49 @@ label0:
 			}
 			break;
 
-			//管理员查售票员
+			//管理员查所有售票员
 			case 24:
 			{
 				SENDY;
 				RECVMSG;
 				char innerpw[10] = "";
-				char sellid[40] = "";
 				int i = 0;
-				for (int j = 0; buf_msg[i] != ';'; i++, j++)
+				for (int j = 0; buf_msg[i] != '\0'; i++, j++)
 					innerpw[j] = buf_msg[i];
-				i++;
-				for (int j = 0; buf_msg[i] != ';'; i++, j++)
-					sellid[j] = buf_msg[i];
 
-				char **sellinfo;
-				sellinfo = new char *[3];
-				for (int i = 0; i < 10; i++)
+				char ***sellinfo;
+				sellinfo = new char **[20];
+				for (int i = 0; i < 20; i++)
 				{
-					sellinfo[i] = new char[10];
+					sellinfo[i] = new char *[3];
+					for (int j = 0; j < 3; j++)
+						sellinfo[i][j] = new char[20];
 				}
 				Conductor conductor(id,pw);
-				char seinfo[30];
-				if (conductor.inquireSuser(innerpw, sellid, sellinfo))
+				char seinfo[1200];
+				if (conductor.inquireSuser(innerpw,sellinfo))
 				{
 					int p = 0;
+					for(int q=0;q<20;q++)
 					for (int i = 0; i < 3; i++)
-						for (int j = 0; sellinfo[i][j] != '\0'; j++, p++)
-							seinfo[p] = sellinfo[i][j];
-					send(sock_clt, seinfo, 30, 0);
-				};
+						for (int j = 0; sellinfo[q][i][j] != '\0'; j++, p++)
+						{
+							seinfo[p] = sellinfo[q][i][j];
+							if (sellinfo[q][i][j] == '$')
+								goto label40;
+						}
+					label40:
+					send(sock_clt, seinfo, 1200, 0);
+				}
+				for (int i = 0; i < LINE_SIZE; i++)
+				{
+					for (int j = 0; j < DD_ROW_SIZE; j++)
+					{
+						delete sellinfo[i][j];
+					}
+					delete sellinfo[i];
+				}
+				delete sellinfo;
 				goto label0;
 			}
 			break;
@@ -1555,6 +1568,54 @@ label0:
 			{
 				SENDY;
 				RECVMSG;
+				char innerpw[10] = "";
+				int i = 0;
+				for (int j = 0; buf_msg[i] != '\0'; i++, j++)
+					innerpw[j] = buf_msg[i];
+
+				char ***businfo;
+				businfo = new char **[20];
+				for (int i = 0; i < 20; i++)
+				{
+					businfo[i] = new char *[14];
+					for (int j = 0; j < 14; j++)
+						businfo[i][j] = new char[10];
+				}
+				Conductor conductor(id, pw);
+				char seinfo[2800];
+				if (conductor.inquireSuser(innerpw, businfo))
+				{
+					int p = 0;
+					for (int q = 0; q<20; q++)
+						for (int i = 0; i < 3; i++)
+							for (int j = 0; businfo[q][i][j] != '\0'; j++, p++)
+							{
+								seinfo[p] = businfo[q][i][j];
+								if (businfo[q][i][j] == '$')
+									goto label50;
+							}
+				label50:
+					send(sock_clt, seinfo, 2800, 0);
+				}
+
+				for (int i = 0; i < LINE_SIZE; i++)
+				{
+					for (int j = 0; j < DD_ROW_SIZE; j++)
+					{
+						delete businfo[i][j];
+					}
+					delete businfo[i];
+				}
+				delete businfo;
+
+			}
+			break;
+
+			//管理员查单辆车
+			case 34:
+			{
+				SENDY;
+				RECVMSG;
 				char **inqucoa;
 				inqucoa = new char *[12];
 				for (int i = 0; i < 12; i++)
@@ -1568,7 +1629,7 @@ label0:
 					char incoa[120] = "";
 					int z = 0;
 					for (int i = 0; i < 12; i++)
-						for (int j = 0; inqucoa[i][j] != '\0'; j++,z++)
+						for (int j = 0; inqucoa[i][j] != '\0'; j++, z++)
 							incoa[z] = inqucoa[i][j];
 					send(sock_clt, incoa, 120, 0);
 				}
@@ -1587,15 +1648,91 @@ label0:
 			}
 			break;
 
-			//管理员查单辆车
-			case 34:
+			//管理员更改车辆
+			case 35:
 			{
 				SENDY;
 				RECVMSG;
+				char busid[10] = "";
+				char innerpw[10]; "";
+				int y = 0;
+				for (int j = 0; buf_msg[y] != ';'; y++)
+					innerpw[y] = buf_msg[y];
+				y++;
+				for (int j = 0; buf_msg[y] != ';'; y++)
+					busid[j] = buf_msg[y];
+				y++;
+				Conductor conductor(busid, busid);
+				conductor.deleteCoach(innerpw, busid);
 
+				//增加车辆
+				{
+					char ***addinfo;
+					addinfo = new char **[12];
+					for (int i = 0; i < 12; i++)
+					{
+						addinfo[i] = new char *[3];
+						for (int j = 0; j < 3; j++)
+							addinfo[i][j] = new char[10];
+					}
+					char seatnum[5] = "";
+					char sttime[10] = "";
+					int i = 0;
+					for (int j = 0; buf_msg[i] != ';'; i++)
+						innerpw[j] = buf_msg[i];
+					i++;
+					for (int j = 0; buf_msg[i] != ';'; i++)
+						busid[j] = buf_msg[i];
+					i++;
+					for (int j = 0; buf_msg[i] != ';'; i++)
+						seatnum[j] = buf_msg[i];
+					i++;
+					for (int j = 0; buf_msg[i] != ';'; i++)
+						;
+					i++;
+					for (int j = 0; buf_msg[i] != ';'; i++)
+						sttime[j] = buf_msg[i];
+					i--;
+					for (int j = 0; buf_msg[i] != ';'; i--)
+						;
+					i--;
+					for (int j = 0; buf_msg[i] != ';'; i--)
+						;
+					i++;
+
+					int stanum = 1;
+					for (int m = 0; m < 12; m++, stanum++)
+						for (int n = 0; n < 3; n++)
+							for (int q = 0; addinfo[m][n][q] != '\0'; q++, i++)
+							{
+								addinfo[m][n][q] = buf_msg[i];
+								if (addinfo[m][n][q] == '$')
+									goto label30;
+							}
+				label30:
+					Conductor conductor(id, pw);
+					if (conductor.addCoach(innerpw, busid, sttime, addinfo, stanum, seatnum))
+					{
+						SENDY;
+					}
+					else
+					{
+						SENDN;
+					}
+
+					for (int i = 0; i < 12; i++)
+					{
+						for (int j = 0; j < 3; j++)
+						{
+							delete addinfo[i][j];
+						}
+						delete addinfo[i];
+					}
+					delete addinfo;
+				}
+				goto label0;
 			}
 			break;
-
 
 
 
