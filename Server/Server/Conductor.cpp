@@ -38,6 +38,15 @@ bool Conductor::check(char *p)
 		return false;
 }
 
+int Conductor::carnum()
+{
+	mysql_real_query(&con, "select count(id) from coach;", 29);
+	if (res = mysql_store_result(&con))
+		return str2int(mysql_fetch_row(res));
+	else
+		return -1;
+}
+
 bool Conductor::carinfo(char ***info)
 {
 	mysql_real_query(&con, "select id from coach;", 23);
