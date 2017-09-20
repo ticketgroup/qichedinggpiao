@@ -1,5 +1,6 @@
 #include "buyticket.h"
 #include "ui_buyticket.h"
+#include "variables.h"
 #include <QLabel>
 
 Buyticket::Buyticket(QWidget *parent) :

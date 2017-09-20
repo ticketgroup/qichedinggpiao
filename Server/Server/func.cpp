@@ -92,6 +92,19 @@ void timeAdd(char *time, char *addM, char *res)
 	h += str2int(temp[0]) + str2int(temp[2]);
 	sprintf(res, "%02d:%02d", h, m);
 }
+void timeSub(char * time, char * subM, char * res)
+{
+	char temp[4][3] = { time[0],time[1],'\0',time[3],time[4],'\0',subM[0],subM[1],'\0',subM[3],subM[4],'\0' };
+	int m = str2int(temp[1]) - str2int(temp[3]);
+	int h = 0;
+	if (m < 0)
+	{
+		m += 60;
+		h--;
+	}
+	h += str2int(temp[0]) - str2int(temp[2]);
+	sprintf(res, "%02d%02d", h, m);
+}
 int getSeatNum(char *id, char *st, char *en)
 {
 	MYSQL coa;

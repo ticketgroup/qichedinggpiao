@@ -1,5 +1,6 @@
 #include "endorse.h"
 #include "ui_endorse.h"
+#include "variables.h"
 #include <QMessageBox>
 
 Endorse::Endorse(QWidget *parent) :
@@ -41,6 +42,7 @@ void Endorse::on_pushButton_clicked()
     switch(QMessageBox::question(NULL, QString::fromLocal8Bit("改签确认"), QString::fromLocal8Bit("您确定要改签吗？"), QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes))
     {
     case QMessageBox::Yes:
+    {
         QList<QTableWidgetSelectionRange>ranges=ui->tableWidget->selectedRanges();
         int count = ranges.count();
         if(count!=0)
@@ -56,7 +58,9 @@ void Endorse::on_pushButton_clicked()
                 QMessageBox::about(NULL, QString::fromLocal8Bit("改签成功"), QString::fromLocal8Bit("您已成功改签"));
                 this->close();
             }
+        }
         break;
+    }
     case QMessageBox::No:
         break;
     }

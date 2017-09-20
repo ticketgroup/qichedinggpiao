@@ -10,7 +10,6 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
-    char a[100] = "12345|北京北|12:31|北京南|13:10|21|￥10|";
 
     ui->setupUi(this);
     ui->dateEdit->setDateTime(QDateTime::currentDateTime());
@@ -23,12 +22,7 @@ MainWindow::MainWindow(QWidget *parent) :
     table->setSelectionBehavior(QAbstractItemView::SelectRows);
     table->setSelectionMode(QAbstractItemView::SingleSelection);
     table->setEditTriggers(QAbstractItemView::NoEditTriggers);
-    table->setRowCount(3);
-    table->setItem(0,0,new QTableWidgetItem(QString::fromLocal8Bit(strtok(a,"|"))));
-    for(int i = 1; i < 7; i++)
-    {
-        table->setItem(0,i,new QTableWidgetItem(QString::fromLocal8Bit(strtok(NULL,"|"))));
-    }
+
     table = ui->tableWidget_4;
     table->setSelectionBehavior(QAbstractItemView::SelectRows);
     table->setSelectionMode(QAbstractItemView::SingleSelection);
@@ -48,7 +42,7 @@ void MainWindow::getmsg()
     l[0]->setText(QString::fromLocal8Bit(strtok(st,";")));
     for(int i = 1; i < 4; i++)
     {
-        l[i]->setText(QString::fromLocal8Bit(strtok(NULL, QString::fromLocal8Bit(";")));
+        l[i]->setText(QString::fromLocal8Bit(strtok(NULL, ";")));
     }
 
     char sta[1000];
@@ -122,7 +116,7 @@ void MainWindow::on_pushButton_7_clicked()
         client.sendmsg("12",ba.data(), st, 56, 2);
         if(st[0] == 'Y')
         {
-            buyticket.getmeg();
+            buyticket.getmsg();
             buyticket.show();
             buyticket.exec();
         }
@@ -144,6 +138,7 @@ void MainWindow::on_pushButton_6_clicked()
    switch(QMessageBox::question(NULL, QString::fromLocal8Bit("退票确认"), QString::fromLocal8Bit("您确定要退票吗？"), QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes))
    {
     case QMessageBox::Yes:
+   {
        QList<QTableWidgetSelectionRange>ranges=ui->tableWidget->selectedRanges();
        int count = ranges.count();
        if(count!=0)
@@ -163,12 +158,15 @@ void MainWindow::on_pushButton_6_clicked()
            client.sendmsg("14",ba.data(), st, 72, 2);
            if(st[0] == 'Y')
            {
-                       QMessageBox::about(NULL, QString::fromLocal8Bit("退票成功"), QString::fromLocal8Bit("您已成功退票"));
+               QMessageBox::about(NULL, QString::fromLocal8Bit("退票成功"), QString::fromLocal8Bit("您已成功退票"));
                this->close();
            }
+       }
        break;
+   }
    case QMessageBox::No:
        break;
+   }
 }
 
 

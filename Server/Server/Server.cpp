@@ -25,7 +25,7 @@ using namespace std;
 	i++;											\
 	for (int p = 0; buf_msg[i] != ';'; i++, p++)	\
 		start[p] = buf_msg[i];i++;					\
-	for (int p = 0; buf_msg[i] != ';'; i++, p++)	\
+	for (int p = 0; buf_msg[i] != '\0'; i++, p++)	\
 		end[p] = buf_msg[i];						\
 }
 //发送字符Y
@@ -1309,7 +1309,6 @@ label0:
 				//接收ID和password
 				char IdPw[ID_SIZE + PW_SIZE];
 				recv(sock_clt, IdPw, ID_SIZE + PW_SIZE, 0);
-
 				//分离ID和password
 				DIV_ID_PW(IdPw);
 
@@ -1318,11 +1317,10 @@ label0:
 				char ver = conductor.verify(pw);
 				if (ver == 'Y')
 					SENDY
-				else if (ver == '1')
-					send(sock_clt, "1", 2, 0);
-				else if (ver == '2')
-					send(sock_clt, "2", 2, 0);
+				else if (ver == '0')
+					send(sock_clt, "N", 2, 0);
 			}
+			goto label0;
 			break;
 
 			//管理员注销
@@ -1384,12 +1382,13 @@ label0:
 			//管理员增加售票员
 			case 25:
 			{
+				cout << "管理员添加售票员" << endl;
 				SENDY;
 				RECVMSG;
+				cout << buf_msg << endl;
 				char innerpw[10]="";
 				char sellid[10] = "";
 				char sellpw[40] = "";
-				char sellname[10] = "";
 				int i = 0;
 				for (int j = 0; buf_msg[i] != ';'; i++, j++)
 					innerpw[j] = buf_msg[i];
@@ -1397,13 +1396,11 @@ label0:
 				for (int j = 0; buf_msg[i] != ';'; i++, j++)
 					sellid[j] = buf_msg[i];
 				i++;
-				for (int j = 0; buf_msg[i] != ';'; i++, j++)
+				for (int j = 0; buf_msg[i] != '\0'; i++, j++)
 					sellpw[j] = buf_msg[i];
 				i++;
-				for (int j = 0; buf_msg[i] != ';'; i++, j++)
-					sellname[j] = buf_msg[i];
 				Conductor conductor(sellid,sellpw);
-				if (conductor.addSuser(innerpw, sellid, sellpw, sellname))
+				if (conductor.addSuser(innerpw, sellid, sellpw))
 				{
 					SENDY;
 				}
@@ -1466,6 +1463,7 @@ label0:
 			//管理员增加车
 			case 28:
 			{
+				cout << "管理员增加车次信息" << endl;
 				SENDY;
 				RECVMSG;
 				char ***addinfo;
@@ -1481,19 +1479,19 @@ label0:
 				char seatnum[5] = "";
 				char sttime[10] = "";
 				int i = 0;
-				for (int j = 0; buf_msg[i] != ';';i++)
+				for (int j = 0; buf_msg[i] != ';';i++, j++)
 					innerpw[j] = buf_msg[i];
 				i++;
-				for (int j=0; buf_msg[i] != ';'; i++)
+				for (int j=0; buf_msg[i] != ';'; i++, j++)
 					busid[j] = buf_msg[i];
 				i++;
-				for (int j = 0; buf_msg[i] != ';';i++)
+				for (int j = 0; buf_msg[i] != ';';i++, j++)
 					seatnum[j] = buf_msg[i];
 				i++;
-				for (int j = 0; buf_msg[i] != ';';i++)
+				for (int j = 0; buf_msg[i] != ';';i++, j++)
 					;
 				i++;
-				for (int j = 0; buf_msg[i] != ';';i++)
+				for (int j = 0; buf_msg[i] != ';';i++, j++)
 					sttime[j] = buf_msg[i];
 				i--;
 				for (int j = 0; buf_msg[i] != ';';i--)
@@ -1503,18 +1501,41 @@ label0:
 					;
 				i++;
 
-				int stanum = 1;
+
+				int stanum = 0;
+				int q = 0;
 				for (int m = 0; m < 12; m++,stanum++)
 					for (int n = 0; n < 3; n++)
-						for (int q = 0; addinfo[m][n][q] != '\0'; q++, i++)
+					{
+						if (n == 1)
 						{
-							addinfo[m][n][q] = buf_msg[i];
-							if (addinfo[m][n][q] == '$')
-								goto label30;
+							for (q = 0; buf_msg[i] != ';'; q++, i++)
+							{
+								addinfo[m][n][q] = buf_msg[i];
+
+							}
+							addinfo[m][n][q] = '\0';
+							i++;
+							timeSub(addinfo[m][n], sttime, addinfo[m][n]);
 						}
-			label30:
-				Conductor conductor(id, pw);
-				if (conductor.addCoach(innerpw, busid, sttime, addinfo, stanum, seatnum))
+						else
+						{
+							if (buf_msg[i] == '\0')
+								goto label30;
+							for (q = 0; buf_msg[i] != ';'; q++, i++)
+							{
+								addinfo[m][n][q] = buf_msg[i];
+
+							}
+							addinfo[m][n][q] = '\0';
+							i++;
+						}
+					}
+					label30:
+						char st[5];
+						timeSub(sttime, "00:00", st);
+						Conductor conductor(id, pw);
+				if (conductor.addCoach(innerpw, busid, st, addinfo, stanum, seatnum))
 				{
 					SENDY;
 				}
@@ -1545,10 +1566,10 @@ label0:
 				memset(innerpw1, 0, 10);
 				char busid[10] = "";
 				int i = 0;
-				for (int j = 0; buf_msg[i] != ';'; i++)
+				for (int j = 0; buf_msg[i] != ';'; i++, j++)
 					innerpw1[j] = buf_msg[i];
 				i++;
-				for (int j = 0; buf_msg[i] != ';'; i++)
+				for (int j = 0; buf_msg[i] != ';'; i++, j++)
 					busid[j] = buf_msg[i];
 				Conductor conductor(id, pw);
 				if (conductor.deleteCoach(innerpw1, busid))
@@ -1678,19 +1699,19 @@ label0:
 					char seatnum[5] = "";
 					char sttime[10] = "";
 					int i = 0;
-					for (int j = 0; buf_msg[i] != ';'; i++)
+					for (int j = 0; buf_msg[i] != ';'; i++, j++)
 						innerpw[j] = buf_msg[i];
 					i++;
-					for (int j = 0; buf_msg[i] != ';'; i++)
+					for (int j = 0; buf_msg[i] != ';'; i++, j++)
 						busid[j] = buf_msg[i];
 					i++;
-					for (int j = 0; buf_msg[i] != ';'; i++)
+					for (int j = 0; buf_msg[i] != ';'; i++, j++)
 						seatnum[j] = buf_msg[i];
 					i++;
-					for (int j = 0; buf_msg[i] != ';'; i++)
+					for (int j = 0; buf_msg[i] != ';'; i++, j++)
 						;
 					i++;
-					for (int j = 0; buf_msg[i] != ';'; i++)
+					for (int j = 0; buf_msg[i] != ';'; i++, j++)
 						sttime[j] = buf_msg[i];
 					i--;
 					for (int j = 0; buf_msg[i] != ';'; i--)
@@ -1707,9 +1728,9 @@ label0:
 							{
 								addinfo[m][n][q] = buf_msg[i];
 								if (addinfo[m][n][q] == '$')
-									goto label30;
+									goto label90;
 							}
-				label30:
+				label90:
 					Conductor conductor(id, pw);
 					if (conductor.addCoach(innerpw, busid, sttime, addinfo, stanum, seatnum))
 					{

@@ -34,20 +34,19 @@ void denglu::on_pushButton_3_clicked()
             {
                 if(st[0] == 'Y')
                 {
-
                     accept();
                 }
                 else if(st[0] == '1')
                 {
-                    QMessageBox::about(NULL, QString::fromLocal8Bit("登录失败"), QString::fromLocal8Bit("没有这个用户！"));
+                    QMessageBox::about(NULL, QString::fromLocal8Bit("登录失败"), QString::fromLocal8Bit("a没有这个用户！"));
                 }
                 else if(st[0]  == '2')
                 {
-                    QMessageBox::about(NULL, QString::fromLocal8Bit("登录失败"), QString::fromLocal8Bit("密码错误！"));
+                    QMessageBox::about(NULL, QString::fromLocal8Bit("登录失败"), QString::fromLocal8Bit("b密码错误！"));
                 }
             }
             else
-                QMessageBox::about(NULL, QString::fromLocal8Bit("登录失败"), QString::fromLocal8Bit("服务器认证失败，请重新登录！"));
+                QMessageBox::about(NULL, QString::fromLocal8Bit("登录失败"), QString::fromLocal8Bit("c服务器认证失败，请重新登录！"));
 
         }
         else
