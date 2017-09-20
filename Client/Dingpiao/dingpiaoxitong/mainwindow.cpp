@@ -66,14 +66,14 @@ void MainWindow::getmsg()
     QTableWidget *table = ui->tableWidget_4;
     a = strtok(st,"\");
     table->setItem(0,0,new QTableWidgetItem(QString::fromLocal8Bit(strtok(a,";"))));
-    for(int i = 1; i < 8; i++)
+    for(int i = 1; i < 9; i++)
     {
         table->setItem(0,i,new QTableWidgetItem(QString::fromLocal8Bit(strtok(NULL,";"))));
     }
     for(int m = 1; a = strtok(NULL,"\"); m++)
     {
         table->setItem(m,0,new QTableWidgetItem(QString::fromLocal8Bit(strtok(a,";"))));
-        for(int i = 1; i < 8; i++)
+        for(int i = 1; i < 9; i++)
         {
             table->setItem(m,i,new QTableWidgetItem(QString::fromLocal8Bit(strtok(NULL,";"))));
         }
@@ -99,23 +99,11 @@ void MainWindow::on_pushButton_2_clicked()
 void MainWindow::on_pushButton_5_clicked()
 {
     /*
-    QList<QTableWidgetSelectionRange>ranges=ui->tableWidget_4->selectedRanges();
-    int count = ranges.count();
-    if(count!=0)
-    {
-        int row=ranges.at(0).topRow();
-        QString busid = ui->tableWidget_4->item(row, 0)->text();
-        QString date = ui->tableWidget_4->item(row, 1)->text();
-        QString startplace = ui->tableWidget_4->item(row, 2)->text();
-        QString finishplace = ui->tableWidget_4->item(row, 4)->text();
-        QString number = ui->tableWidget_4->item(row, 8)->text();
-        QByteArray ba = (busid + ";" + date + ";" + startplace + ";" + finishplace + ";" + number).toLatin1();
-        char st[10];
-        client.sendmsg("12",ba.data()", st, 56, 2);
-       */
-//        endorse.setLabel(ui->tableWidget_4->item(row,2)->text(),ui->tableWidget_4->item(row,4)->text());
+
+        endorse.setLabel(ui->tableWidget_4->item(row,2)->text(),ui->tableWidget_4->item(row,4)->text(),ui->tableWidget_4->item(row,8)->text());
         endorse.show();
         endorse.exec();
+*/
 }
 
 void MainWindow::on_pushButton_7_clicked()
@@ -156,15 +144,38 @@ void MainWindow::on_pushButton_7_clicked()
 
 void MainWindow::on_pushButton_6_clicked()
 {
-    switch(QMessageBox::question(NULL, "question", "Content", QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes))
-    {
-    case QMessageBox::Yes:
-        QMessageBox::about(NULL, "About", "About this application");
-        break;
-    case QMessageBox::No:
-        break;
+    /*
+   switch(QMessageBox::question(NULL, "question", "Content", QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes))
+   {
 
-    }
+    case QMessageBox::Yes:
+       QList<QTableWidgetSelectionRange>ranges=ui->tableWidget->selectedRanges();
+       int count = ranges.count();
+       if(count!=0)
+       {
+            /*
+           int row=ranges.at(0).topRow();
+           QString busid = ui->tableWidget_4->item(row, 0)->text();
+           QString date = ui->tableWidget_4->item(row, 1)->text();
+           QString startplace = ui->tableWidget_4->item(row, 2)->text();
+           QString starttime = ui->tableWidget_4->item(row, 3)->text();
+           QString finishplace = ui->tableWidget_4->item(row, 4)->text();
+           QString finishtime = ui->tableWidget_4->item(row, 5)->text();
+           QString seatnumber = ui->tableWidget_4->item(row, 6)->text();
+           QString number = ui->tableWidget_4->item(row, 8)->text();
+           QByteArray ba = (busid + ";" + date + ";" + startplace + ";" + starttime + ";" + finishplace + ";" +
+                            finishtime + ";" + seatnumber + ";" + number).toLatin1();
+           char st[72];
+           client.sendmsg("14",ba.data()", st, 72, 2);
+           QMessageBox::about(NULL, "退票成功", "您已成功退票");
+                   if(st[0] == 'Y')
+           {
+               this->close();
+           }
+       break;
+   case QMessageBox::No:
+       break;
+       */
 }
 
 

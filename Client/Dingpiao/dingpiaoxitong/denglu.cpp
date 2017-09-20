@@ -34,7 +34,7 @@ void denglu::on_pushButton_3_clicked()
             {
                 if(st[0] == 'Y')
                 {
-                    MainWindow.getmeg();*/
+                    */
                     accept();
                 /*}
                 else if(st[0] == '1')

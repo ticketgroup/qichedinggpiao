@@ -28,10 +28,12 @@ Endorse::~Endorse()
 //    this->close();
 //}
 
-void Endorse::setLabel(QString s, QString e)
+void Endorse::setLabel(QString s, QString e,QString m)
 {
 //    ui->label_5->setText(s);
 //    ui->label_6->setText(e);
+//    ui->label_8->setText(m);
+
 }
 
 void Endorse::on_pushButton_clicked()
@@ -67,10 +69,11 @@ void Endorse::on_pushButton_3_clicked()
    QString date = ui->dateEdit->text();
    QString startplace = ui->label_5->text();
    QString finishplace = ui->label_6->text();
+   QString number = ui->label_8->text();
 
-   QByteArray ba = (date + ";" + startplace + ";" + finishplace).toLatin1();
+   QByteArray ba = (date + ";" + startplace + ";" + finishplace + ";" + number).toLatin1();
    char st[1000];
-   client.sendmsg("4",ba.data(), st, 40, 1000);
+   client.sendmsg("4",ba.data(), st, 50, 1000);
    if(st[0] != 'N')
    {
 
