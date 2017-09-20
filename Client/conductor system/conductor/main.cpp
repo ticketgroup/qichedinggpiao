@@ -1,3 +1,4 @@
+#include "variables.h"
 #include "mainwindow.h"
 #include "denglu.h"
 #include <QApplication>
