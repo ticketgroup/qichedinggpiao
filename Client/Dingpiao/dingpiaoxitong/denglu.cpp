@@ -1,4 +1,4 @@
-#include "denglu.h"
+﻿#include "denglu.h"
 #include "ui_denglu.h"
 #include "variables.h"
 #include <QRegExp>
@@ -29,7 +29,7 @@ void denglu::on_pushButton_3_clicked()
         {
             QByteArray ba = (id + ";" + password).toLatin1();
             char st[2];
-            client.sendmsg("2",ba.data(), st, 53, 2);
+            client.sendmsg("2",ba.data(), st, 53, 10);
             if(st)
             {
                 if(st[0] == 'Y')

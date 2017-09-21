@@ -36,6 +36,14 @@ void Endorse::setLabel(QString s, QString e,QString m)
     ui->label_8->setText(m);
 }
 
+
+void Endorse::setVar(QString i,QString s,QString d)
+{
+    this->id = i;
+    this->seatnum = s;
+    this->date = d;
+}
+
 void Endorse::on_pushButton_clicked()
 {
 
@@ -50,9 +58,12 @@ void Endorse::on_pushButton_clicked()
             int row=ranges.at(0).topRow();
             QString busid = ui->tableWidget->item(row, 0)->text();
             QString date = ui->dateEdit->text();
-            QByteArray ba = (busid + ";" + date).toLatin1();
+            QString startplace = ui->label_5->text();
+            QString endplace = ui->label_6->text();
+            QString pas = ui->label_8->text();
+            QByteArray ba = (this->id + ";" + this->seatnum + ";" + startplace + ";" + endplace + ";" +  date +";" + pas + ";" +  busid + ";" + date).toLatin1();
             char st[2];
-            client.sendmsg("15",ba.data(), st, 11, 2);
+            client.sendmsg("15",ba.data(), st, 100, 2);
             if(st[0] == 'Y')
             {
                 QMessageBox::about(NULL, QString::fromLocal8Bit("改签成功"), QString::fromLocal8Bit("您已成功改签"));
@@ -71,9 +82,8 @@ void Endorse::on_pushButton_3_clicked()
    QString date = ui->dateEdit->text();
    QString startplace = ui->label_5->text();
    QString finishplace = ui->label_6->text();
-   QString number = ui->label_8->text();
 
-   QByteArray ba = (date + ";" + startplace + ";" + finishplace + ";" + number).toLatin1();
+   QByteArray ba = (date + ";" + startplace + ";" + finishplace).toLatin1();
    char st[1000];
    client.sendmsg("4",ba.data(), st, 50, 1000);
    if(st[0] != 'N')
@@ -82,13 +92,14 @@ void Endorse::on_pushButton_3_clicked()
        char *a;
 
        QTableWidget *table = ui->tableWidget;
-       a = strtok(st,"\\");
+       table->clearContents();
+       a = strtok(st,"$");
        table->setItem(0,0,new QTableWidgetItem(QString::fromLocal8Bit(strtok(a,";"))));
        for(int i = 1; i < 7; i++)
        {
            table->setItem(0,i,new QTableWidgetItem(QString::fromLocal8Bit(strtok(NULL,";"))));
        }
-       for(int m = 1; a = strtok(NULL,"\\"); m++)
+       for(int m = 1; a = strtok(NULL,"$"); m++)
        {
            table->setItem(m,0,new QTableWidgetItem(QString::fromLocal8Bit(strtok(a,";"))));
            for(int i = 1; i < 7; i++)

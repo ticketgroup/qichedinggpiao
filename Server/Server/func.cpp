@@ -12,7 +12,7 @@ void getse(char*id, char*tNum, char *st, char*en)
 	int i = 0, s, e;
 	for (; tNum[i] != '1'; i++);
 	s = i;
-	for (; tNum[i] != '0'; i++);
+	for (; tNum[i] != '0'&&tNum[i] != '\0'; i++);
 	e = i - 1;
 	char tem[100];
 	sprintf(tem, "SELECT station FROM ctov WHERE id='%s' and num in (%d,%d);", id, s, e);
@@ -62,7 +62,7 @@ bool gettnum(char *id, char *st, char *en, char *source)
 	mysql_real_query(&con, tem, 48);
 	res = mysql_store_result(&con);
 	row = mysql_fetch_row(res);
-	station = str2int(row[0]);
+	station = str2int(row[0]) + 1;
 	for (int i = 0; i < station; source[i] = '0', i++);
 	source[station] = '\0';
 	sprintf(tem, "select num from ctov where id='%s' and station='%s' union select num from ctov where id='%s' and station='%s';", id, st, id, en);
@@ -74,7 +74,7 @@ bool gettnum(char *id, char *st, char *en, char *source)
 	e = str2int(row[0]);
 	if (s < e)
 	{
-		for (int i = s - 1; i < e; i++)
+		for (int i = s; i < e+1; i++)
 		{
 			source[i] = '1';
 		}
@@ -125,11 +125,12 @@ int getSeatNum(char *id, char *st, char *en)
 		{
 			tn[i] = '0';
 		}
-		sprintf(tem, "select seatid from ticket where id='%s' and substring(ticketnum,%d,%d)<>'%s' order by seatnum;", id, a, b, tn);
+		sprintf(tem, "select seatid from ticket where id='%s' and substring(ticketnum,%d,%d)<>'%s' order by seatid;", id, a, b - 1, tn);
 		mysql_real_query(&coa, tem, 120);
-		if (res = mysql_store_result(&coa))
+		res = mysql_store_result(&coa);
+		if (result = mysql_fetch_row(res))
 		{
-			int pre = str2int(mysql_fetch_row(res)[0]);
+			int pre = str2int(result[0]);
 			int next;
 			while (result = mysql_fetch_row(res))
 			{
@@ -140,14 +141,17 @@ int getSeatNum(char *id, char *st, char *en)
 			}
 			sprintf(tem, "select seatnum from coach where id='%s';", id);
 			mysql_real_query(&coa, tem, 120);
-			if (res = mysql_store_result(&coa))
+			res = mysql_store_result(&coa);
+			if (result = mysql_fetch_row(res))
 			{
-				int seat = str2int(mysql_fetch_row(res)[0]);
-				if (next != seat)
-					return seat;
+				int seat = str2int(result[0]);
+				if (next < seat)
+					return next + 1;
 				else
 					return 0;
 			}
+			else
+				return 2;
 		}
 		else
 			return 1;

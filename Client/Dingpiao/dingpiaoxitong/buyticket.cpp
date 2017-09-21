@@ -19,7 +19,7 @@ Buyticket::~Buyticket()
 void Buyticket::getmsg()
 {
     char st[47];
-    client.sendmsg("32","0", st, 2, 47);
+    client.sendmsg("12","0", st, 2, 47);
     QLabel* l[5] = {ui->label_5,ui->label_7,ui->label_8,ui->label_9,ui->label_10};
     l[0]->setText(QString::fromLocal8Bit(strtok(st,";")));
     for(int i = 1; i < 5; i++)

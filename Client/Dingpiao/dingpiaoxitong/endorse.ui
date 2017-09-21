@@ -22,6 +22,24 @@
      <height>241</height>
     </rect>
    </property>
+   <property name="rowCount">
+    <number>15</number>
+   </property>
+   <row/>
+   <row/>
+   <row/>
+   <row/>
+   <row/>
+   <row/>
+   <row/>
+   <row/>
+   <row/>
+   <row/>
+   <row/>
+   <row/>
+   <row/>
+   <row/>
+   <row/>
    <column>
     <property name="text">
      <string>汽车编号</string>

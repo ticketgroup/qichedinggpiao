@@ -9,7 +9,7 @@ void Ticket::getse(char *st, char *en)
 	int i = 0, s, e;
 	for (; tNum[i] != '1'; i++);
 	s = i;
-	for (; tNum[i] != '0'; i++);
+	for (; tNum[i] != '0'&&tNum[i] != '\0'; i++);
 	e = i - 1;
 	char tem[100];
 	sprintf(tem, "SELECT station FROM ctov WHERE id='%s' and num in (%d,%d);", this->id, s, e);

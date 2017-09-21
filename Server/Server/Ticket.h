@@ -50,11 +50,11 @@ private:
 	MYSQL con;
 	MYSQL_RES *res;
 	MYSQL_ROW row;
-	char *seatnum;
+	char seatnum[4];
 	char date[5];
     char buyer[10];
 	char passenger[10];
-	char *tNum;
-	char *id;
+	char tNum[13];
+	char id[6];
 };
 #endif // !TICKET_H

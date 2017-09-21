@@ -33,7 +33,8 @@ void Client::sendmsg(const char *state, const char *msg, char *rec, int m, int n
 {
     char *st;
     send(sock_clt,state,3,0);
-    recv(sock_clt,st,2,0);
+    recv(sock_clt,st,10,0);
+
     if(st[0] == 'Y')
     {
         send(sock_clt, msg,m,0);
@@ -43,4 +44,5 @@ void Client::sendmsg(const char *state, const char *msg, char *rec, int m, int n
     {
         rec = NULL;
     }
+
 }

@@ -14,6 +14,7 @@ class Endorse : public QDialog
 public:
     explicit Endorse(QWidget *parent = 0);
     void setLabel(QString, QString,QString);
+    void setVar(QString,QString,QString);
     ~Endorse();
 
 private slots:
@@ -23,6 +24,9 @@ private slots:
 
 private:
     Ui::Endorse *ui;
+    QString id;
+    QString seatnum;
+    QString date;
 };
 
 #endif // ENDORSE_H

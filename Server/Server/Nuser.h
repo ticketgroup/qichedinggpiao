@@ -74,7 +74,7 @@ public:
 	bool inquireticket(char ***);
 	bool inquireInfo( char**);
 private:
-	char ID[10];
+	char ID[12];
 	//char *password;
 };
 

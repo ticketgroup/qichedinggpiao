@@ -135,15 +135,15 @@ bool Conductor::addCoach(char *p, char *i, char *st, char ***station, int s, cha
 				{
 					for (int a = 0; a < s; a++)
 					{
-						sprintf(temp, "select num from stov where station='%s';", station[a][0]);
+						sprintf(temp, "select rownum from stov where station='%s';", station[a][0]);
 						mysql_real_query(&coa, temp, 100);
-						if (res = mysql_store_result(&con))
+						res = mysql_store_result(&coa);
+						if (result = mysql_fetch_row(res))
 						{
-							result = mysql_fetch_row(res);
 							sprintf(temp, "insert into ctov(num,id,station) values(%d,'%s','%s');", a, i, station[a][0]);
 							if (!mysql_query(&coa, temp))
 							{
-								sprintf(temp, "update ctos set %s='%s,%s' where id='%s';", result[0], station[a][1], station[a][2], i);
+								sprintf(temp, "update ctos set a%s='%s,%s' where id='%s';", result[0], station[a][1], station[a][2], i);
 								if (!mysql_query(&coa, temp))
 								{
 									continue;

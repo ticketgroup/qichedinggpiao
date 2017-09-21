@@ -5,6 +5,7 @@
 #include <cstring>
 #include <QList>
 #include <QLabel>
+#include <QStringList>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -37,32 +38,13 @@ MainWindow::~MainWindow()
 void MainWindow::getmsg()
 {
     char st[55];
-    client.sendmsg("33","0", st, 2, 55);
+    client.sendmsg("66","0", st, 2, 55);
     QLabel* l[4] = {ui->label_10,ui->label_13,ui->label_12,ui->label_11};
     l[0]->setText(QString::fromLocal8Bit(strtok(st,";")));
     for(int i = 1; i < 4; i++)
     {
         l[i]->setText(QString::fromLocal8Bit(strtok(NULL, ";")));
     }
-
-    /*char sta[1000];
-    client.sendmsg("13","0", sta, 2, 1000);
-    char *a;
-    QTableWidget *table = ui->tableWidget_4;
-    a = strtok(sta,"\\");
-    table->setItem(0,0,new QTableWidgetItem(QString::fromLocal8Bit(strtok(a,";"))));
-    for(int i = 1; i < 9; i++)
-    {
-        table->setItem(0,i,new QTableWidgetItem(QString::fromLocal8Bit(strtok(NULL,";"))));
-    }
-    for(int m = 1; a = strtok(NULL,"\\"); m++)
-    {
-        table->setItem(m,0,new QTableWidgetItem(QString::fromLocal8Bit(strtok(a,";"))));
-        for(int i = 1; i < 9; i++)
-        {
-            table->setItem(m,i,new QTableWidgetItem(QString::fromLocal8Bit(strtok(NULL,";"))));
-        }
-    }*/
 
 }
 void MainWindow::on_pushButton_3_clicked()
@@ -83,12 +65,13 @@ void MainWindow::on_pushButton_2_clicked()
 
 void MainWindow::on_pushButton_5_clicked()
 {
-    QList<QTableWidgetSelectionRange>ranges=ui->tableWidget->selectedRanges();
+    QList<QTableWidgetSelectionRange>ranges=ui->tableWidget_4->selectedRanges();
     int count = ranges.count();
     if(count!=0)
     {
         int row=ranges.at(0).topRow();
         endorse.setLabel(ui->tableWidget_4->item(row,2)->text(),ui->tableWidget_4->item(row,4)->text(),ui->tableWidget_4->item(row,8)->text());
+        endorse.setVar(ui->tableWidget_4->item(row,0)->text(),ui->tableWidget_4->item(row,1)->text(),ui->tableWidget_4->item(row,7)->text());
         endorse.show();
         endorse.exec();
     }
@@ -110,17 +93,16 @@ void MainWindow::on_pushButton_7_clicked()
         QString date = ui->dateEdit->text();
         QString startplace = ui->comboBox->currentText();
         QString finishplace = ui->comboBox_2->currentText();
-
-        QByteArray ba = (number + ";" + date + ";" + busid + ";" + startplace + ";" + finishplace).toLatin1();
+        QByteArray ba = (date + ";" + busid + ";" + startplace + ";" + finishplace + ";" + number).toLatin1();
         char st[2];
-        client.sendmsg("12",ba.data(), st, 56, 2);
+        client.sendmsg("32",ba.data(), st, 60, 2);
         if(st[0] == 'Y')
         {
             buyticket.getmsg();
             buyticket.show();
             buyticket.exec();
         }
-        else if(st[0] == '1')
+        else if(st[0] == 'N')
         {
             QMessageBox::about(NULL, QString::fromLocal8Bit("购票失败"), QString::fromLocal8Bit("该车次无座！"));
         }
@@ -139,18 +121,18 @@ void MainWindow::on_pushButton_6_clicked()
    {
     case QMessageBox::Yes:
    {
-       QList<QTableWidgetSelectionRange>ranges=ui->tableWidget->selectedRanges();
+       QList<QTableWidgetSelectionRange>ranges=ui->tableWidget_4->selectedRanges();
        int count = ranges.count();
        if(count!=0)
        {
            int row=ranges.at(0).topRow();
            QString busid = ui->tableWidget_4->item(row, 0)->text();
-           QString date = ui->tableWidget_4->item(row, 1)->text();
+           QString date = ui->tableWidget_4->item(row, 7)->text();
            QString startplace = ui->tableWidget_4->item(row, 2)->text();
            QString starttime = ui->tableWidget_4->item(row, 3)->text();
            QString finishplace = ui->tableWidget_4->item(row, 4)->text();
            QString finishtime = ui->tableWidget_4->item(row, 5)->text();
-           QString seatnumber = ui->tableWidget_4->item(row, 6)->text();
+           QString seatnumber = ui->tableWidget_4->item(row, 1)->text();
            QString number = ui->tableWidget_4->item(row, 8)->text();
            QByteArray ba = (busid + ";" + date + ";" + startplace + ";" + starttime + ";" + finishplace + ";" +
                             finishtime + ";" + seatnumber + ";" + number).toLatin1();
@@ -159,7 +141,6 @@ void MainWindow::on_pushButton_6_clicked()
            if(st[0] == 'Y')
            {
                QMessageBox::about(NULL, QString::fromLocal8Bit("退票成功"), QString::fromLocal8Bit("您已成功退票"));
-               this->close();
            }
        }
        break;
@@ -175,24 +156,61 @@ void MainWindow::on_pushButton_4_clicked()
     QString date = ui->dateEdit->text();
     QString startplace = ui->comboBox->currentText();
     QString finishplace = ui->comboBox_2->currentText();
-
-    QByteArray ba = (date + ";" + startplace + ";" + finishplace).toLatin1();
-    char st[1000];
-    client.sendmsg("4",ba.data(), st, 40, 1000);
-    if(st[0] != 'N')
+    if(startplace.compare(finishplace) != 0)
     {
-        char *a;
-        QTableWidget *table = ui->tableWidget;
-        a = strtok(st,"\\");
+        QByteArray ba = (date + ";" + startplace + ";" + finishplace).toLatin1();
+        char st[1000];
+        client.sendmsg("4",ba.data(), st, 40, 1000);
+        if(st[0] != 'N')
+        {
+            char *a;
+            QTableWidget *table = ui->tableWidget;
+            table->clearContents();
+            a = strtok(st,"$");
+            table->setItem(0,0,new QTableWidgetItem(QString::fromLocal8Bit(strtok(a,";"))));
+            for(int i = 1; i < 7; i++)
+            {
+                table->setItem(0,i,new QTableWidgetItem(QString::fromLocal8Bit(strtok(NULL,";"))));
+            }
+            for(int m = 1; a = strtok(NULL,"$"); m++)
+            {
+                table->setItem(m,0,new QTableWidgetItem(QString::fromLocal8Bit(strtok(a,";"))));
+                for(int i = 1; i < 7; i++)
+                {
+                    table->setItem(m,i,new QTableWidgetItem(QString::fromLocal8Bit(strtok(NULL,";"))));
+                }
+            }
+        }
+        else
+        {
+            QMessageBox::about(NULL, QString::fromLocal8Bit("搜索失败"), QString::fromLocal8Bit("无相应车辆！"));
+        }
+    }
+    else
+        QMessageBox::about(NULL, QString::fromLocal8Bit("搜索失败"), QString::fromLocal8Bit("请不要把起点与终点设置为同样的值！"));
+}
+
+void MainWindow::on_pushButton_clicked()
+{
+    char sta[1200];
+    client.sendmsg("13","0", sta, 2, 1200);
+    char *a;
+    char *b;
+    QTableWidget *table = ui->tableWidget_4;
+    table->clearContents();
+
+    a = strtok(sta,"$");
+    if(a)
+    {
         table->setItem(0,0,new QTableWidgetItem(QString::fromLocal8Bit(strtok(a,";"))));
-        for(int i = 1; i < 7; i++)
+        for(int i = 1; i < 9; i++)
         {
             table->setItem(0,i,new QTableWidgetItem(QString::fromLocal8Bit(strtok(NULL,";"))));
         }
-        for(int m = 1; a = strtok(NULL,"\\"); m++)
+        for(int m = 1; b = strtok(NULL,";"); m++)
         {
-            table->setItem(m,0,new QTableWidgetItem(QString::fromLocal8Bit(strtok(a,";"))));
-            for(int i = 1; i < 7; i++)
+            table->setItem(m,0,new QTableWidgetItem(QString::fromLocal8Bit(b)));
+            for(int i = 1; i < 9; i++)
             {
                 table->setItem(m,i,new QTableWidgetItem(QString::fromLocal8Bit(strtok(NULL,";"))));
             }
@@ -200,6 +218,6 @@ void MainWindow::on_pushButton_4_clicked()
     }
     else
     {
-        QMessageBox::about(NULL, QString::fromLocal8Bit("搜索失败"), QString::fromLocal8Bit("无相应车辆！"));
+        QMessageBox::about(NULL, QString::fromLocal8Bit("没有订单"), QString::fromLocal8Bit("您没有任何订单！"));
     }
 }

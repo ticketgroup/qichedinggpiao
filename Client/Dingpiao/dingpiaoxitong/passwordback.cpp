@@ -2,6 +2,7 @@
 #include "passwordback.h"
 #include "ui_passwordback.h"
 
+
 Passwordback::Passwordback(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Passwordback)
@@ -57,6 +58,8 @@ void Passwordback::on_pushButton_clicked()
         QMessageBox::about(NULL, QString::fromLocal8Bit("错误"), QString::fromLocal8Bit("您输入的一卡通有误！"));
     }
 }
+
+
 
 
 

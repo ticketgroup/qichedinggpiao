@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -172,6 +172,21 @@
         <height>221</height>
        </rect>
       </property>
+      <property name="rowCount">
+       <number>12</number>
+      </property>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
       <column>
        <property name="text">
         <string>编号</string>
@@ -257,6 +272,24 @@
         <height>231</height>
        </rect>
       </property>
+      <property name="rowCount">
+       <number>15</number>
+      </property>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
       <column>
        <property name="text">
         <string>汽车编号</string>
@@ -264,7 +297,7 @@
       </column>
       <column>
        <property name="text">
-        <string>出发日期</string>
+        <string>座位号</string>
        </property>
       </column>
       <column>
@@ -289,12 +322,12 @@
       </column>
       <column>
        <property name="text">
-        <string>座位号</string>
+        <string>乘车人姓名</string>
        </property>
       </column>
       <column>
        <property name="text">
-        <string>乘车人姓名</string>
+        <string>日期</string>
        </property>
       </column>
       <column>
@@ -327,6 +360,19 @@
       </property>
       <property name="text">
        <string>退票</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton">
+      <property name="geometry">
+       <rect>
+        <x>80</x>
+        <y>260</y>
+        <width>89</width>
+        <height>24</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>查询订单</string>
       </property>
      </widget>
     </widget>

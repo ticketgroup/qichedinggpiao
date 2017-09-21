@@ -14,42 +14,70 @@ bool Nuser::inquireticket(char*** info)
 	char temp[150];
 	char st[5];
 	char t[5];
-	sprintf(temp, "select id,ticketnum,date,passenger,seatid from ticket where buyer='%s';", id);
-	mysql_real_query(&coa, temp, 80);
-	if (cres = mysql_store_result(&coa))
+	char n[58];
+	sprintf(n, "SELECT id FROM nuser where phone='%s';", this->id);
+	mysql_real_query(&con, n, 58);
+	res = mysql_store_result(&con);
+	result = mysql_fetch_row(res);
+	sprintf(temp, "select id,ticketnum,date,passenger,seatid from ticket where buyer='%s';", result[0]);
+	mysql_real_query(&coa, temp, 82);
+	if (res = mysql_store_result(&coa))
 	{
 		int i = 0;
-		for (; row = mysql_fetch_row(cres); i++)
+		for (; row = mysql_fetch_row(res); i++)
 		{
 			strcpy(info[i][0], row[0]);
 			strcpy(info[i][1], row[4]);
 			strcpy(info[i][7], row[2]);
+			/*info[i][7][5] = '\0';
+			info[i][7][4] = info[i][7][3];
+			info[i][7][3] = info[i][7][2];
+			info[i][7][2] = '/';*/
 
-			sprintf(temp, "select name from cinfo where id='%s';", row[3]);
+
+			mysql_query(&con, "SET NAMES 'gbk';");
+			sprintf(temp, "select name,id from cinfo where id='%s';", row[3]);
 			mysql_real_query(&con, temp, 50);
-			res = mysql_store_result(&con);
-			strcpy(info[i][6], mysql_fetch_row(res)[0]);
+			cres = mysql_store_result(&con);
+			result = mysql_fetch_row(cres);
+			strcpy(info[i][6], result[0]);
+			strcpy(info[i][8], result[1]);
 
 			getse(row[0], row[1], info[i][2], info[i][4]);
 			sprintf(temp, "select starttime from coach where id='%s';", info[i][0]);
 			mysql_real_query(&coa, temp, 60);
 			cres = mysql_store_result(&coa);
 			strcpy(st, mysql_fetch_row(cres)[0]);
-			sprintf(temp, "select (select num from stov where station=%s),(select num from stov where station=%s) from ctos where id='%s';", info[i][2], info[i][4], info[i][0]);
-			mysql_real_query(&con, temp, 150);
-			cres = mysql_store_result(&con);
+			 sprintf(temp, "select rownum from stov where station='%s' union select rownum from stov where station='%s';", info[i][4], info[i][2]);
+			mysql_real_query(&coa, temp, 200);
+			cres = mysql_store_result(&coa);
+			char t[5];
+			char b[6];
+			sprintf(temp, "select a%s from ctos where id = '%s' union select a%s from ctos where id = '%s'; ", mysql_fetch_row(cres)[0], info[i][0], mysql_fetch_row(cres)[0], info[i][0]);
+			mysql_real_query(&coa, temp, 200);
+			cres = mysql_store_result(&coa);
 			row = mysql_fetch_row(cres);
 
 			sprintf(t, "%04s", strtok(row[0], ","));
 			timeAdd(st, t, info[i][3]);
-			sprintf(t, "%04s", strtok(row[1], ","));
+
+
+			row = mysql_fetch_row(cres);
+			sprintf(t, "%04s", strtok(row[0], ","));
 			timeAdd(st, t, info[i][5]);
 
 		}
-		strcat(info[i - 1][7], "$");
+		if(i)
+			strcat(info[i - 1][8], "$");
+		else
+		{
+			info[0][0][0] = '$';
+			info[0][0][1] = '\0';
+		}
+		return true;
 	}
 	else
-		return true;	
+		return false;	
 }
 bool ver(char *Id, char *num)
 {
@@ -111,8 +139,6 @@ Nuser::Nuser(char *NID, char *Npass):Buyer(NID,Npass)
 {
 	mysql_init(&con);
 	mysql_real_connect(&con, "localhost", "root", "111111", "user", 3306, NULL, 0);
-	for (int i = 0; i < 12; i++)
-		ID[i] = NID[i];
 }
 
 bool Nuser::del()
@@ -136,9 +162,9 @@ bool Nuser::changePassword(char *newpass)
 }
 bool Nuser::inquireInfo(char **out)
 {
-	char a[56];
-	sprintf(a, "SELECT id FROM nuser where phone='%s';", ID);
-	mysql_real_query(&con, a, 56);
+	char a[58];
+	sprintf(a, "SELECT id FROM nuser where phone='%s';", id);
+	mysql_real_query(&con, a, 58);
 	res = mysql_store_result(&con);
 	if (result = mysql_fetch_row(res))
 	{
@@ -162,7 +188,7 @@ bool Nuser::inquireInfo(char **out)
 bool Nuser::changeinfo(char *newNID)
 {
 	char tem[65];
-	sprintf(tem, "UPDATE nuser set phone='%s' where phone='%s';", newNID, ID);
+	sprintf(tem, "UPDATE nuser set phone='%s' where phone='%s';", newNID, id);
 	if (!mysql_query(&con, tem))
 	{
 		return true;
@@ -174,14 +200,16 @@ bool Nuser::changeinfo(char *newNID)
 	
 char Nuser::verify(char* password)
 {
-	char n[54];
-	sprintf(n, "SELECT password FROM nuser where phone='%s';", this->ID);
-	mysql_real_query(&con, n, 56);
+	char n[58];
+	sprintf(n, "SELECT password,id FROM nuser where phone='%s';", this->id);
+	mysql_real_query(&con, n, 58);
 	res = mysql_store_result(&con);
 	if (result = mysql_fetch_row(res))
 	{
 		if (!strcmp(result[0], password))
+		{
 			return 'Y';
+		}
 		else
 			return '2';
 	}
